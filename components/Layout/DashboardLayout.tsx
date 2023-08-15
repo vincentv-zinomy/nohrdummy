@@ -58,7 +58,7 @@ function DashboardLayout({
 
         { name: "Agents", href: "/app/org-agent", icon: FolderIcon },
         { name: "Team Members", href: "/app/team", icon: UsersIcon },
-        { name: "Leads", href: "/app/leads/view", icon: UsersIcon },
+        { name: "Leads", href: "/app/contacts/view", icon: UsersIcon },
         { name: "My Files", href: "/app/files", icon: FolderOpenIcon },
         {
           name: "Company Info",
@@ -94,13 +94,13 @@ function DashboardLayout({
     },
     [RoleTypes.TEAM_MEMBER]: {
       routes: ["/app", "/app/dashboard",
-        "/app/signout", "/app/org-agent", "/app/leads/view",
+        "/app/signout", "/app/org-agent", "/app/contacts/view",
         "/app/setting/general-settings", "/app/setting/integrations",
       ],
       navigation: [
 
         { name: "Agents", href: "/app/org-agent", icon: FolderIcon, },
-        { name: "Leads", href: "/app/leads/view", icon: UsersIcon },
+        { name: "Leads", href: "/app/contacts/view", icon: UsersIcon },
         {
           name: "General Settings",
           href: "/app/setting/general-settings",

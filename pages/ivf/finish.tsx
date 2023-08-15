@@ -56,13 +56,13 @@ const index = (props: Props) => {
 
     const getSpecificLead = async () => {
         try {
-            const lead_id = router.query.id;
-            const res = await axiosWithoutAuth.get(`/leads/ivf/get-lead?lead_id=${lead_id}`)
+            const contact_id = router.query.id;
+            const res = await axiosWithoutAuth.get(`/contacts/ivf/get-lead?contact_id=${contact_id}`)
             console.log(res.data);
             const responseFromDB = res.data;
             setAppointmentData(prevState => ({
                 ...prevState, // spread previous state
-                id: responseFromDB.lead_id, // update id with lead_id
+                id: responseFromDB.contact_id, // update id with contact_id
                 clinic: {
                     ...prevState.clinic, // spread previous clinic
                     id: responseFromDB.branch_location, // update clinic id with branch_location

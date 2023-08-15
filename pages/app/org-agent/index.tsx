@@ -234,7 +234,7 @@ function ProductsPage() {
                           hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 
                           focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                     onClick={() => {
-                      router.push(`/app/leads/view?org_agent_id=${item._id}&open_modal=0`)
+                      router.push(`/app/contacts/view?org_agent_id=${item._id}&open_modal=0`)
                     }}
                   >
                     View Leads
@@ -252,7 +252,7 @@ function ProductsPage() {
                        focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                     onClick={() => {
 
-                      router.push(`/app/leads/view?org_agent_id=${item._id}&open_modal=1`);
+                      router.push(`/app/contacts/view?org_agent_id=${item._id}&open_modal=1`);
                     }}
                   >
                     <PlusIcon className="ml-1 mr-1 h-5 w-5" aria-hidden="true" />

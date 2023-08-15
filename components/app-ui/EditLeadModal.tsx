@@ -77,7 +77,7 @@ function EditLeadModal({
         setIsChatLoading(true);
         try {
 
-            const sendMessage = await axiosAPIWithAuth.post(`/leads/chat-manually-with-lead/${leadData._id}`, {
+            const sendMessage = await axiosAPIWithAuth.post(`/contacts/chat-manually-with-lead/${leadData._id}`, {
                 message: msgBoxValue
             });
             toast.addToast("success", "Message sent to user...");
@@ -193,7 +193,7 @@ function EditLeadModal({
     const fetchChatMedia = async () => {
         setIsMediaLoading(true);
         try {
-            const getMediaFilesResp = await axiosAPIWithAuth(`/leads/chat-media/by-user/${leadData._id}`);
+            const getMediaFilesResp = await axiosAPIWithAuth(`/contacts/chat-media/by-user/${leadData._id}`);
 
             console.log(getMediaFilesResp.data);
             let media_file = getMediaFilesResp && getMediaFilesResp.data ? getMediaFilesResp.data : [];
@@ -219,7 +219,7 @@ function EditLeadModal({
     const fetchChatHistory = async () => {
         setIsChatLoading(true);
         try {
-            const getChatResp = await axiosAPIWithAuth(`/leads/chat-history/by-user/${leadData._id}`);
+            const getChatResp = await axiosAPIWithAuth(`/contacts/chat-history/by-user/${leadData._id}`);
 
             setMessages(getChatResp.data);
         }

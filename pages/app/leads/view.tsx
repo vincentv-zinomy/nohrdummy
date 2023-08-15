@@ -46,7 +46,7 @@ function AddLeadPage() {
 
     setIsLoadingLeads(true);
     try {
-      const res = await axiosAPIWithAuth.get(`/leads/by-org-agent/${selectedProduct?._id}`);
+      const res = await axiosAPIWithAuth.get(`/contacts/by-org-agent/${selectedProduct?._id}`);
       const data = await res.data;
 
       console.log(data);

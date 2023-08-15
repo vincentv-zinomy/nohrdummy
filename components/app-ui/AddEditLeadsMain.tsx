@@ -63,8 +63,8 @@ function AddEditLeadsMain({
 
   }
 
-  const handleOpenEditLeadModal = (lead_id: string, onlyChat: boolean) => {
-    const lead = leadsData.find((i) => i._id === lead_id);
+  const handleOpenEditLeadModal = (contact_id: string, onlyChat: boolean) => {
+    const lead = leadsData.find((i) => i._id === contact_id);
     if (lead) {
       console.log(lead);
       setLeadDataForEdit(lead);
@@ -80,7 +80,7 @@ function AddEditLeadsMain({
     setShowMessageTemplateModal(true);
     try {
 
-      const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/leads/start-conversation/multiple-leads`, {
+      const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/multiple-leads`, {
         leadIds: selectedLeadIdsForTable,
         msg_template_id: selectedMessageTemplateId,
         required_values: requiredMsgTemplateValues
@@ -107,11 +107,11 @@ function AddEditLeadsMain({
     setIsStartingConversation(false);
     setShowMessageTemplateModal(false);
   }
-  // const handleReEngageConversation = async (lead_id: string) => {
+  // const handleReEngageConversation = async (contact_id: string) => {
   //   setIsStartingConversation(true);
   //   try {
 
-  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/leads/re-engage-lead/by-user/${lead_id}`, {
+  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/re-engage-lead/by-user/${contact_id}`, {
 
   //     });
   //     toast.addToast("success", "Conversation started successfully");
@@ -134,11 +134,11 @@ function AddEditLeadsMain({
   //   reloadData();
   //   setIsStartingConversation(false);
   // }
-  // const handleStartConversation = async (lead_id: string) => {
+  // const handleStartConversation = async (contact_id: string) => {
   //   setIsStartingConversation(true);
   //   try {
 
-  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/leads/start-conversation/by-user/${lead_id}`, {
+  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/by-user/${contact_id}`, {
 
   //     });
   //     toast.addToast("success", "Conversation started successfully");
@@ -165,8 +165,8 @@ function AddEditLeadsMain({
     setIsDeleting(true);
     try {
 
-      const tryDelete = await axiosAPIWithAuth.post('/leads/bulk-delete', {
-        lead_ids: selectedLeadIdsForTable
+      const tryDelete = await axiosAPIWithAuth.post('/contacts/bulk-delete', {
+        contact_ids: selectedLeadIdsForTable
       });
       toast.addToast("success", "Lead(s) deleted successfully");
 
@@ -197,7 +197,7 @@ function AddEditLeadsMain({
       setIsAdding(true);
       if (router.query.org_agent_id) {
 
-        await axiosAPIWithAuth.post(`/leads/add/${router.query.org_agent_id}`, { ...leadData });
+        await axiosAPIWithAuth.post(`/contacts/add/${router.query.org_agent_id}`, { ...leadData });
         toast.addToast("success", `Lead added successfully: ${leadData.full_name}`);
 
 
@@ -221,16 +221,16 @@ function AddEditLeadsMain({
     reloadData();
   }
   const updateLead = async (
-    lead_id: string,
+    contact_id: string,
     lead_data: LeadTypes
   ) => {
 
     setShowEditLeadModal(false);
     try {
       setIsAdding(true);
-      if (lead_id) {
-        console.log(lead_id, lead_data)
-        await axiosAPIWithAuth.put(`/leads/update/${lead_id}`, {
+      if (contact_id) {
+        console.log(contact_id, lead_data)
+        await axiosAPIWithAuth.put(`/contacts/update/${contact_id}`, {
           ...lead_data
 
         });
