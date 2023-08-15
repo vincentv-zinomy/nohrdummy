@@ -102,7 +102,7 @@ export interface OrgAgentDataTypes {
   agent_use_case_id: string;
   assigned_number: string;
   status: string;
-  leads_count?: number;
+  contacts_count?: number;
   custom_values: any;
 }
 export interface LeadTypes {

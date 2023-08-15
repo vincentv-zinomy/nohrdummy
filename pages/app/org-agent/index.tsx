@@ -31,7 +31,7 @@ function ProductsPage() {
   };
 
   const showCustomComponent = (item: any, key: string) => {
-    if (key === 'leads_count') {
+    if (key === 'contacts_count') {
       return <>
 
         <span className="text-green-500">{
@@ -176,7 +176,7 @@ function ProductsPage() {
                   type: HeaderItemForTableTypes.TEXT
                 },
                 {
-                  key: "leads_count",
+                  key: "contacts_count",
                   label: "Total Leads(s)",
                   type: HeaderItemForTableTypes.CUSTOM_COMPONENT
                 },
