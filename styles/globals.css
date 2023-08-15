@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.gradient {
+  background: linear-gradient(265.56deg,
+      rgba(59, 120, 31, 0.15) 15.09%,
+      rgba(253, 255, 167, 0.15) 107.57%);
+}
+
+.card-shadow {
+  box-shadow: 2px 2px 15px rgba(204, 204, 204, 0.3);
+}
+
+
+
+
+/* .gradient{
+    background: linear-gradient(265.56deg,rgba(59,120,31,.15) 15.09%,rgba(253,255,167,.15) 107.57%);
+} */
+
+
+
+.swiper-button-next:after,
+.swiper-rtl .swiper-button-prev:after {
+  opacity: 0;
+}
+
+.swiper-button-prev:after,
+.swiper-rtl .swiper-button-next:after {
+  opacity: 0;
+}
