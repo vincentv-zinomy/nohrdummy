@@ -40,7 +40,7 @@ function ProductsPage() {
 
       </>
     }
-    if (key === 'converted_leads_count') {
+    if (key === 'converted_contacts_count') {
       return <>
 
         <span className="text-green-500">
@@ -182,7 +182,7 @@ function ProductsPage() {
                 },
 
                 {
-                  key: "converted_leads_count",
+                  key: "converted_contacts_count",
                   label: "Scheduled/Converted Leads(s)",
                   type: HeaderItemForTableTypes.CUSTOM_COMPONENT
                 }
