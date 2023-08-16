@@ -47,10 +47,17 @@ function AddLeadPage() {
     setIsLoadingLeads(true);
     try {
       const res = await axiosAPIWithAuth.get(`/contacts/by-org-agent/${selectedProduct?._id}`);
-      const data = await res.data;
+      const data = await res.data as {
+        data: LeadTypes[];
+        total: number;
+        page: number;
+        limit: number;
+      }
+
 
       console.log(data);
-      setLeadsData(data);
+
+      setLeadsData(data.data);
     } catch (err) {
       console.log(err);
     }
