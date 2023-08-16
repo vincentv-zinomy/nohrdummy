@@ -76,7 +76,6 @@ function ConnectIntegrations(props: ConnectIntegrationsProps) {
       const getRes = await axiosAPIWithAuth(`/integration-auth/auth/${integration_id}`);
       const getURL = getRes.data;
 
-      console.log(getURL)
       return getURL;
     }
     catch (err: any) {

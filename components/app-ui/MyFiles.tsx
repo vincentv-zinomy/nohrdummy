@@ -57,7 +57,7 @@ function MyFiles() {
         try {
 
             const startRes = await axiosAPIWithAuth.get(`/data-storage/start-embedding/${doc_id}`);
-            console.log(startRes.data);
+
             fetchLatestFiles();
             toast.addToast("success", "Embedding started")
         }

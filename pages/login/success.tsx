@@ -2,7 +2,8 @@ import { useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import { OrgLevelData, RoleTypes, useAuth } from "@/components/contexts/AuthContext";
 import Spinner from "@/components/common/Spinner";
-import { LocalStorageKeys } from "@/lib/static-common-data";
+import { CookieKeys } from "@/lib/static-common-data";
+import Cookies from "js-cookie";
 export interface jwtPayload {
   email: string;
   orgs: OrgLevelData[];
@@ -20,9 +21,9 @@ export default function LoginSuccess() {
       const payload = JSON.parse(
         Buffer.from(jwt_token.split(".")[1], "base64").toString()
       ) as jwtPayload;
-      localStorage.setItem(LocalStorageKeys.ACCESS_TOKEN, jwt as string);
-      localStorage.setItem(LocalStorageKeys.PAYLOAD_DATA, JSON.stringify(payload));
-      localStorage.setItem(LocalStorageKeys.CURRENT_ORG_ID, payload.orgs[0].org_id);
+      Cookies.set(CookieKeys.ACCESS_TOKEN, jwt as string);
+      Cookies.set(CookieKeys.PAYLOAD_DATA, JSON.stringify(payload));
+      Cookies.set(CookieKeys.CURRENT_ORG_ID, payload.orgs[0].org_id);
 
       triggerAuth();
 

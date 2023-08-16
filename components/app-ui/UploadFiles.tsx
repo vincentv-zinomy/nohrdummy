@@ -19,7 +19,7 @@ function UploadFiles(props: UploadFiles) {
   const startEmbedding = async (doc_id: string) => {
     try {
       const startRes = await axiosAPIWithAuth.get(`/data-storage/start-embedding/${doc_id}`);
-      console.log(startRes.data)
+
       toast.addToast("success", "Embedding started")
     }
     catch (err) {

@@ -132,7 +132,6 @@ function EditLeadModal({
                     countryCode = 'US';
                 }
 
-                console.log(phoneNumber, countryCode);
                 // Now update the state values
                 setPhone(phoneNumber);
                 setCountryCode(countryCode);
@@ -195,11 +194,9 @@ function EditLeadModal({
         try {
             const getMediaFilesResp = await axiosAPIWithAuth(`/contacts/chat-media/by-user/${leadData._id}`);
 
-            console.log(getMediaFilesResp.data);
             let media_file = getMediaFilesResp && getMediaFilesResp.data ? getMediaFilesResp.data : [];
             const sortedMediaFiles: MediaFileTypes[] = [...media_file].sort((a: MediaFileTypes, b: MediaFileTypes) => b.timestamp - a.timestamp);
-            console.log("media files---")
-            console.log(sortedMediaFiles)
+
             setMediaFiles([...sortedMediaFiles]);
 
         }
@@ -429,7 +426,7 @@ function EditLeadModal({
                                                 style={{ backgroundImage: "url('/whatsappbg.png')" }}>
 
                                                 {formattedMessages.map((x) => {
-                                                    console.log(x)
+
                                                     return (
                                                         <>
                                                             <div className={`  w-fit max-w-[75%]  ${x.role === 'user' ? 'ml-auto bg-white' : 'bg-[#dcf8c7]'} p-2 break-words rounded-b-lg  ${x.role === 'user' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>

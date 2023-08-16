@@ -1,6 +1,6 @@
 import Spinner from "@/components/common/Spinner";
 import { useToast } from "@/components/hooks/useToast";
-import AddEditProductMain from "@/components/app-ui/AddEditProductMain";
+import AddEditProductMain from "@/components/app-ui/AddEditAgentMain";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
 import { OrgAgentDataTypes } from "@/lib/types/ui";
 import { useRouter } from "next/navigation";
@@ -9,11 +9,20 @@ import { useEffect, useState } from "react";
 function CreateProduct() {
   const router = useRouter();
   const [formData, setFormData] = useState<OrgAgentDataTypes>({
+    is_sms_enabled: false,
+    is_whatsapp_enabled: false,
+    is_instagram_enabled: false,
+    is_email_enabled: false,
+    is_voice_enabled: false,
+    is_website_chat_enabled: false,
+    assigned_sms_number: "",
+    assigned_whatsapp_number: "",
+    assigned_instagram_id: "",
+    assigned_email_id: "",
+    assigned_voice_id: "",
     title: "",
     description: "",
     status: "draft",
-    assigned_number: "",
-    number_type: "SMS",
     agent_use_case_id: "",
     custom_values: {},
     _id: ""
@@ -30,7 +39,7 @@ function CreateProduct() {
         ...formData,
       };
       await axiosAPIWithAuth.post("/org-agent/new", JSON.stringify(productPostData));
-      toast.addToast("success", "Product created successfully");
+      toast.addToast("success", "Agent created successfully");
       router.push("/app/org-agent");
     } catch (err: any) {
       console.log(err);
@@ -83,8 +92,7 @@ function CreateProduct() {
             disabled={
               isSubmitting ||
               formData.description === "" ||
-              formData.title === "" ||
-              formData.assigned_number === ""
+              formData.title === ""
 
             }
             onClick={() => {

@@ -4,16 +4,22 @@ import React, { useEffect } from "react";
 import { useToast } from "../hooks/useToast";
 import Spinner from "@/components/common/Spinner";
 
-function WhatsAppBusinessAccountSetup() {
+function WhatsAppBusinessAccountSetup({
+  setIsLauncherVisible,
+  isLauncherVisible
+}: {
+  setIsLauncherVisible: React.Dispatch<React.SetStateAction<boolean>>;
+  isLauncherVisible: boolean;
+}) {
   const toast = useToast();
-  const [isLauncherVisible, setIsLauncherVisible] =
-    React.useState<boolean>(false);
+
+  React.useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = React.useState<boolean>(false);
   const fetchWhatsAppInfo = async () => {
     setIsSubmitting(true);
     try {
       const data = await axiosAPIWithAuth.post(
-        "/phone-numbers/setup-whatsapp-embedded",
+        "/communication-channels/setup-whatsapp-embedded",
         {
           access_token: window.FB_DATA_ACCESS_TOKEN,
         }
@@ -137,24 +143,6 @@ function launchWhatsAppSignup() {
         </svg>
         Add WhatsApp Number
       </button> */}
-      <button
-        onClick={() => {
-          setIsLauncherVisible(true);
-          window.launchWhatsAppSignup();
-        }}
-        className="mt-2 inline-flex items-center 
-        py-2 px-4 border border-transparent 
-        shadow-sm text-sm font-medium 
-        rounded-md text-white 
-        bg-[#1877f2] hover:bg-blue-700 
-        focus:outline-none focus:ring-2 
-        focus:ring-offset-2 focus:ring-blue-500
-        disabled:opacity-50 disabled:cursor-not-allowed"
-
-      >
-        Login with Facebook
-      </button>
-      <span className="text-xs text-slate-700 font-bold">{`(Add whatsapp number by connecting facebook account)`}</span>
 
     </>
   );

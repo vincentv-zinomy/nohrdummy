@@ -74,7 +74,7 @@ const index = (props: Props) => {
     useEffect(() => {
         if (router.isReady) { // to ensure all the query parameters are available
             const date = router.query.id; // 'id' is the name of the query parameter you want to get
-            console.log(date); // Outputs: "2023-07-14T13:00:00+05:30"
+
         }
     }, [router.isReady, router.query]);
 
@@ -82,7 +82,7 @@ const index = (props: Props) => {
         try {
             const contact_id = router.query.id;
             const res = await axiosWithoutAuth.get(`/contacts/ivf/get-lead?contact_id=${contact_id}`)
-            console.log(res.data);
+
             const responseFromDB = res.data;
             setAppointmentData(prevState => ({
                 ...prevState, // spread previous state
