@@ -9,14 +9,15 @@ const Footer = () => {
       <div className="max-w-[79.1875rem] mx-auto px-5 text-white">
         <div className="flex flex-col md:flex-row gap-y-3 justify-between items-center py-4 md:py-9">
           <h1 className="font-montserrat font-extrabold  text-[30px] md:text-[40px]">
-            Leadfix.ai
+            Zigment.ai
           </h1>
           <div className="w-full md:w-72 flex justify-between items-center gap-3">
             <p className="font-poppins md:text-lg font-semibold">
               Follow US on
             </p>
             <div className="flex items-center gap-2">
-              <Link href="https://www.facebook.com/leadfixai" target="_blank" aria-label="Follow us on facebook">
+              <Link href="https://www.facebook.com/zigmentai
+" target="_blank" aria-label="Follow us on facebook">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -27,7 +28,7 @@ const Footer = () => {
                   <path d="M16 0C7.17764 0 0 7.17764 0 16C0 24.8217 7.17764 32 16 32C24.8217 32 32 24.8217 32 16C32 7.17764 24.823 0 16 0ZM19.9791 16.5633H17.376V25.8413H13.5187C13.5187 25.8413 13.5187 20.7718 13.5187 16.5633H11.6852V13.2841H13.5187V11.1631C13.5187 9.64408 14.2406 7.27044 17.4114 7.27044L20.2697 7.2814V10.4645C20.2697 10.4645 18.5328 10.4645 18.1951 10.4645C17.8574 10.4645 17.3773 10.6334 17.3773 11.3578V13.2848H20.3161L19.9791 16.5633Z"></path>
                 </svg>
               </Link>
-              <Link href="https://www.instagram.com/leadfix.ai/" target="_blank" aria-label="Follow us on instagram">
+              <Link href="https://www.instagram.com/zigment.ai/" target="_blank" aria-label="Follow us on instagram">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -48,7 +49,7 @@ const Footer = () => {
                   </defs>
                 </svg>
               </Link>
-              <Link href="https://www.linkedin.com/company/leadfix-ai" aria-label="Follow us on Linkedin">
+              <Link href="https://www.linkedin.com/company/zigment" aria-label="Follow us on Linkedin">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -59,7 +60,7 @@ const Footer = () => {
                   <path d="M16 0C7.16479 0 0 7.16479 0 16C0 24.8352 7.16479 32 16 32C24.8352 32 32 24.8352 32 16C32 7.16479 24.8352 0 16 0ZM11.3506 24.1875H7.45386V12.4641H11.3506V24.1875ZM9.40234 10.8633H9.37695C8.06934 10.8633 7.22363 9.96313 7.22363 8.83813C7.22363 7.68774 8.09521 6.8125 9.42822 6.8125C10.7612 6.8125 11.5815 7.68774 11.6069 8.83813C11.6069 9.96313 10.7612 10.8633 9.40234 10.8633ZM25.4014 24.1875H21.5051V17.9158C21.5051 16.3396 20.9409 15.2646 19.531 15.2646C18.4546 15.2646 17.8135 15.9897 17.5317 16.6897C17.4287 16.9402 17.4036 17.2903 17.4036 17.6406V24.1875H13.5071C13.5071 24.1875 13.5581 13.564 13.5071 12.4641H17.4036V14.124C17.9214 13.3252 18.8479 12.189 20.9153 12.189C23.479 12.189 25.4014 13.8645 25.4014 17.4653V24.1875Z"></path>
                 </svg>
               </Link>
-              <Link href="https://twitter.com/leadfix_ai" target="_blank" aria-label="Follow us on Twiter">
+              <Link href="https://twitter.com/zigment" target="_blank" aria-label="Follow us on Twiter">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -155,7 +156,7 @@ const Footer = () => {
                 </span>
                 <div>
                   <p className="text-brand-gray">Email</p>
-                  <Link href="mailto:contact@leadfix.ai" className="group-hover:text-brand-orange" aria-label="Email us">
+                  <Link href="mailto:contact@zigment.ai" className="group-hover:text-brand-orange" aria-label="Email us">
                     contact@leadfix.ai
                   </Link>
                 </div>

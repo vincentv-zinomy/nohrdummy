@@ -118,20 +118,15 @@ interface User {
     database_id: string;
   }
   
-export interface BlogI {
-    object: string;
+  export interface BlogI {
     id: string;
-    created_time: string;
-    last_edited_time: string;
-    created_by: User;
-    last_edited_by: User;
-    cover: Cover | null;
-    icon: unknown;
-    parent: Parent;
-    archived: boolean;
-    properties: Properties;
-    url: string;
-    public_url: null;
+    slug: string;
+    title: string;
+    file: string;
+    author: string;
+    description: string;
+    published_at: string;
+    cover_image: string;
   }
 
 export type BlogResponse = {

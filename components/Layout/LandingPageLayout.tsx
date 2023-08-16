@@ -22,7 +22,7 @@ function LandingPageLayout({ children }: Props) {
     <>
       <>
         <Head>
-          <title>Leadfix.ai</title>
+          <title>Zigment.ai</title>
         </Head>
         <Navbar />
         <NextProgress />
