@@ -107,7 +107,7 @@ function EditLeadModal({
             setFullName(leadData.full_name);
             setLeadStatus(leadData.status as LeadStatus)
             setLeadNotes(leadData.notes ? leadData.notes : "")
-            setLeadStage(leadData.stage ? leadData.stage : "")
+            setLeadStage(leadData.contact_stage ? leadData.contact_stage : "")
             setStopAI(leadData.stop_ai_processing ? leadData.stop_ai_processing : false)
 
             // If phone number is present
@@ -326,7 +326,7 @@ function EditLeadModal({
                                                     <input
                                                         value={leadStage}
                                                         onChange={(e) => setLeadStage(e.target.value)}
-                                                        name="stage"
+                                                        name="contact_stage"
                                                         className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                     />
                                                 </div>
@@ -540,7 +540,7 @@ function EditLeadModal({
                                                         notes: leadNotes,
                                                         status: leadStatus,
                                                         stop_ai_processing: stopAI,
-                                                        stage: leadStage
+                                                        contact_stage: leadStage
 
                                                     });
                                                 }}
