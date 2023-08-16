@@ -390,7 +390,7 @@ function AddEditLeadsMain({
                 label: "Status",
               },
               {
-                key: "lead_stage",
+                key: "stage",
                 label: "Stage",
               },
             ]}
