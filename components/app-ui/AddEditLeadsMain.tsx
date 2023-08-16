@@ -107,60 +107,7 @@ function AddEditLeadsMain({
     setIsStartingConversation(false);
     setShowMessageTemplateModal(false);
   }
-  // const handleReEngageConversation = async (contact_id: string) => {
-  //   setIsStartingConversation(true);
-  //   try {
 
-  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/re-engage-lead/by-user/${contact_id}`, {
-
-  //     });
-  //     toast.addToast("success", "Conversation started successfully");
-
-  //     setSelectedLeadIdsForTable([]);
-  //   }
-  //   catch (err: any) {
-  //     console.log(err);
-  //     let errorMsg = "Something went wrong while starting conversation";
-
-  //     // Check if err object has response data and it has a message property
-  //     if (err.response && err.response.data && err.response.data.message) {
-  //       errorMsg = err.response.data.message;
-  //     }
-
-  //     toast.addToast("error", errorMsg);
-
-
-  //   }
-  //   reloadData();
-  //   setIsStartingConversation(false);
-  // }
-  // const handleStartConversation = async (contact_id: string) => {
-  //   setIsStartingConversation(true);
-  //   try {
-
-  //     const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/by-user/${contact_id}`, {
-
-  //     });
-  //     toast.addToast("success", "Conversation started successfully");
-
-  //     setSelectedLeadIdsForTable([]);
-  //   }
-  //   catch (err: any) {
-  //     console.log(err);
-  //     let errorMsg = "Something went wrong while starting conversation";
-
-  //     // Check if err object has response data and it has a message property
-  //     if (err.response && err.response.data && err.response.data.message) {
-  //       errorMsg = err.response.data.message;
-  //     }
-
-  //     toast.addToast("error", errorMsg);
-
-
-  //   }
-  //   reloadData();
-  //   setIsStartingConversation(false);
-  // }
   const handleDeleteSelected = async () => {
     setIsDeleting(true);
     try {

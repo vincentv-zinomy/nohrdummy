@@ -46,10 +46,12 @@ function AddLeadPage() {
 
     setIsLoadingLeads(true);
     try {
-      const res = await axiosAPIWithAuth.get(`/contacts/by-org-agent/${selectedProduct?._id}`);
-      const data = await res.data;
+      const res = await axiosAPIWithAuth.get(`/contacts/by-org-agent/${selectedProduct?._id}?page=${router.query.page ? router.query.page : 1}`);
+      const data = await res.data
+
 
       console.log(data);
+
       setLeadsData(data);
     } catch (err) {
       console.log(err);
