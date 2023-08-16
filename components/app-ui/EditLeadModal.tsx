@@ -77,7 +77,7 @@ function EditLeadModal({
         setIsChatLoading(true);
         try {
 
-            const sendMessage = await axiosAPIWithAuth.post(`/contacts/chat-manually-with-lead/${leadData._id}`, {
+            const sendMessage = await axiosAPIWithAuth.post(`/contacts/chat-manually-with-contact/${leadData._id}`, {
                 message: msgBoxValue
             });
             toast.addToast("success", "Message sent to user...");

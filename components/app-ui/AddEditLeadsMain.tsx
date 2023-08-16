@@ -80,7 +80,7 @@ function AddEditLeadsMain({
     setShowMessageTemplateModal(true);
     try {
 
-      const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/multiple-leads`, {
+      const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/multiple-contacts`, {
         leadIds: selectedLeadIdsForTable,
         msg_template_id: selectedMessageTemplateId,
         required_values: requiredMsgTemplateValues
