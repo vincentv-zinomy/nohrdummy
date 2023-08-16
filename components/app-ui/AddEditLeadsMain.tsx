@@ -393,7 +393,7 @@ function AddEditLeadsMain({
                 type: HeaderItemForTableTypes.TEXT
               },
               {
-                key: "lead_stage",
+                key: "stage",
                 label: "Stage",
                 type: HeaderItemForTableTypes.TEXT
               },

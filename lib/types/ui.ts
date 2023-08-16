@@ -113,7 +113,7 @@ export interface LeadTypes {
   stop_ai_processing?: boolean;
   notes?: string;
   status: string;
-  lead_stage?: string;
+  stage?: string;
   created_at_timestamp?: number;
   updated_at_timestamp?: number;
   org_agent_id?: string;
