@@ -301,7 +301,7 @@ function AddNewMessageTemplateModal({
                                                                 })
                                                             }
                                                             <span className="text-xs text-slate-600">
-                                                                {` You can add custom variables like this (use numbers only): "Hi {{1}}, This is LeadFix Team.  Are you interested in buying {{2}} ?".`}
+                                                                {` You can add custom variables like this (use numbers only): "Hi {{1}}, This is Zigment Team.  Are you interested in buying {{2}} ?".`}
                                                             </span>
                                                         </>
                                                     )

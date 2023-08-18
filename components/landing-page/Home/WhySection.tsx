@@ -12,7 +12,7 @@ export default function WhySection({ }: Props) {
     <section className="bg-white">
       <div className="max-w-[56.9375rem] flex flex-col gap-12 md:gap-24 mx-auto px-5 py-14 md:py-28">
         <h2 className="font-bold text-4xl md:text-40 text-center w-full">
-          Why Leadfix
+          Why Zigment
         </h2>
         <div className="grid md:grid-cols-2 items-center gap-12">
           <div className="font-outfit text-center md:text-left">
@@ -20,7 +20,7 @@ export default function WhySection({ }: Props) {
               Intelligent and Humane interactions
             </h3>
             <p className="text-brand-gray-300 mt-3">
-              leadfix is trained to deliver magical, human-like interactions with your prospective customers. It is also intelligent - It stays focussed on its task, which is to schedule a call.
+              Zigment is trained to deliver magical, human-like interactions with your prospective customers. It is also intelligent - It stays focussed on its task, which is to schedule a call.
             </p>
             <a
               className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
@@ -73,7 +73,7 @@ export default function WhySection({ }: Props) {
               Smart Scheduling
             </h3>
             <p className="text-brand-gray-300 mt-3">
-              leadfix integrates with your google calendar to smartly schedule the calls within the available time slots of the assigned sales team members
+              Zigment integrates with your google calendar to smartly schedule the calls within the available time slots of the assigned sales team members
             </p>
             <a
               className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"

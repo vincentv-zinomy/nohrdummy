@@ -51,7 +51,7 @@ const BlogDetailComp = ({ blog_content, author, date, title }: Props) => {
           font-mont 
         '>
         <h1 className='pb-5 '>{title}</h1>
-        <div className='w-full pb-5'>
+        <div className='w-full '>
           <p>{author}</p>
           <p className=' text-slate-600 text-sm '>
             {date}

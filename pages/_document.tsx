@@ -15,7 +15,7 @@ export default function Document() {
           rel="stylesheet"
         />
         <link rel="icon" href="/zigment.svg" />
-        <title>Leadfix.ai - Schedule Sales Calls Without Spending Hours</title>
+        <title>Zigment.ai - Schedule Sales Calls Without Spending Hours</title>
       </Head>
       <body>
         <Main />

@@ -20,7 +20,7 @@ const Solution = () => {
         </div>
         <div className=" mt-11 text-brand-darkgrey">
           <p className=" font-medium text-lg md:text-2xl text-center">
-            Let leadfix coordinate between different parties to find a common
+            Let zigment coordinate between different parties to find a common
             available time slot for the sales call, the most time consuming part
             of sales process. So that you can spend more time on searching and
             finding those great prospects.

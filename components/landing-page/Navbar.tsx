@@ -7,59 +7,24 @@ import FlyoutMenu from './Navbar/TailwindNav';
 import { BuildingStorefrontIcon, CurrencyDollarIcon } from '@heroicons/react/20/solid';
 import Sidebar from './Navbar/Sidebar';
 import Link from 'next/link';
-import { BuildingOffice2Icon, CloudIcon, ShoppingBagIcon, UserGroupIcon, ChartBarIcon } from '@heroicons/react/24/solid';
+import { PencilSquareIcon, CloudIcon, ShoppingBagIcon, UserGroupIcon, ChartBarIcon, SquaresPlusIcon } from '@heroicons/react/24/solid';
 
-const flyoutMenuItems = [
-  {
-    name: 'Industries',
-    subMenu: [
+ 
 
-      {
-        name: 'Fintech',
-        description: 'Get a better understanding of your traffic',
-        href: '#',
-        icon: CurrencyDollarIcon
-      },
-      {
-        name: 'Saas',
-        description: 'Speak directly to your customers',
-        href: '#',
-        icon: CloudIcon
-      },
-      {
-        name: 'Retail',
-        description: "Your customers' data will be safe and secure",
-        href: '#',
-        icon: BuildingStorefrontIcon
-      },
-      {
-        name: 'E-Commerce',
-        description: 'Connect with third-party tools',
-        href: '#',
-        icon: ShoppingBagIcon
-      },
-    ]
-  }
-];
-
-const menuItems = [
-  {
-    name: 'Home',
-    href: '/'
-  },
+const menuItems = [ 
   {
     name: 'Solutions',
     subMenu: [
       {
         name: 'For HR',
         description: 'Recruit faster and more efficiently.',
-        href: '/solution/agency',
+        href: '/solutions/nohr',
         icon: UserGroupIcon
       },
       {
         name: 'For Sales',
         description: 'Built for buisness to scale their sales',
-        href: '/solution/startup',
+        href: '/solutions/leadfix',
         icon: ChartBarIcon
       } 
 
@@ -71,16 +36,40 @@ const menuItems = [
   },
   {
     name: 'Products',
-    href: '/product'
+    subMenu: [
+      {
+        name: 'NoHR',
+        description: 'Schedule Interviews Without Spending Hours',
+        href: '/nohr',
+        icon: '/nohrTabLogo.png'
+      },
+      {
+        name: 'LeadFix',
+        description: 'Your AI Sales assistant with superhuman abilities',
+        href: '/leadfix',
+        icon: '/leadfix_icon.svg'
+      } 
+
+    ]
   },
   {
     name: 'Resources',
-    href: '/resources'
-  },
-  {
-    name: 'Blog',
-    href: '/blog'
-  },
+    subMenu: [
+      {
+        name: 'Blog', 
+        href: '/blog',
+        icon: PencilSquareIcon,
+        description: 'Your AI Sales assistant with superhuman abilities',
+      },
+      {
+        name: 'Integrations', 
+        href: '/integrations',
+        icon: SquaresPlusIcon,
+        description: "Connect with third-party tools that you're already using",
+      } 
+
+    ]
+  }, 
   {
     name: 'Login',
     href: '/signin'
@@ -101,7 +90,7 @@ export default function Navbar() {
           className="bg-white h-[80px]    z-40 fixed w-full duration-50 transition-all overflow-hidden lg:overflow-visible"
         >
           <div className='w-full px-5 md:px-10 flex items-center border-b border-slate-300 justify-between h-[80px] z-40 relative bg-white'>
-            <Logo src={'/Zigment_logo.svg'} /> 
+            <Logo src={'/Zigment_logo.svg'}  /> 
             <div className='flex gap-10 items-center hidden lg:flex'>
             {menuItems.map((x, i) => {
               if (x.href) {

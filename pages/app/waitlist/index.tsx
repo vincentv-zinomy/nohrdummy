@@ -11,7 +11,7 @@ function WaitlistPage() {
         </p>
 
         <p className="mt-6">
-          For any further questions, email support@leadfix.ai or use live chat.
+          For any further questions, email support@zigment.ai or use live chat.
         </p>
       </div>
     </div>

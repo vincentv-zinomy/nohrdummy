@@ -157,7 +157,7 @@ const Footer = () => {
                 <div>
                   <p className="text-brand-gray">Email</p>
                   <Link href="mailto:contact@zigment.ai" className="group-hover:text-brand-orange" aria-label="Email us">
-                    contact@leadfix.ai
+                    contact@zigment.ai
                   </Link>
                 </div>
               </div>
