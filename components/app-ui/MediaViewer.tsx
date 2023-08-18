@@ -3,8 +3,7 @@ import { MediaFileTypes } from "./EditLeadModal";
 
 
 function MediaViewer({ url, mime_type }: MediaFileTypes) {
-    console.log(url);
-    console.log(mime_type)
+
     if (mime_type) {
         if (mime_type.startsWith('image/')) {
             return <img src={url} alt="Media content" onDoubleClick={() => {

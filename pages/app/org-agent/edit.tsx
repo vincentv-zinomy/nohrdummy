@@ -1,6 +1,6 @@
 import Spinner from "@/components/common/Spinner";
 import { useToast } from "@/components/hooks/useToast";
-import AddEditProductMain from "@/components/app-ui/AddEditProductMain";
+import AddEditProductMain from "@/components/app-ui/AddEditAgentMain";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
 import { LeadTypes, OrgAgentDataTypes } from "@/lib/types/ui";
 import { useRouter } from "next/router";
@@ -13,8 +13,17 @@ function EditProduct() {
     title: "",
     description: "",
     status: "draft",
-    assigned_number: "",
-    number_type: "SMS",
+    is_sms_enabled: false,
+    is_whatsapp_enabled: false,
+    is_instagram_enabled: false,
+    is_email_enabled: false,
+    is_voice_enabled: false,
+    is_website_chat_enabled: false,
+    assigned_sms_number: "",
+    assigned_whatsapp_number: "",
+    assigned_voice_id: "",
+    assigned_instagram_id: "",
+    assigned_email_id: "",
     agent_use_case_id: "",
     custom_values: {},
     _id: ""
@@ -35,8 +44,17 @@ function EditProduct() {
         title: products_data.title,
         description: products_data.description,
         status: products_data.status,
-        assigned_number: products_data.assigned_number,
-        number_type: products_data.number_type,
+        is_sms_enabled: products_data.is_sms_enabled,
+        is_whatsapp_enabled: products_data.is_whatsapp_enabled,
+        is_instagram_enabled: products_data.is_instagram_enabled,
+        is_email_enabled: products_data.is_email_enabled,
+        is_voice_enabled: products_data.is_voice_enabled,
+        is_website_chat_enabled: products_data.is_website_chat_enabled,
+        assigned_sms_number: products_data.assigned_sms_number,
+        assigned_whatsapp_number: products_data.assigned_whatsapp_number,
+        assigned_instagram_id: products_data.assigned_instagram_id,
+        assigned_email_id: products_data.assigned_email_id,
+        assigned_voice_id: products_data.assigned_voice_id,
         agent_use_case_id: products_data.agent_use_case_id,
         custom_values: products_data.custom_values
       });
@@ -64,7 +82,7 @@ function EditProduct() {
       };
 
       await axiosAPIWithAuth.put(`/org-agent/update/${router.query.id}`, JSON.stringify(productPostData));
-      toast.addToast("success", "Product created successfully");
+      toast.addToast("success", "Agent created successfully");
       window.location.href = "/app/org-agent";
     } catch (err: any) {
       console.log(err);
@@ -118,8 +136,7 @@ function EditProduct() {
               disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isSubmitting ||
               formData.description === "" ||
-              formData.title === "" ||
-              formData.assigned_number === ""
+              formData.title === ""
 
             }
             onClick={() => {

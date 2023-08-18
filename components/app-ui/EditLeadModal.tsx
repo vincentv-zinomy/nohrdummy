@@ -107,7 +107,7 @@ function EditLeadModal({
             setFullName(leadData.full_name);
             setLeadStatus(leadData.status as LeadStatus)
             setLeadNotes(leadData.notes ? leadData.notes : "")
-            setLeadStage(leadData.lead_stage ? leadData.lead_stage : "")
+            setLeadStage(leadData.contact_stage ? leadData.contact_stage : "")
             setStopAI(leadData.stop_ai_processing ? leadData.stop_ai_processing : false)
 
             // If phone number is present
@@ -132,7 +132,6 @@ function EditLeadModal({
                     countryCode = 'US';
                 }
 
-                console.log(phoneNumber, countryCode);
                 // Now update the state values
                 setPhone(phoneNumber);
                 setCountryCode(countryCode);
@@ -195,11 +194,9 @@ function EditLeadModal({
         try {
             const getMediaFilesResp = await axiosAPIWithAuth(`/contacts/chat-media/by-user/${leadData._id}`);
 
-            console.log(getMediaFilesResp.data);
             let media_file = getMediaFilesResp && getMediaFilesResp.data ? getMediaFilesResp.data : [];
             const sortedMediaFiles: MediaFileTypes[] = [...media_file].sort((a: MediaFileTypes, b: MediaFileTypes) => b.timestamp - a.timestamp);
-            console.log("media files---")
-            console.log(sortedMediaFiles)
+
             setMediaFiles([...sortedMediaFiles]);
 
         }
@@ -326,7 +323,7 @@ function EditLeadModal({
                                                     <input
                                                         value={leadStage}
                                                         onChange={(e) => setLeadStage(e.target.value)}
-                                                        name="lead_stage"
+                                                        name="contact_stage"
                                                         className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
                                                     />
                                                 </div>
@@ -429,7 +426,7 @@ function EditLeadModal({
                                                 style={{ backgroundImage: "url('/whatsappbg.png')" }}>
 
                                                 {formattedMessages.map((x) => {
-                                                    console.log(x)
+
                                                     return (
                                                         <>
                                                             <div className={`  w-fit max-w-[75%]  ${x.role === 'user' ? 'ml-auto bg-white' : 'bg-[#dcf8c7]'} p-2 break-words rounded-b-lg  ${x.role === 'user' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>
@@ -540,7 +537,7 @@ function EditLeadModal({
                                                         notes: leadNotes,
                                                         status: leadStatus,
                                                         stop_ai_processing: stopAI,
-                                                        lead_stage: leadStage
+                                                        contact_stage: leadStage
 
                                                     });
                                                 }}

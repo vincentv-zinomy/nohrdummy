@@ -75,7 +75,7 @@ function MessageTemplateSelectionModal({
         if (findTemplate) {
             const matches = findTemplate.template_data.text_content.match(/{{\d+}}/g);
             if (matches) {
-                console.log(matches)
+
                 const tempArr = Array(matches.length).fill('ASSISTANT_NAME');
                 setRequiredMsgTemplateValues(tempArr);
             }

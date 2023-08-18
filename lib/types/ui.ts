@@ -38,7 +38,13 @@ export enum MessageTemplateType {
   SMS = "SMS",
   WHATSAPP = "WHATSAPP"
 }
-
+export enum ChatChannelType {
+  SMS = 'SMS',
+  EMAIL = 'EMAIL',
+  WHATSAPP = 'WHATSAPP',
+  INSTAGRAM = 'INSTAGRAM',
+  VOICE = 'VOICE',
+}
 export interface MessageTemplateResponseType {
   org_id?: string;
   template_name: string;
@@ -70,13 +76,21 @@ export interface IAgentUseCase {
   default_not_qualified_message: string;
 }
 
-export interface PhoneNumberTypes {
+export interface CommunicationChannelTypes {
   _id: string;
-
+  org_id: string;
+  friendly_name: string;
   phone_number: string;
-  connection_type: string;
-  is_trial: boolean;
-  WHATSAPP_METADATA?: WhatsAppMetadata
+  connection_type: ChatChannelType;
+  email_metadata: EmailMetadata;
+  instagram_id: string;
+  voice_id: string;
+  WHATSAPP_METADATA?: WhatsAppMetadata;
+  updated_at_timestamp: number;
+
+  created_at_timestamp: number;
+
+  is_deleted: boolean;
 }
 export interface WhatsAppMetadata {
   waba_id: string;
@@ -86,6 +100,13 @@ export interface WhatsAppMetadata {
   waba_number_name: string;
   waba_quality_rating: string;
   waba_verification_status: string;
+}
+export interface EmailMetadata {
+  user: string;
+  password: string;
+  host: string;
+  port: string;
+  tls: string;
 }
 export interface IntegrationAuth {
   _id: string;
@@ -98,9 +119,18 @@ export interface OrgAgentDataTypes {
   _id: string;
   title: string;
   description: string;
-  number_type: string;
   agent_use_case_id: string;
-  assigned_number: string;
+  is_sms_enabled: boolean;
+  is_whatsapp_enabled: boolean;
+  is_instagram_enabled: boolean;
+  is_email_enabled: boolean;
+  is_voice_enabled: boolean;
+  is_website_chat_enabled: boolean;
+  assigned_sms_number: string;
+  assigned_whatsapp_number: string;
+  assigned_instagram_id: string;
+  assigned_email_id: string;
+  assigned_voice_id: string;
   status: string;
   contacts_count?: number;
   custom_values: any;
@@ -113,7 +143,7 @@ export interface LeadTypes {
   stop_ai_processing?: boolean;
   notes?: string;
   status: string;
-  lead_stage?: string;
+  contact_stage?: string;
   created_at_timestamp?: number;
   updated_at_timestamp?: number;
   org_agent_id?: string;

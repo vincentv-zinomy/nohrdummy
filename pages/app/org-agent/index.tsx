@@ -150,8 +150,8 @@ function ProductsPage() {
               ]}
               searchFilter={[
                 {
-                  key: "assigned_number",
-                  label: "Phone Number",
+                  key: "assigned_whatsapp_number",
+                  label: "Whatsapp Number",
                 },
                 {
                   key: "title",
@@ -171,8 +171,23 @@ function ProductsPage() {
                   type: HeaderItemForTableTypes.TEXT
                 },
                 {
-                  key: "assigned_number",
-                  label: "Phone Number",
+                  key: "assigned_whatsapp_number",
+                  label: "Whatsapp Number",
+                  type: HeaderItemForTableTypes.TEXT
+                },
+                {
+                  key: "assigned_sms_number",
+                  label: "SMS Number",
+                  type: HeaderItemForTableTypes.TEXT
+                },
+                {
+                  key: "assigned_email_id",
+                  label: "Email Id",
+                  type: HeaderItemForTableTypes.TEXT
+                },
+                {
+                  key: "assigned_instagram_id",
+                  label: "Instagram Id",
                   type: HeaderItemForTableTypes.TEXT
                 },
                 {

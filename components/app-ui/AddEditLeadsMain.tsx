@@ -337,7 +337,7 @@ function AddEditLeadsMain({
                 label: "Status",
               },
               {
-                key: "stage",
+                key: "contact_stage",
                 label: "Stage",
               },
             ]}
@@ -393,7 +393,7 @@ function AddEditLeadsMain({
                 type: HeaderItemForTableTypes.TEXT
               },
               {
-                key: "lead_stage",
+                key: "contact_stage",
                 label: "Stage",
                 type: HeaderItemForTableTypes.TEXT
               },

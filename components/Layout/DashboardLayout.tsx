@@ -76,8 +76,8 @@ function DashboardLayout({
           icon: WrenchIcon,
         },
         {
-          name: "My Phone Numbers",
-          href: "/app/setting/my-numbers",
+          name: "My Comm Channels",
+          href: "/app/setting/my-communication-channels",
           icon: PhoneIcon,
         },
         {

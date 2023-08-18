@@ -3,7 +3,8 @@ import axios from "axios";
 import Spinner from "../common/Spinner";
 import { posthog } from "posthog-js";
 import { jwtPayload } from "@/pages/login/success";
-import { LocalStorageKeys } from "@/lib/static-common-data";
+import { CookieKeys } from "@/lib/static-common-data";
+import Cookies from "js-cookie";
 
 export enum RoleTypes {
   ADMIN = "ADMIN",
@@ -70,24 +71,20 @@ export const AuthProvider = ({ children }: any) => {
   });
 
   const signOut = () => {
-    localStorage.removeItem(LocalStorageKeys.ACCESS_TOKEN);
-    localStorage.removeItem(LocalStorageKeys.PAYLOAD_DATA);
-    localStorage.removeItem(LocalStorageKeys.CURRENT_ORG_ID);
-    localStorage.removeItem(LocalStorageKeys.CURRENT_STEP);
-    localStorage.removeItem(LocalStorageKeys.ONBOARDING_DATA);
+    Cookies.set(CookieKeys.ACCESS_TOKEN, "", { expires: 0 });
+    Cookies.set(CookieKeys.PAYLOAD_DATA, "", { expires: 0 });
+    Cookies.set(CookieKeys.CURRENT_ORG_ID, "", { expires: 0 });
     window.location.href = "/signin";
   };
   const handleOrgChange = async (org_id: string) => {
-    localStorage.setItem(LocalStorageKeys.CURRENT_ORG_ID, org_id);
-    localStorage.setItem(LocalStorageKeys.CURRENT_STEP, "1");
-    localStorage.setItem(LocalStorageKeys.ONBOARDING_DATA, JSON.stringify({}));
+    Cookies.set(CookieKeys.CURRENT_ORG_ID, org_id);
     window.location.reload();
   };
   const getAuthData = async (org_id?: string) => {
-    const token = localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN);
-    const prePayload = localStorage.getItem(LocalStorageKeys.PAYLOAD_DATA);
+    const token = Cookies.get(CookieKeys.ACCESS_TOKEN);
+    const prePayload = Cookies.get(CookieKeys.PAYLOAD_DATA);
     const payload: jwtPayload = prePayload ? JSON.parse(prePayload) : null;
-    const selectedOrgId = localStorage.getItem(LocalStorageKeys.CURRENT_ORG_ID);
+    const selectedOrgId = Cookies.get(CookieKeys.CURRENT_ORG_ID);
 
     if (token && payload && selectedOrgId) {
       let selectedOrg = selectedOrgId ? selectedOrgId : undefined;

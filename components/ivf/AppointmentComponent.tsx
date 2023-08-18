@@ -16,7 +16,7 @@ type Props = {
 const AppointmentComponent = ({ data }: Props) => {
   const componentRef = useRef<HTMLDivElement>(null);
 
-  console.log(data)
+
   useEffect(() => {
     const handleScroll = () => {
       if (componentRef.current) {

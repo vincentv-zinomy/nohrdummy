@@ -1,20 +1,15 @@
 import axios from "axios";
-import { LocalStorageKeys } from "./static-common-data";
+import { CookieKeys } from "./static-common-data";
+import Cookies from "js-cookie";
 
 const BASE_URL = `${process.env.NEXT_PUBLIC_API_URL}`;
 
 const getToken = () => {
-  return typeof localStorage !== "undefined"
-    ? localStorage.getItem(LocalStorageKeys.ACCESS_TOKEN)
-    : "";
+
+  return Cookies.get(CookieKeys.ACCESS_TOKEN);
 };
 const getCurrentOrgId = () => {
-  if (typeof localStorage !== "undefined") {
-    const getSelectedOrgId = localStorage.getItem(LocalStorageKeys.CURRENT_ORG_ID);
-    return getSelectedOrgId ? getSelectedOrgId : "";
-  } else {
-    return "";
-  }
+  return Cookies.get(CookieKeys.CURRENT_ORG_ID);
 };
 
 const axiosAPIWithAuth = axios.create({

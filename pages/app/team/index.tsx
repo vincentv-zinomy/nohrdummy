@@ -136,7 +136,7 @@ function TeamsPage() {
                 (isDeleting || isLoading || isSendingInvite) && <Spinner color="text-indigo-500" />
               }
               <CommonTable data={teamMembers} onRowClick={(item: TeamMember) => {
-                console.log(item)
+
                 handleCheckboxChange(item)
               }}
                 checkBoxFilter={[
@@ -192,7 +192,7 @@ function TeamsPage() {
                   totalItems: teamMembers.length,
                   itemsPerPage: 10,
                   onPageChange: (page: number) => {
-                    console.log(page)
+
                   }
 
                 }}
