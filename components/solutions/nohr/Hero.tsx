@@ -1,10 +1,10 @@
 import Image from "next/image";
-import icon from '@/assets/images/solutions/fintech/hero/639217d589d6f45940232133Mark.svg'
+import icon from '@/assets/images/solutions/nohr/fintech/hero/639217d589d6f45940232133Mark.svg'
 import Link from "next/link"; 
 import videojs from 'video.js';
 import { useRef } from "react";
 import ModalVideo from '@/components/solutions/nohr/ModalVideo'
-import heroImg from '@/components/solutions/nohr/assets/rafiki.svg'
+import heroImg from '@/assets/images/solutions/nohr/hero/rafiki.svg'
 
  
 

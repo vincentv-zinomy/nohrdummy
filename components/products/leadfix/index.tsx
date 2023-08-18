@@ -1,14 +1,11 @@
 import Image from 'next/image'
-import Hero from './components/Home/Hero'
-import ProblemStatement from './components/Home/ProblemStatement'
-import IntrodSection from './components/Home/Introduction'
-import TestimonialSection from './components/Home/TestimonialSection'
-import WhySection from './components/Home/WhySection'
-import Solution from './components/Home/Solution'
-import PricingSection from './components/Home/PricingSection'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import LandingPageLayout from '@/components/Layout/LandingPageLayout'
+import Hero from './Hero'
+import ProblemStatement from './ProblemStatement'
+import IntrodSection from './Introduction'
+import TestimonialSection from './TestimonialSection'
+import WhySection from './WhySection'
+import Solution from './Solution'
+import PricingSection from './PricingSection'  
 
 export default function LandingPage() {
     return (

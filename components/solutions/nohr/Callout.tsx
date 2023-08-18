@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import calloutImage from './assets/callout/calloutimage.png'
+import calloutImage from '@/assets/images/solutions/nohr/callout/calloutimage.png'
 import Link from "next/link";
 
 type Props = {};

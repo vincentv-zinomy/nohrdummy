@@ -1,12 +1,13 @@
 import React from 'react'
-import Hero from './components/Hero'  
-import Pricing from './components/Pricing'
-import FAQSection from './components/FAQSection'
-import ProblemStatement from './components/ProblemStatement'
-import IntrodSection from './components/IntrodSection'
-import TestimonialSection from './components/TestimonialSection'
-import WhySection from './components/WhySection'
-import Solution from './components/Solution'
+import Hero from './Hero'
+import ProblemStatement from './ProblemStatement'
+import IntrodSection from './IntrodSection'
+import TestimonialSection from './TestimonialSection'
+import WhySection from './WhySection'
+import Solution from './Solution'
+import Pricing from './Pricing'
+import FAQSection from './FAQSection'
+ 
 type Props = {}
 
 const index = (props: Props) => {

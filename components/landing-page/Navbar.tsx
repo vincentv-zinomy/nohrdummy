@@ -1,13 +1,13 @@
 "use client"
 
 import React, { useState } from 'react';
-import { RxHamburgerMenu } from 'react-icons/rx';
-import Logo from './Navbar/Logo';
+import { RxHamburgerMenu } from 'react-icons/rx'; 
 import FlyoutMenu from './Navbar/TailwindNav';
 import { BuildingStorefrontIcon, CurrencyDollarIcon } from '@heroicons/react/20/solid';
 import Sidebar from './Navbar/Sidebar';
 import Link from 'next/link';
 import { PencilSquareIcon, CloudIcon, ShoppingBagIcon, UserGroupIcon, ChartBarIcon, SquaresPlusIcon } from '@heroicons/react/24/solid';
+import Logo from './Navbar/Logo';
 
  
 

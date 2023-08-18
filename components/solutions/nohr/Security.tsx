@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import React from 'react'
-import securityImg from './assets/security/pana.svg'
+import securityImg from '@/assets/images/solutions/nohr/security/pana.svg'
 
  
 

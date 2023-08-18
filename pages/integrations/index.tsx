@@ -1,5 +1,4 @@
-import LandingPageLayout from '@/components/Layout/LandingPageLayout'
-import AppLayout from '@/components/products/leadfix/components/AppLayout'
+import LandingPageLayout from '@/components/Layout/LandingPageLayout' 
 import axios from 'axios'
 import Head from 'next/head'
 import React from 'react'

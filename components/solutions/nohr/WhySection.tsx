@@ -1,16 +1,10 @@
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
-import image from './assets/why/icon-green-title.svg'
-import image1 from './assets/why/section1.png'
-import image2 from './assets/why/section2.png'
-import image3 from './assets/why/section3.png'
-
-import heroImg from './assets/why/rafiki.svg'
-import whyImage1 from "./assets/why/img-1.svg";
-import whyImage2 from "./assets/why/img-2.svg";
-import whyImage3 from "./assets/why/img-3.svg";
-import whyImage4 from "./assets/why/img-4.svg";
+import React from 'react'   
+import whyImage1 from "@/assets/images/solutions/nohr/why/img-1.svg";
+import whyImage2 from "@/assets/images/solutions/nohr/why/img-2.svg";
+import whyImage3 from "@/assets/images/solutions/nohr/why/img-3.svg";
+import whyImage4 from "@/assets/images/solutions/nohr/why/img-4.svg"
 type Props = {}
 
 

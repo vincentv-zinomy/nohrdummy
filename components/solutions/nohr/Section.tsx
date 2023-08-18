@@ -1,9 +1,8 @@
-import React from 'react'
-import image1 from './assets/section/section1.png'
-
-import image from './assets/section/section1.png'
-import image2 from './assets/section/section2.png'
-import image3 from './assets/section/section3.png'
+import React from 'react' 
+import image1 from '@/assets/images/solutions/nohr/fintech/section2/section1.png'
+ 
+import image2 from '@/assets/images/solutions/nohr/fintech/section2/section2.png'
+import image3 from '@/assets/images/solutions/nohr/fintech/section2/section3.png'
 import Image from 'next/image'
  
 
