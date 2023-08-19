@@ -28,6 +28,12 @@ export default function App({ Component, pageProps }: AppProps) {
   if (
     router.pathname === "/" ||
     router.pathname.startsWith("/blog") ||
+    router.pathname.startsWith("/products") ||
+    router.pathname.startsWith("/products/leadfix") ||
+    router.pathname.startsWith("/resources") ||
+    router.pathname.startsWith("/resources/blog") ||
+    router.pathname.startsWith("/resources/apps") ||
+    router.pathname.startsWith("/solutions") ||
     noAuthRoutes.includes(router.pathname)
   ) {
     return (

@@ -13,7 +13,7 @@ const IntrodSection = () => {
             Say Hello to{" "}
             <span className="relative inline-flex justify-center items-center">
               {" "}
-              <span className="">Leadfix</span>{" "}
+              <span className="">Zigment</span>{" "}
               <div className="absolute w-[140%]">
                 {" "}
                 <Image src={blueTitle} alt="icon-green-title" />{" "}
@@ -22,7 +22,7 @@ const IntrodSection = () => {
           </h2>
           <p className="md:text-lg text-brand-gray-300 mt-3">
             {" "}
-            Let leadfix.ai coordinate with your shortlisted prospects to fix up
+            Let Zigment.ai coordinate with your shortlisted prospects to fix up
             sales calls. Just enter your product or service description and feed
             the leads data. No human intervention needed!
           </p>

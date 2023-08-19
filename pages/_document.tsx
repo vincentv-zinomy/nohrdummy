@@ -14,8 +14,8 @@ export default function Document() {
           href="https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Outfit:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <link rel="icon" href="/leadfix_icon.svg" />
-        <title>Leadfix.ai - Schedule Sales Calls Without Spending Hours</title>
+        <link rel="icon" href="/zigment.svg" />
+        <title>Zigment.ai - Schedule Sales Calls Without Spending Hours</title>
       </Head>
       <body>
         <Main />

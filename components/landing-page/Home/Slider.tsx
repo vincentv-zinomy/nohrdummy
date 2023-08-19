@@ -37,7 +37,7 @@ const testimonials = [
     designation: "CEO, UniGage",
     rating: 5,
     testimonial:
-      "I am blown over by the human-like interactions that Leadfix's Ai is able to have with the potetial leads. This is the future",
+      "I am blown over by the human-like interactions that Zigment's Ai is able to have with the potetial leads. This is the future",
     profile: profilepic4
   },
 ];

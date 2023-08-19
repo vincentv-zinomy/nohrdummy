@@ -7,29 +7,16 @@ import React from 'react'
 import NavbarItem from './NavbarItem'
 import Link from 'next/link'
 
-type flyoutMenuItems = {
-    name:string,
-    subMenu:{
-        name: string;
-        description: string;
-        href: string;
-        icon:any
-    }[]
-}
-
-type menuItemType = {
-  name:string,
-  href:string
-}
+ 
+ 
 
 type Props = {
     open:boolean,
-    setOpen:React.Dispatch<React.SetStateAction<boolean>>,
-    flyoutMenuItems:flyoutMenuItems[],
-    menuItems:menuItemType[]
+    setOpen:React.Dispatch<React.SetStateAction<boolean>>, 
+    menuItems:any
 }
 
-export default function Sidebar({open, setOpen, flyoutMenuItems, menuItems}:Props) {
+export default function Sidebar({open, setOpen, menuItems}:Props) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-50 lg:hidden" onClose={setOpen}>
@@ -51,7 +38,7 @@ export default function Sidebar({open, setOpen, flyoutMenuItems, menuItems}:Prop
                   <div className="flex h-full flex-col overflow-y-scroll bg-white py-6 shadow-xl">
                     <div className="px-4 sm:px-6">
                       <div className="flex items-start justify-between">
-                        <Dialog.Title className="text-lg font-medium text-gray-900">Leadfix</Dialog.Title>
+                        <Dialog.Title className="text-lg font-medium text-gray-900">Zigment</Dialog.Title>
                         <div className="ml-3 flex h-7 items-center">
                           <button
                             type="button"
@@ -64,16 +51,18 @@ export default function Sidebar({open, setOpen, flyoutMenuItems, menuItems}:Prop
                         </div>
                       </div>
                     </div>
-                    <div className="relative mt-6 flex-1 px-4 sm:px-6">
-                      {/* Replace with your content */}
+                    <div className="relative mt-6 flex-1 px-4 sm:px-6"> 
                       <div className="absolute inset-0 px-4 sm:px-6 gap-2 flex flex-col">
-                        {menuItems.map((x)=>(<Link href={x.href} className='font-outfit text-lg'>{x.name}</Link>))}
+                        {menuItems.map((x:any,i:number)=>{
+                          if(x.href) {
+                            return <Link href={x.href} key={i} className='font-outfit text-md'>{x.name}</Link>
+                          }
+                          if(x.subMenu){
+                            return <NavbarItem menu={x} key={i}/>
+                          }
+                        })}
 
-                        {flyoutMenuItems.map((x)=>(
-                            <NavbarItem menu={x}/>
-                        ))}
-                      </div>
-                      {/* /End replace */}
+                      </div> 
                     </div>
                   </div>
                 </Dialog.Panel>

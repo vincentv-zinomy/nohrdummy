@@ -1,6 +1,7 @@
 import { Fragment } from 'react'
 import { Popover, Transition } from '@headlessui/react'
 import { ChevronDownIcon  } from '@heroicons/react/20/solid'
+import Image from 'next/image'
  
 
  
@@ -29,7 +30,11 @@ export default function TailwindNav({menu}) {
               {menu.subMenu.map((item) => (
                 <div key={item.name} className="group relative flex gap-x-6 rounded-lg p-2 hover:bg-gray-200">
                   <div className="mt-1 flex h-11 w-11 flex-none items-center justify-center rounded-lg bg-gray-200 group-hover:bg-white">
-                    <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                    {typeof item.icon === 'string' && <Image src={item.icon} width={20} height={20} alt='' />  }
+                    {
+                      typeof item.icon !== 'string' &&
+                      <item.icon className="h-6 w-6 text-gray-600 group-hover:text-indigo-600" aria-hidden="true" />
+                    } 
                   </div>
                   <div>
                     <a href={item.href} className="font-semibold text-gray-900">
