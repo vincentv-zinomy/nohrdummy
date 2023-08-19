@@ -9,15 +9,15 @@ import { useToast } from "../hooks/useToast";
 
 import Spinner from "../common/Spinner";
 
-interface AddEditProductMainProps {
+interface AddEditAgentMainProps {
   setFormDataMain: (data: OrgAgentDataTypes) => void;
   formData: OrgAgentDataTypes;
   isEditMode: boolean;
 }
-function AddEditProductMain({
+function AddEditAgentMain({
   setFormDataMain,
   formData,
-}: AddEditProductMainProps) {
+}: AddEditAgentMainProps) {
   const router = useRouter();
   const toast = useToast();
 
@@ -525,4 +525,4 @@ function AddEditProductMain({
   );
 }
 
-export default AddEditProductMain;
+export default AddEditAgentMain;

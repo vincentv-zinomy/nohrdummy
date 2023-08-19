@@ -19,7 +19,7 @@ export interface TeamMember {
   roles: RoleTypes[];
   user_joined: boolean;
 }
-export enum LeadStatus {
+export enum ContactStatus {
   NEW = 'NEW',
   IN_PROGRESS = 'IN_PROGRESS',
   SCHEDULED = 'SCHEDULED',
@@ -116,7 +116,12 @@ export interface IntegrationAuth {
   integration_unique_id: string;
   logo_url?: string;
 }
-
+export interface OrgProjectDataTypes {
+  _id: string;
+  title: string;
+  description: string;
+  contacts_count?: number;
+}
 export interface OrgAgentDataTypes {
   _id: string;
   title: string;
@@ -137,7 +142,7 @@ export interface OrgAgentDataTypes {
   contacts_count?: number;
   custom_values: any;
 }
-export interface LeadTypes {
+export interface ContactTypes {
   _id: string;
   full_name: string;
   email: string;

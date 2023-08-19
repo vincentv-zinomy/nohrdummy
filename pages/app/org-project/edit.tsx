@@ -1,31 +1,16 @@
 import Spinner from "@/components/common/Spinner";
 import { useToast } from "@/components/hooks/useToast";
-import AddEditAgentMain from "@/components/app-ui/AddEditAgentMain";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
-import { ContactTypes, OrgAgentDataTypes } from "@/lib/types/ui";
+import { OrgProjectDataTypes } from "@/lib/types/ui";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function EditAgent() {
+function EditProjectPage() {
   const router = useRouter();
 
-  const [formData, setFormData] = useState<OrgAgentDataTypes>({
+  const [formData, setFormData] = useState<OrgProjectDataTypes>({
     title: "",
     description: "",
-    status: "draft",
-    is_sms_enabled: false,
-    is_whatsapp_enabled: false,
-    is_instagram_enabled: false,
-    is_email_enabled: false,
-    is_voice_enabled: false,
-    is_website_chat_enabled: false,
-    assigned_sms_number: "",
-    assigned_whatsapp_number: "",
-    assigned_voice_id: "",
-    assigned_instagram_id: "",
-    assigned_email_id: "",
-    agent_use_case_id: "",
-    custom_values: {},
     _id: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -33,30 +18,17 @@ function EditAgent() {
   const getData = async () => {
     try {
       const res = await axiosAPIWithAuth.get(
-        `/org-agent/details/${router.query.id}`
+        `/org-project/details/${router.query.id}`
       );
       const data = await res.data;
 
-      const agents_data = data as OrgAgentDataTypes;
+      const org_projects_data = data as OrgProjectDataTypes;
 
       setFormData({
-        _id: agents_data._id,
-        title: agents_data.title,
-        description: agents_data.description,
-        status: agents_data.status,
-        is_sms_enabled: agents_data.is_sms_enabled,
-        is_whatsapp_enabled: agents_data.is_whatsapp_enabled,
-        is_instagram_enabled: agents_data.is_instagram_enabled,
-        is_email_enabled: agents_data.is_email_enabled,
-        is_voice_enabled: agents_data.is_voice_enabled,
-        is_website_chat_enabled: agents_data.is_website_chat_enabled,
-        assigned_sms_number: agents_data.assigned_sms_number,
-        assigned_whatsapp_number: agents_data.assigned_whatsapp_number,
-        assigned_instagram_id: agents_data.assigned_instagram_id,
-        assigned_email_id: agents_data.assigned_email_id,
-        assigned_voice_id: agents_data.assigned_voice_id,
-        agent_use_case_id: agents_data.agent_use_case_id,
-        custom_values: agents_data.custom_values
+        _id: org_projects_data._id,
+        title: org_projects_data.title,
+        description: org_projects_data.description,
+
       });
     } catch (err) {
       console.log(err);
@@ -76,14 +48,14 @@ function EditAgent() {
   const onSubmit = async () => {
     setIsSubmitting(true);
     try {
-      let agentsData: any = {
+      let projectsData: any = {
         ...formData,
         id: router.query.id,
       };
 
-      await axiosAPIWithAuth.put(`/org-agent/update/${router.query.id}`, JSON.stringify(agentsData));
-      toast.addToast("success", "Agent created successfully");
-      window.location.href = "/app/org-agent";
+      await axiosAPIWithAuth.put(`/org-project/update/${router.query.id}`, JSON.stringify(projectsData));
+      toast.addToast("success", "Project created successfully");
+      window.location.href = "/app/org-project";
     } catch (err: any) {
       console.log(err);
 
@@ -105,21 +77,53 @@ function EditAgent() {
     <div className="m-2 p-2">
 
 
-      <AddEditAgentMain
-        setFormDataMain={(tempData) => {
-          setFormData({
-            ...tempData,
-          });
-        }}
-        formData={formData}
-        isEditMode={true}
-      />
+      <div className="sm:col-span-6 sm:w-full md:w-1/2">
+        <label className="block text-sm font-medium text-gray-700">
+          Project Title
+        </label>
+        <div className="mt-1">
+          <input
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            name="projectTitle"
+            className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+          />
+        </div>
+        <p className="mt-2 text-sm text-gray-500">Enter Project Title.</p>
+      </div>
+      <div className="sm:col-span-6 sm:w-full md:w-1/2">
+        <label
+          htmlFor="about"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Project Description
+        </label>
+        <div className="mt-1">
+          <textarea
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                description: e.target.value,
+              })
+            }
+            name="projectDescription"
+            rows={5}
+            className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+          />
+        </div>
+        <p className="mt-2 text-sm text-gray-500">
+          Copy Paste Project Description.
+        </p>
+      </div>
       <div className="pt-5">
         <div className="flex justify-start">
           <button
             type="button"
             onClick={() => {
-              window.location.href = "/app/org-agent";
+              window.location.href = "/app/org-project";
             }}
             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -157,4 +161,4 @@ function EditAgent() {
   );
 }
 
-export default EditAgent;
+export default EditProjectPage;

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useToast } from "../hooks/useToast";
 
 import { allowedCountryCodes, classNames } from "@/lib/common";
-import { LeadStatus, LeadTypes, MessageTemplateResponseType } from "@/lib/types/ui";
+import { ContactStatus, ContactTypes, MessageTemplateResponseType } from "@/lib/types/ui";
 import validator from "validator";
 import Spinner from "../common/Spinner";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";

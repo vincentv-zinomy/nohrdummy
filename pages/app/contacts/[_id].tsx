@@ -1,7 +1,7 @@
 import { useAuth } from "@/components/contexts/AuthContext";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
 import { classNames } from "@/lib/common";
-import { LeadStatus, LeadTypes, OrgAgentDataTypes } from "@/lib/types/ui";
+import { ContactStatus, ContactTypes, OrgAgentDataTypes } from "@/lib/types/ui";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronDownIcon, MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
 import { useRouter as navRouter, } from "next/navigation";
@@ -23,7 +23,7 @@ function AddLeadPage() {
   const toast = useToast();
   const { authState } = useAuth();
   const [leadsData, setLeadsData] = useState<{
-    data: LeadTypes[];
+    data: ContactTypes[];
     total: number;
     page: number;
     limit: number;
@@ -40,13 +40,13 @@ function AddLeadPage() {
   const [showMessageTemplateModal, setShowMessageTemplateModal] = useState(false);
   const [selectedMessageTemplateId, setSelectedMessageTemplateId] = useState<string>("");
   const [requiredMsgTemplateValues, setRequiredMsgTemplateValues] = useState<string[]>([]);
-  const [leadDataForEdit, setLeadDataForEdit] = useState<LeadTypes>({
+  const [leadDataForEdit, setLeadDataForEdit] = useState<ContactTypes>({
     _id: "",
     full_name: "",
     email: "",
     phone: "",
     stop_ai_processing: false,
-    status: LeadStatus.NEW,
+    status: ContactStatus.NEW,
     notes: ""
   });
   const [onlyChatMode, setOnlyChatMode] = useState(false);
@@ -150,8 +150,8 @@ function AddLeadPage() {
     setIsDeleting(false);
   }
 
-  const addLeadToExistingProduct = async (
-    leadData: LeadTypes,
+  const addLeadToExistingProject = async (
+    leadData: ContactTypes,
   ) => {
     try {
       setIsAdding(true);
@@ -182,7 +182,7 @@ function AddLeadPage() {
   }
   const updateLead = async (
     contact_id: string,
-    lead_data: LeadTypes
+    lead_data: ContactTypes
   ) => {
 
     setShowEditLeadModal(false);
@@ -269,7 +269,7 @@ function AddLeadPage() {
 
     setIsLoadingLeads(true);
     try {
-      const res = await axiosAPIWithAuth.get(`/contacts/by-org-agent/${router.query._id}`, {
+      const res = await axiosAPIWithAuth.get(`/contacts/by-org-project/${router.query._id}`, {
         params: {
           ...router.query,
           search: search
@@ -340,7 +340,7 @@ function AddLeadPage() {
                   ...leadsData,
                   data: [...leadsData.data, newLead]
                 });
-                addLeadToExistingProduct(newLead);
+                addLeadToExistingProject(newLead);
               }}
             />
             <div className="sm:flex sm:items-center">
@@ -515,7 +515,7 @@ function AddLeadPage() {
                 },
 
               ]}
-              rowActions={(item: LeadTypes) => {
+              rowActions={(item: ContactTypes) => {
                 const fixedActions = [
                   <button
                     type="button"
@@ -540,7 +540,7 @@ focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                   </button>
                 ]
                 let dynamicActions: any = [];
-                // if (item.status === LeadStatus.NEW) {
+                // if (item.status === ContactStatus.NEW) {
                 //   dynamicActions.push(
                 //     <button
                 //       type="button"
@@ -554,13 +554,13 @@ focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                 //         e.preventDefault()
                 //         handleStartConversation(item._id)
                 //       }}
-                //       disabled={isStartingConversation || item.status !== LeadStatus.NEW}
+                //       disabled={isStartingConversation || item.status !== ContactStatus.NEW}
                 //     >
                 //       Start Conversation
                 //     </button>
                 //   )
                 // }
-                // if (item.status === LeadStatus.IN_PROGRESS) {
+                // if (item.status === ContactStatus.IN_PROGRESS) {
                 //   dynamicActions.push(
                 //     <button
                 //       type="button"

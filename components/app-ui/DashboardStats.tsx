@@ -13,7 +13,7 @@ import { classNames } from "@/lib/common";
 const stats = [
   {
     id: 1,
-    name: "Total Leads",
+    name: "Total Contacts",
     stat: "71,897",
     icon: UsersIcon,
     change: "122",

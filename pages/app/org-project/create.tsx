@@ -1,30 +1,17 @@
 import Spinner from "@/components/common/Spinner";
 import { useToast } from "@/components/hooks/useToast";
-import AddEditAgentMain from "@/components/app-ui/AddEditAgentMain";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
-import { OrgAgentDataTypes } from "@/lib/types/ui";
+import { OrgProjectDataTypes } from "@/lib/types/ui";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
-function CreateAgent() {
+function CreateProjectPage() {
   const router = useRouter();
-  const [formData, setFormData] = useState<OrgAgentDataTypes>({
-    is_sms_enabled: false,
-    is_whatsapp_enabled: false,
-    is_instagram_enabled: false,
-    is_email_enabled: false,
-    is_voice_enabled: false,
-    is_website_chat_enabled: false,
-    assigned_sms_number: "",
-    assigned_whatsapp_number: "",
-    assigned_instagram_id: "",
-    assigned_email_id: "",
-    assigned_voice_id: "",
+  const [formData, setFormData] = useState<OrgProjectDataTypes>({
+
     title: "",
     description: "",
-    status: "draft",
-    agent_use_case_id: "",
-    custom_values: {},
+
     _id: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -35,12 +22,12 @@ function CreateAgent() {
   const onSubmit = async () => {
     setIsSubmitting(true);
     try {
-      let agentPostData: any = {
+      let orgProjectData: any = {
         ...formData,
       };
-      await axiosAPIWithAuth.post("/org-agent/new", JSON.stringify(agentPostData));
-      toast.addToast("success", "Agent created successfully");
-      router.push("/app/org-agent");
+      await axiosAPIWithAuth.post("/org-project/new", JSON.stringify(orgProjectData));
+      toast.addToast("success", "Project created successfully");
+      router.push("/app/org-project");
     } catch (err: any) {
       console.log(err);
 
@@ -60,21 +47,53 @@ function CreateAgent() {
 
   return (
     <div className="m-2 p-2">
-      <AddEditAgentMain
-        setFormDataMain={(tempData) => {
-          setFormData({
-            ...tempData,
-          });
-        }}
-        formData={formData}
-        isEditMode={false}
-      />
+      <div className="sm:col-span-6 sm:w-full md:w-1/2">
+        <label className="block text-sm font-medium text-gray-700">
+          Project Title
+        </label>
+        <div className="mt-1">
+          <input
+            value={formData.title}
+            onChange={(e) =>
+              setFormData({ ...formData, title: e.target.value })
+            }
+            name="projectTitle"
+            className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+          />
+        </div>
+        <p className="mt-2 text-sm text-gray-500">Enter Project Title.</p>
+      </div>
+      <div className="sm:col-span-6 sm:w-full md:w-1/2">
+        <label
+          htmlFor="about"
+          className="block text-sm font-medium text-gray-700"
+        >
+          Project Description
+        </label>
+        <div className="mt-1">
+          <textarea
+            value={formData.description}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                description: e.target.value,
+              })
+            }
+            name="projectDescription"
+            rows={5}
+            className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md"
+          />
+        </div>
+        <p className="mt-2 text-sm text-gray-500">
+          Copy Paste Project Description.
+        </p>
+      </div>
       <div className="pt-5">
         <div className="flex justify-start">
           <button
             type="button"
             onClick={() => {
-              router.push("/app/org-agent");
+              router.push("/app/org-project");
             }}
             className="bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
           >
@@ -99,7 +118,7 @@ function CreateAgent() {
               onSubmit();
             }}
           >
-            Create Agent
+            Create Project
           </button>
         </div>
         {isSubmitting && (
@@ -112,4 +131,4 @@ function CreateAgent() {
   );
 }
 
-export default CreateAgent;
+export default CreateProjectPage;

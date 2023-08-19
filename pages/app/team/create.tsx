@@ -123,7 +123,7 @@ function AddTeamMember() {
                               <span className="text-xs text-slate-500">
 
                                 {tRole === RoleTypes.ADMIN && " (Can access everything)"}
-                                {tRole === RoleTypes.TEAM_MEMBER && " (Can create and manage leads & product data.)"}
+                                {tRole === RoleTypes.TEAM_MEMBER && " (Can create and manage leads data & send messages.)"}
                               </span>
 
                             </label>

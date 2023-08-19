@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useToast } from "../hooks/useToast";
 
 import { allowedCountryCodes, classNames } from "@/lib/common";
-import { LeadStatus, LeadTypes } from "@/lib/types/ui";
+import { ContactStatus, ContactTypes } from "@/lib/types/ui";
 import validator from "validator";
 import Spinner from "../common/Spinner";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
@@ -12,9 +12,9 @@ import MediaViewer from "./MediaViewer";
 interface EditLeadModalProps {
     show: boolean;
     setShow: (show: boolean) => void;
-    leadData: LeadTypes;
+    leadData: ContactTypes;
     onlyChat: boolean;
-    updateLead: (leadId: string, data: LeadTypes) => void;
+    updateLead: (leadId: string, data: ContactTypes) => void;
 
 }
 
@@ -53,7 +53,7 @@ function EditLeadModal({
     const [mediaFiles, setMediaFiles] = useState<MediaFileTypes[]>([]);
     const [formattedMessages, setFormattedMessages] = useState<FormattedMessages[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false); // New state
-    const [leadStatus, setLeadStatus] = useState<LeadStatus>(LeadStatus.NEW); // New state
+    const [leadStatus, setLeadStatus] = useState<ContactStatus>(ContactStatus.NEW); // New state
     const [leadNotes, setLeadNotes] = useState<string>(""); // New state
     const [isChatLoading, setIsChatLoading] = useState(false); // New state
     const [isMediaLoading, setIsMediaLoading] = useState(false); // New state
@@ -105,7 +105,7 @@ function EditLeadModal({
             setFullName(leadData.full_name);
             setEmail(leadData.email);
             setFullName(leadData.full_name);
-            setLeadStatus(leadData.status as LeadStatus)
+            setLeadStatus(leadData.status as ContactStatus)
             setLeadNotes(leadData.notes ? leadData.notes : "")
             setLeadStage(leadData.contact_stage ? leadData.contact_stage : "")
             setStopAI(leadData.stop_ai_processing ? leadData.stop_ai_processing : false)
@@ -338,11 +338,11 @@ function EditLeadModal({
                                                     className="mt-1 block w-full rounded-md border-gray-300 py-2 pl-3 pr-10 text-base focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm"
                                                     value={leadStatus}
                                                     onChange={(e) => {
-                                                        setLeadStatus(e.target.value as LeadStatus)
+                                                        setLeadStatus(e.target.value as ContactStatus)
                                                     }}
                                                 >
                                                     {
-                                                        Object.values(LeadStatus).map((status, in_d) => {
+                                                        Object.values(ContactStatus).map((status, in_d) => {
                                                             return (
                                                                 <option value={status} key={`lead-stauts-${status}-${in_d}`}>{status}</option>
                                                             )

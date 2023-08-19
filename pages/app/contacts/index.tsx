@@ -13,10 +13,10 @@ function ViewLeads() {
     useEffect(() => {
 
         if (authState.isAuthenticated) {
-            getProductsData()
+            getAgentsData()
         }
     }, [authState])
-    const getProductsData = async () => {
+    const getAgentsData = async () => {
 
 
         try {

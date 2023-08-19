@@ -3,15 +3,15 @@ import Spinner from "@/components/common/Spinner";
 import CommonTable, { HeaderItemForTableTypes } from "@/components/Tables/CommonTable";
 import { useToast } from "@/components/hooks/useToast";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
-import { OrgAgentDataTypes } from "@/lib/types/ui";
+import { OrgProjectDataTypes } from "@/lib/types/ui";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
-function AgentsPage() {
+function OrgProjectsPage() {
   const [loading, setLoading] = useState(true);
   const [isStarting, setIsStarting] = useState(false);
-  const [agents, setAgents] = useState([]);
+  const [projects, setProjects] = useState([]);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const { authState } = useAuth()
   const router = useRouter();
@@ -26,10 +26,10 @@ function AgentsPage() {
   const getData = async () => {
     setLoading(true);
     try {
-      const res = await axiosAPIWithAuth.get("/org-agent/all");
+      const res = await axiosAPIWithAuth.get("/org-project/all");
       const data = await res.data;
 
-      setAgents(data);
+      setProjects(data);
     } catch (err) {
       console.log(err);
     }
@@ -72,17 +72,17 @@ function AgentsPage() {
   const handleDeleteSelected = async () => {
     try {
 
-      const tryDelete = await axiosAPIWithAuth.post('/org-agent/bulk-delete', {
-        org_agent_ids: selectedIds
+      const tryDelete = await axiosAPIWithAuth.post('/org-project/bulk-delete', {
+        org_project_ids: selectedIds
       });
-      toast.addToast("success", "Agent(s) deleted successfully");
+      toast.addToast("success", "Project(s) deleted successfully");
       window.location.reload();
 
     }
     catch (err: any) {
       console.log(err);
 
-      let errorMsg = "Error while deleting Agent(s).";
+      let errorMsg = "Error while deleting Project(s).";
 
       // Check if err object has response data and it has a message property
       if (err.response && err.response.data && err.response.data.message) {
@@ -110,13 +110,13 @@ function AgentsPage() {
     return (
       <div className="m-4 p-4">
 
-        {agents.length > 0 ? (
+        {projects.length > 0 ? (
           <>
             <div className="sm:flex sm:items-center">
               <div className="sm:flex-auto">
-                <h1 className="text-xl font-semibold text-gray-900">{`Your Agents`}</h1>
+                <h1 className="text-xl font-semibold text-gray-900">{`Your Projects`}</h1>
                 {/* <p className="mt-2 text-sm text-gray-700">
-                  A list of all the agents and/org.
+                  A list of all the projects and/org.
                 </p> */}
               </div>
             </div>
@@ -135,10 +135,10 @@ function AgentsPage() {
             disabled:opacity-50 disabled:cursor-not-allowed"
                   disabled={false}
                   onClick={async () => {
-                    router.push("/app/org-agent/create");
+                    router.push("/app/org-project/create");
                   }}
                 >
-                  Create New Agent
+                  Create New Project
                 </button>
               </div>
             </div>
@@ -146,7 +146,7 @@ function AgentsPage() {
             <CommonTable
               isLoading={loading}
               currentPage={currentPage}
-              data={agents} onRowClick={(item: any) => {
+              data={projects} onRowClick={(item: any) => {
                 console.log(item)
                 handleCheckboxChange(item._id)
               }}
@@ -197,7 +197,7 @@ function AgentsPage() {
               ]
               }
               pagination={{
-                totalItems: agents.length,
+                totalItems: projects.length,
                 itemsPerPage: 10,
                 onPageChange: (page: number) => {
                   console.log(page)
@@ -215,7 +215,7 @@ function AgentsPage() {
                   }
                 }
               ]}
-              rowActions={(item: OrgAgentDataTypes) => {
+              rowActions={(item: OrgProjectDataTypes) => {
                 return ([
                   <button
                     type="button"
@@ -227,10 +227,10 @@ function AgentsPage() {
                         focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
                     onClick={() => {
 
-                      router.push(`/app/org-agent/edit?id=${item._id}`)
+                      router.push(`/app/org-project/edit?id=${item._id}`)
                     }}
                   >
-                    Edit Agent
+                    Edit Project
                   </button>
                   ,
                   <button
@@ -292,10 +292,10 @@ function AgentsPage() {
               />
             </svg>
             <h3 className="mt-2 text-sm font-medium text-gray-900">
-              No Agents
+              No Projects
             </h3>
             <p className="mt-1 text-sm text-gray-500">
-              Get started by creating a new agent. Ask your admin to give you access.
+              Get started by creating a new project. Ask your admin to give you access.
             </p>
             {
               authState?.current_org?.roles.includes(RoleTypes.ADMIN) && (
@@ -304,11 +304,11 @@ function AgentsPage() {
                     type="button"
                     className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
                     onClick={() => {
-                      router.push("/app/org-agent/create");
+                      router.push("/app/org-project/create");
                     }}
                   >
                     <PlusIcon className="-ml-1 mr-2 h-5 w-5" aria-hidden="true" />
-                    Create Agent
+                    Create Project
                   </button>
                 </div>
               )
@@ -320,4 +320,4 @@ function AgentsPage() {
   }
 }
 
-export default AgentsPage;
+export default OrgProjectsPage;
