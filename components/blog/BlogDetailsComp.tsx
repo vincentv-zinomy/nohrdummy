@@ -1,7 +1,6 @@
 
 import Image from 'next/image';
-import Link from 'next/link'
-import ReactMarkdown from 'react-markdown'
+import Link from 'next/link';
 import MarkdownToHTML from '../common/MarkdownToHTML';
 
 
@@ -22,16 +21,16 @@ const BlogDetailComp = ({ blog_content, author, date, title }: Props) => {
 
 
   const renderers = {
-    a: ({ node, children, href, ...props }: any) => { 
+    a: ({ node, children, href, ...props }: any) => {
       return <Link href={href}><a>{children}</a></Link>
 
     },
-    image: ({ src, alt }:any) => (
+    image: ({ src, alt }: any) => (
       <Image src={src} alt={alt} className="w-full h-full" />
     ),
   };
 
-  
+
   if (!blog_content) return null
 
 
@@ -57,7 +56,7 @@ const BlogDetailComp = ({ blog_content, author, date, title }: Props) => {
             {date}
           </p>
         </div>
-        <MarkdownToHTML content={blog_content}/> 
+        <MarkdownToHTML content={blog_content} />
       </div>
     </section>
   )
