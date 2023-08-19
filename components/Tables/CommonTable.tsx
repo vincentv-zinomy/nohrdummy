@@ -73,9 +73,6 @@ export interface CommonTableProps {
         itemsPerPage: number;
         onPageChange: (page: number) => void;
     };
-    checkBoxFilter: { key: string; label: string }[];
-    searchFilter: { key: string; label: string }[];
-    setAppliedFilters: (filters: { key: string; value: string }[]) => void;
     isLoading: boolean;
 }
 
@@ -92,9 +89,6 @@ function CommonTable(props: CommonTableProps) {
         handleCheckboxChange,
         renderCustomComponent,
         pagination,
-        checkBoxFilter,
-        searchFilter,
-        setAppliedFilters,
         isLoading
     } = props;
 
@@ -129,121 +123,11 @@ function CommonTable(props: CommonTableProps) {
             pagination.onPageChange(page);
         }
     };
-    const router = useRouter();
-
-
-
-
-    // State for checkbox Filters
-    const [checkboxFilterValues, setCheckboxFilterValues] = useState<
-        checkboxFilterValuesI[]
-    >([]);
-
-    const [sort, setSort] = useState<sortI | null>(null);
-
-    // State for Search Filters
-    const [searchFilterValues, setSearchFilterValues] = useState<
-        searchFilterValuesI[]
-    >(
-        searchFilter.map((x) => {
-            return {
-                ...x,
-                value: "",
-            };
-        })
-    );
-
-    const initializeCheckboxFilterValues = () => {
-        console.log("init checkbox triggered")
-        let values: {
-            options: { key: any; checked: boolean }[];
-            key: string;
-            label: string;
-        }[] = [];
-        if (checkBoxFilter) {
-            values = checkBoxFilter.map(element => {
-                const uniqueValues = Array.from(new Set(data.map(item => item[element.key])));
-                return {
-                    ...element,
-                    options: uniqueValues.map(val => ({
-                        key: val,
-                        checked: false,
-                    }))
-                };
-            });
-        }
-        return values;
-    };
-
-
     useEffect(() => {
-        setCheckboxFilterValues(initializeCheckboxFilterValues());
-    }, []);
-    useEffect(() => {
-        const tempAppliedFilters = [] as { key: string; value: string }[];
-        checkboxFilterValues.forEach(element => {
-            const filters = element.options
-                .filter(x => x.checked)
-                .map(x => x.key);
-            if (filters.length > 0) {
-                tempAppliedFilters.push({
-                    key: element.key,
-                    value: filters.join(","),
-                });
-            }
-        });
-        searchFilterValues.forEach(element => {
-            if (element.value.trim()) {
-                tempAppliedFilters.push({
-                    key: element.key,
-                    value: element.value,
-                });
-            }
-        });
-        if (sort) {
-            tempAppliedFilters.push({
-                key: sort.type,
-                value: sort.key,
-            });
-        }
-        console.log(tempAppliedFilters)
-        setAppliedFilters([...tempAppliedFilters])
+        setSelectedItems([])
+    }, [data])
 
-    }, [checkboxFilterValues, searchFilterValues, sort]);
 
-    const handleSort = (key: string) => {
-        if (sort) {
-            if (sort.key === key) {
-                if (sort.type === "asc") {
-                    setSort({ key, type: "desc" });
-                } else {
-                    setSort(null);
-                }
-            } else {
-                setSort({ key, type: "asc" });
-            }
-        } else {
-            setSort({ key, type: "asc" });
-        }
-    };
-
-    // delete functions from the filter chips
-    const handleFilterDelete = (filterIndex: number, index: number) => {
-        if (checkboxFilterValues) {
-            const duplicateValues = [...checkboxFilterValues];
-            duplicateValues[filterIndex].options[index].checked = false;
-            setCheckboxFilterValues(duplicateValues);
-        }
-    };
-
-    // delete functions from the filter chips
-    const handleSearchFilterDelete = (searchFilterIdx: number) => {
-        if (searchFilterValues) {
-            const duplicateValues = [...searchFilterValues];
-            duplicateValues[searchFilterIdx].value = "";
-            setSearchFilterValues(duplicateValues);
-        }
-    };
 
 
 
@@ -253,145 +137,9 @@ function CommonTable(props: CommonTableProps) {
             <div className="inline-block w-full py-2">
                 {/* Dropdown filters */}
                 <div className="flex justify-end mb-4">
-                    {checkboxFilterValues.map((x: checkboxFilterValuesI, i: number) => (
-                        <CheckBoxFilterComp
-                            key={`table-key-for-checkbox-filter-${x.key}`}
-                            section={x}
-                            index={i}
-                            checkboxFilterValues={checkboxFilterValues}
-                            setCheckboxFilterValues={setCheckboxFilterValues}
-                        />
-                    ))}
-                    {searchFilterValues.map((x: searchFilterValuesI, i: number) => (
-                        <SearchFIlterComp
-                            key={`table-key-for-search-filter-${x.key}`}
-                            section={x}
-                            index={i}
-                            searchFilterValues={searchFilterValues}
-                            setSearchFilterValues={setSearchFilterValues}
-                        />
-                    ))}
+
                 </div>
 
-                {/* Filter Chips */}
-                {(searchFilter || checkBoxFilter) && (
-                    <div className=" relative overflow-hidden px-4  ring-1 ring-gray-200  md:rounded-t-lg">
-                        <div className=" max-w-7xl py-2 px-2 sm:flex sm:items-center ">
-                            <div className="group flex items-center font-medium text-gray-700 h-12">
-                                <FunnelIcon
-                                    className="mr-2 h-5 w-5 flex-none text-gray-400 group-hover:text-gray-500"
-                                    aria-hidden="true"
-                                />
-                                Filters
-                            </div>
-
-                            <div
-                                aria-hidden="true"
-                                className="hidden h-5 w-px bg-gray-300 sm:ml-4 sm:block"
-                            />
-
-                            <div className="mt-2 sm:mt-0 sm:ml-4">
-                                <div className="-m-1 flex flex-wrap items-center gap-2  ">
-                                    {checkboxFilterValues &&
-                                        checkboxFilterValues.map((x: checkboxFilterValuesI, filterIndex: number) => {
-                                            if (!x.options.some((item: valuesOptionsI) => item.checked === true))
-                                                return null;
-                                            return (
-                                                <div
-                                                    className=" flex flex-wrap items-center  border border-gray-100 bg-gray-50  p-1 px-2   rounded-md     "
-                                                    key={`checkbox-filter-values-${x.key}`}
-                                                >
-                                                    <h3 className="font-semibold text-sm mr-3">{x.label}</h3>
-                                                    <div className="flex flex-wrap">
-                                                        {x.options.map((item: valuesOptionsI, index: number) => {
-                                                            if (!item.checked) return null;
-                                                            return (
-                                                                <span
-                                                                    key={`checkboxfilter-chips-${item.key}`}
-                                                                    className="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900"
-                                                                >
-                                                                    <span className="text-sm">
-                                                                        {String(item.key)}
-                                                                    </span>
-                                                                    <button
-                                                                        type="button"
-                                                                        className="ml-1 inline-flex items-center h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
-                                                                        onClick={() =>
-                                                                            handleFilterDelete(filterIndex, index)
-                                                                        }
-                                                                    >
-                                                                        <svg
-                                                                            className="h-2 w-2"
-                                                                            stroke="currentColor"
-                                                                            fill="none"
-                                                                            viewBox="0 0 8 8"
-                                                                        >
-                                                                            <path
-                                                                                strokeLinecap="round"
-                                                                                strokeWidth="1.5"
-                                                                                d="M1 1l6 6m0-6L1 7"
-                                                                            />
-                                                                        </svg>
-                                                                    </button>
-                                                                </span>
-                                                            );
-                                                        })}
-                                                    </div>
-                                                </div>
-                                            );
-                                        })}
-                                    {searchFilterValues &&
-                                        searchFilterValues.map(
-                                            (x: searchFilterValuesI, searchFilterIdx: number) => {
-                                                if (x.value.trim().length > 0) {
-                                                    return (
-                                                        <div
-                                                            className=" flex items-center border border-gray-50 py-1 px-2 rounded-md  bg-gray-50"
-                                                            key={`search-filter-values-${x.key}`}
-                                                        >
-                                                            <h3 className="font-semibold mr-3">{x.label} </h3>
-                                                            <div className="flex">
-                                                                {x.value.trim().length > 0 && (
-                                                                    <span
-                                                                        key={`searchfilter-chips-${x.value}`}
-                                                                        className="m-1 inline-flex items-center rounded-full border border-gray-200 bg-white py-1.5 pl-3 pr-2 text-sm font-medium text-gray-900"
-                                                                    >
-                                                                        <span className="text-sm">{x.value}</span>
-                                                                        <button
-                                                                            type="button"
-                                                                            className="ml-1 inline-flex items-center h-4 w-4 flex-shrink-0 rounded-full p-1 text-gray-400 hover:bg-gray-200 hover:text-gray-500"
-                                                                            onClick={() =>
-                                                                                handleSearchFilterDelete(searchFilterIdx)
-                                                                            }
-                                                                        >
-                                                                            <svg
-                                                                                className="h-2 w-2"
-                                                                                stroke="currentColor"
-                                                                                fill="none"
-                                                                                viewBox="0 0 8 8"
-                                                                            >
-                                                                                <path
-                                                                                    strokeLinecap="round"
-                                                                                    strokeWidth="1.5"
-                                                                                    d="M1 1l6 6m0-6L1 7"
-                                                                                />
-                                                                            </svg>
-                                                                        </button>
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </div>
-                                                    )
-                                                } else {
-                                                    return null
-                                                }
-                                            }
-                                        )}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                )}
                 <div className="relative overflow-hidden   ring-1 ring-black ring-opacity-10 md:rounded-b-lg">
                     {selectedItems.length > 0 && (
                         <div className="absolute top-0 left-12 flex h-12 items-center space-x-3 bg-gray-50 sm:left-16">
@@ -459,15 +207,9 @@ function CommonTable(props: CommonTableProps) {
                                                     >
                                                         <button
                                                             className="w-full text-left flex gap-4 items-center"
-                                                            onClick={() => handleSort(item.key)}
                                                         >
                                                             {item.label}
-                                                            {item.key === sort?.key && sort.type === "asc" && (
-                                                                <BsArrowUp />
-                                                            )}
-                                                            {item.key === sort?.key && sort.type === "desc" && (
-                                                                <BsArrowDown />
-                                                            )}
+
                                                         </button>
                                                     </th>
                                                 ))}
@@ -641,6 +383,7 @@ function CommonTable(props: CommonTableProps) {
                                                     {i + 1}
                                                 </a>;
                                             }
+
                                             // Show the current page and adjacent 3 pages
                                             if (i >= currentPage - 4 && i <= currentPage) {
                                                 return <a
@@ -653,6 +396,13 @@ function CommonTable(props: CommonTableProps) {
                                                 >
                                                     {i + 1}
                                                 </a>;
+                                            }
+                                            if (currentPage > 15 && i === Math.ceil(pagination.totalItems / pagination.itemsPerPage) / 2) {
+                                                return (
+                                                    <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
+                                                        ...
+                                                    </span>
+                                                )
                                             }
 
                                             // Show the last 3 pages

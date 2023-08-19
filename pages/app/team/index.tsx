@@ -137,34 +137,12 @@ function TeamsPage() {
               }
               <CommonTable
                 isLoading={isLoading}
-                setAppliedFilters={() => {
 
-                }}
                 data={teamMembers} onRowClick={(item: TeamMember) => {
 
                   handleCheckboxChange(item)
                 }}
-                checkBoxFilter={[
 
-                  {
-                    key: "user_joined",
-                    label: "User Joined Status",
-                  },
-                  {
-                    key: "roles",
-                    label: "Roles",
-                  }
-                ]}
-                searchFilter={[
-                  {
-                    key: "name",
-                    label: "Name",
-                  },
-                  {
-                    key: "email",
-                    label: "Email",
-                  },
-                ]}
                 header_items={[
                   {
                     key: "name",

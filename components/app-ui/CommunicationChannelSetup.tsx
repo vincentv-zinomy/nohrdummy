@@ -368,26 +368,11 @@ function CommunicationChannelSetup() {
         myCommunicationChannels && myCommunicationChannels.length > 0 ?
           <CommonTable
             isLoading={isLoading}
-            setAppliedFilters={() => {
 
-            }}
             data={myCommunicationChannels} onRowClick={(item: any) => {
               handleCheckboxChange(item._id)
             }}
             renderCustomComponent={showCustomComponent}
-            checkBoxFilter={[
-              {
-                key: "connection_type",
-                label: "Connection Type",
-              },
-            ]}
-            searchFilter={[
-              {
-                key: "friendly_name",
-                label: "Name",
-              },
-            ]}
-
             header_items={[
               {
                 key: "friendly_name",

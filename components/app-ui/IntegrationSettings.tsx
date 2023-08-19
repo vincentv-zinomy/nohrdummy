@@ -106,9 +106,7 @@ function IntegrationSettings() {
 
             }} /></div>
             <CommonTable
-                setAppliedFilters={() => {
 
-                }}
                 isLoading={isLoading}
                 data={integrationData} onRowClick={(item: any) => {
 
@@ -123,19 +121,7 @@ function IntegrationSettings() {
 
                 }}
                 renderCustomComponent={showCustomComponent}
-                checkBoxFilter={[
 
-                    {
-                        key: "integration_unique_id",
-                        label: "Connection Type",
-                    },
-                ]}
-                searchFilter={[
-                    {
-                        key: "integration_account_indentifier",
-                        label: "Account Identifier",
-                    },
-                ]}
                 header_items={[
 
                     {

@@ -95,9 +95,7 @@ function MyFiles() {
             <UploadFiles notifyUploaded={fetchLatestFiles} />
 
             <CommonTable
-                setAppliedFilters={() => {
 
-                }}
                 isLoading={isLoading}
                 data={dataStorageData} onRowClick={(item: any) => {
 
@@ -112,19 +110,7 @@ function MyFiles() {
 
                 }}
                 renderCustomComponent={showCustomComponent}
-                checkBoxFilter={[
 
-                    {
-                        key: "mime_type",
-                        label: "File Type",
-                    },
-                ]}
-                searchFilter={[
-                    {
-                        key: "file_name",
-                        label: "File Name",
-                    },
-                ]}
                 header_items={[
 
                     {

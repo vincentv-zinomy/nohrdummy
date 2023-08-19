@@ -125,27 +125,13 @@ function MessageTemplates() {
             {
                 myMessageTemplates && myMessageTemplates.length > 0 ?
                     <CommonTable
-                        setAppliedFilters={() => {
 
-                        }}
                         isLoading={isLoading}
                         data={myMessageTemplates} onRowClick={(item: any) => {
                             handleCheckboxChange(item._id)
                         }}
                         renderCustomComponent={showCustomComponent}
-                        checkBoxFilter={[
 
-                            {
-                                key: "template_type",
-                                label: "Template Type",
-                            },
-                        ]}
-                        searchFilter={[
-                            {
-                                key: "template_name",
-                                label: "Template Name",
-                            },
-                        ]}
                         header_items={[
                             {
                                 key: "template_name",

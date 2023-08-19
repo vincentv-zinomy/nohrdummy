@@ -380,46 +380,11 @@ function AddLeadPage() {
               data={leadsData.data}
               isLoading={isLoadingLeads}
               renderCustomComponent={showCustomComponent}
-              setAppliedFilters={(filters: { key: string; value: string }[]) => {
-                console.log(filters);
-                let temp_query_object = {
-                  ...router.query
-                }
-                filters.forEach((filter) => {
-                  temp_query_object[filter.key] = filter.value;
-                })
-                router.push({
-                  pathname: router.pathname,
-                  query: {
-                    ...temp_query_object
-                  },
-                }, undefined, { shallow: true }); // Add shallow option here
 
-              }}
               onRowClick={(item: any) => {
                 handleCheckboxChange(item._id)
               }}
-              checkBoxFilter={[
 
-                {
-                  key: "status",
-                  label: "Status",
-                },
-                {
-                  key: "contact_stage",
-                  label: "Stage",
-                },
-              ]}
-              searchFilter={[
-                {
-                  key: "full_name",
-                  label: "Name",
-                },
-                {
-                  key: "phone",
-                  label: "Phone",
-                },
-              ]}
               header_items={[
                 {
                   key: "full_name",

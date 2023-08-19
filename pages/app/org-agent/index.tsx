@@ -139,30 +139,12 @@ function ProductsPage() {
 
             <CommonTable
               isLoading={loading}
-              setAppliedFilters={() => {
 
-              }}
               data={products} onRowClick={(item: any) => {
                 console.log(item)
                 handleCheckboxChange(item._id)
               }}
-              checkBoxFilter={[
 
-                {
-                  key: "status",
-                  label: "Status",
-                },
-              ]}
-              searchFilter={[
-                {
-                  key: "assigned_whatsapp_number",
-                  label: "Whatsapp Number",
-                },
-                {
-                  key: "title",
-                  label: "Title",
-                },
-              ]}
               renderCustomComponent={showCustomComponent}
               header_items={[
                 {
