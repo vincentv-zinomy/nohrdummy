@@ -105,10 +105,15 @@ function IntegrationSettings() {
             }} onError={() => {
 
             }} /></div>
-            <CommonTable data={integrationData} onRowClick={(item: any) => {
+            <CommonTable
+                setAppliedFilters={() => {
 
-                handleCheckboxChange(item._id)
-            }}
+                }}
+                isLoading={isLoading}
+                data={integrationData} onRowClick={(item: any) => {
+
+                    handleCheckboxChange(item._id)
+                }}
                 pagination={{
                     totalItems: integrationData.length,
                     itemsPerPage: 10,

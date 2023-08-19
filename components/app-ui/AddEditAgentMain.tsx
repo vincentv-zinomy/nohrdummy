@@ -112,7 +112,7 @@ function AddEditProductMain({
                   disabled={false}
                   onClick={async () => {
 
-                    router.push(`/app/contacts/view?org_agent_id=${router.query.id}&open_modal=1`);
+                    router.push(`/app/contacts/${router.query.id}`);
                   }}
                 >
                   View/Add Contacts

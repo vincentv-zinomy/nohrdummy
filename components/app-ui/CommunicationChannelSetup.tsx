@@ -13,8 +13,10 @@ function CommunicationChannelSetup() {
   const [emailChannelData, setEmailChannelData] = useState<EmailMetadata>({
     user: "",
     password: "",
-    host: "",
-    port: "",
+    imap_host: "",
+    smtp_host: "",
+    imap_port: "",
+    smtp_port: "",
     tls: "true"
   });
   const [myCommunicationChannels, setMyCommunicationChannels] = useState<CommunicationChannelTypes[]>([]);
@@ -254,15 +256,15 @@ function CommunicationChannelSetup() {
             </div>
             <div className="mt-1">
               <label className="block text-sm font-medium text-gray-700">
-                Email Host
+                Email SMTP Host
               </label>
               <input
-                value={emailChannelData.host}
+                value={emailChannelData.smtp_host}
 
                 onChange={(e) => {
                   setEmailChannelData({
                     ...emailChannelData,
-                    host: e.target.value
+                    smtp_host: e.target.value
                   })
                 }}
                 name="customer_variable_"
@@ -271,15 +273,49 @@ function CommunicationChannelSetup() {
             </div>
             <div className="mt-1">
               <label className="block text-sm font-medium text-gray-700">
-                Email Port
+                Email IMAP Host
               </label>
               <input
-                value={emailChannelData.port}
+                value={emailChannelData.imap_host}
 
                 onChange={(e) => {
                   setEmailChannelData({
                     ...emailChannelData,
-                    port: e.target.value
+                    imap_host: e.target.value
+                  })
+                }}
+                name="customer_variable_"
+                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+              />
+            </div>
+            <div className="mt-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Email IMAP Port
+              </label>
+              <input
+                value={emailChannelData.imap_port}
+
+                onChange={(e) => {
+                  setEmailChannelData({
+                    ...emailChannelData,
+                    imap_port: e.target.value
+                  })
+                }}
+                name="customer_variable_"
+                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+              />
+            </div>
+            <div className="mt-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Email SMTP Port
+              </label>
+              <input
+                value={emailChannelData.smtp_port}
+
+                onChange={(e) => {
+                  setEmailChannelData({
+                    ...emailChannelData,
+                    smtp_port: e.target.value
                   })
                 }}
                 name="customer_variable_"
@@ -330,9 +366,14 @@ function CommunicationChannelSetup() {
 
       {
         myCommunicationChannels && myCommunicationChannels.length > 0 ?
-          <CommonTable data={myCommunicationChannels} onRowClick={(item: any) => {
-            handleCheckboxChange(item._id)
-          }}
+          <CommonTable
+            isLoading={isLoading}
+            setAppliedFilters={() => {
+
+            }}
+            data={myCommunicationChannels} onRowClick={(item: any) => {
+              handleCheckboxChange(item._id)
+            }}
             renderCustomComponent={showCustomComponent}
             checkBoxFilter={[
               {

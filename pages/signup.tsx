@@ -53,13 +53,13 @@ export default function SignInPage() {
   }
   return (
     <div className="min-h-screen flex">
-      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
-        <div className="mx-auto w-full max-w-sm lg:w-96">
+      <div className="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 ">
+        <div className="mx-auto w-full max-w-sm ">
           <div>
             <img
               className="h-24 w-auto"
-              src="/leadfix_logo.svg"
-              alt="no-hr logo"
+              src="/Zigment_logo.svg"
+              alt="zigment logo"
             />
             <h2 className="mt-6 text-3xl font-extrabold text-gray-900">
               Create a new account
@@ -255,13 +255,7 @@ export default function SignInPage() {
           </div>
         </div>
       </div>
-      <div className="hidden lg:block relative w-0 flex-1 bg-[#171822] flex justify-center items-center max-h-screen" >
-        <img
-          className="max-w-full max-h-full object-contain"
-          src="/leadfix_webpage_image.jpg"
-          alt=""
-        />
-      </div>
+
     </div>
   );
 }

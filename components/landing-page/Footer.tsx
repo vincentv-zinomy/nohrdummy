@@ -190,6 +190,9 @@ const Footer = () => {
               <Link href="/privacy-policy" className="hover:text-brand-orange" aria-label="Our privacy policy">
                 Privacy Policy
               </Link>
+              <Link href="/refund-policy" className="hover:text-brand-orange" aria-label="our terms and services">
+                Refunds & Cancellation
+              </Link>
             </div>
           </div>
           <div>
@@ -214,7 +217,7 @@ const Footer = () => {
       </div>
       <div className="bg-white text-center text-white py-4">
         <p className="text-brand-blue-200 font-poppins font-medium text-sm ">
-          © Copyright 2023, All Rights Reserved | Salesfix.ai
+          © Copyright 2023, All Rights Reserved | Zigment.ai
         </p>
       </div>
     </footer>

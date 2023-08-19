@@ -3,4 +3,4 @@ Disallow: /api/  # Exclude the /api routes from being crawled
 Disallow: /_next/  # Exclude the Next.js specific files from being crawled
 Disallow: /static/  # Exclude the static files from being crawled
 
-Sitemap: https://leadfix.ai/sitemap.xml  # Replace with the actual URL of your sitemap.xml file
+Sitemap: https://zigment.ai/sitemap.xml  # Replace with the actual URL of your sitemap.xml file

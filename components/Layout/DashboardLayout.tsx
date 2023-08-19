@@ -273,8 +273,8 @@ function DashboardLayout({
                 <div className="flex-shrink-0 flex items-center px-4">
                   <img
                     className="h-24 w-auto"
-                    src="/leadfix_logo.svg"
-                    alt="leadfix_logo"
+                    src="/Zigment_logo.svg"
+                    alt="zigment_logo"
                   />
                 </div>
                 <div className="mt-5 flex-1 h-0 overflow-y-auto">
@@ -319,8 +319,8 @@ function DashboardLayout({
             <div className="flex items-center flex-shrink-0 px-4">
               <img
                 className="h-24 w-auto"
-                src="/leadfix_logo.svg"
-                alt="leadfix_logo"
+                src="/Zigment_logo.svg"
+                alt="zigment_logo"
               />
             </div>
             <div className="mt-5 flex-grow flex flex-col">

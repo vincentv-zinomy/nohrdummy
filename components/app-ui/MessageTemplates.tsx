@@ -124,9 +124,14 @@ function MessageTemplates() {
 
             {
                 myMessageTemplates && myMessageTemplates.length > 0 ?
-                    <CommonTable data={myMessageTemplates} onRowClick={(item: any) => {
-                        handleCheckboxChange(item._id)
-                    }}
+                    <CommonTable
+                        setAppliedFilters={() => {
+
+                        }}
+                        isLoading={isLoading}
+                        data={myMessageTemplates} onRowClick={(item: any) => {
+                            handleCheckboxChange(item._id)
+                        }}
                         renderCustomComponent={showCustomComponent}
                         checkBoxFilter={[
 

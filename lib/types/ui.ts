@@ -104,8 +104,10 @@ export interface WhatsAppMetadata {
 export interface EmailMetadata {
   user: string;
   password: string;
-  host: string;
-  port: string;
+  imap_host: string;
+  smtp_host: string;
+  imap_port: string;
+  smtp_port: string;
   tls: string;
 }
 export interface IntegrationAuth {

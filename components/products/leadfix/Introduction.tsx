@@ -67,7 +67,7 @@ const IntrodSection = () => {
                     3
                   </div>
                 </div>
-                <p> <span className="text-brand-blue-100">salesfix </span> interacts with prospects over whatsapp to schedule calls
+                <p> <span className="text-brand-blue-100">Leadfix </span> interacts with prospects over whatsapp to schedule calls
                 </p>
               </div>
               <Image

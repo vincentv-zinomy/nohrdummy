@@ -94,10 +94,15 @@ function MyFiles() {
             )}
             <UploadFiles notifyUploaded={fetchLatestFiles} />
 
-            <CommonTable data={dataStorageData} onRowClick={(item: any) => {
+            <CommonTable
+                setAppliedFilters={() => {
 
-                handleCheckboxChange(item._id)
-            }}
+                }}
+                isLoading={isLoading}
+                data={dataStorageData} onRowClick={(item: any) => {
+
+                    handleCheckboxChange(item._id)
+                }}
                 pagination={{
                     totalItems: dataStorageData.length,
                     itemsPerPage: 10,

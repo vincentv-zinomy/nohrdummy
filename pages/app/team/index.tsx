@@ -135,10 +135,15 @@ function TeamsPage() {
               {
                 (isDeleting || isLoading || isSendingInvite) && <Spinner color="text-indigo-500" />
               }
-              <CommonTable data={teamMembers} onRowClick={(item: TeamMember) => {
+              <CommonTable
+                isLoading={isLoading}
+                setAppliedFilters={() => {
 
-                handleCheckboxChange(item)
-              }}
+                }}
+                data={teamMembers} onRowClick={(item: TeamMember) => {
+
+                  handleCheckboxChange(item)
+                }}
                 checkBoxFilter={[
 
                   {
