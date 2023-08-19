@@ -5,9 +5,11 @@ import { useToast } from "../hooks/useToast";
 import CommonTable, { HeaderItemForTableTypes } from "../Tables/CommonTable";
 import { ChatChannelType, CommunicationChannelTypes, EmailMetadata } from "@/lib/types/ui";
 import WhatsAppBusinessAccountSetup from "./WhatsAppBusinessAccountSetup";
+import { useRouter } from "next/router";
 
 function CommunicationChannelSetup() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
+  const router = useRouter();
   const [isLauncherVisible, setIsLauncherVisible] = useState<boolean>(false);
   const [selectedChannelToAdd, setSelectedChannelToAdd] = useState<ChatChannelType>(ChatChannelType.SMS);
   const [emailChannelData, setEmailChannelData] = useState<EmailMetadata>({
@@ -22,6 +24,13 @@ function CommunicationChannelSetup() {
   const [myCommunicationChannels, setMyCommunicationChannels] = useState<CommunicationChannelTypes[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (router.query.page) {
+      setCurrentPage(parseInt(router.query.page as string));
+    }
+  }, [router.query])
   const toast = useToast();
 
   const getAllMyChannels = async () => {
@@ -368,6 +377,7 @@ function CommunicationChannelSetup() {
         myCommunicationChannels && myCommunicationChannels.length > 0 ?
           <CommonTable
             isLoading={isLoading}
+            currentPage={currentPage}
 
             data={myCommunicationChannels} onRowClick={(item: any) => {
               handleCheckboxChange(item._id)

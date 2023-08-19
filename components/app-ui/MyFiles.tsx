@@ -18,7 +18,13 @@ function MyFiles() {
     const router = useRouter();
     const toast = useToast();
     const [isDeleting, setIsDeleting] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        if (router.query.page) {
+            setCurrentPage(parseInt(router.query.page as string));
+        }
+    }, [router.query])
     useEffect(() => {
         fetchLatestFiles()
     }, [])
@@ -95,7 +101,7 @@ function MyFiles() {
             <UploadFiles notifyUploaded={fetchLatestFiles} />
 
             <CommonTable
-
+                currentPage={currentPage}
                 isLoading={isLoading}
                 data={dataStorageData} onRowClick={(item: any) => {
 

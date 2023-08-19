@@ -6,8 +6,10 @@ import CommonTable, { HeaderItemForTableTypes } from "../Tables/CommonTable";
 import { useToast } from "../hooks/useToast";
 import AddNewMessageTemplateModal from "./AddNewMessageTemplateModal";
 import EditMessageTemplateModal from "./EditMessageTemplateModal";
+import { useRouter } from "next/router";
 
 function MessageTemplates() {
+    const router = useRouter();
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [myMessageTemplates, setMyMessageTemplates] = useState<MessageTemplateResponseType[]>([]);
     const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -30,6 +32,13 @@ function MessageTemplates() {
         assigned_number_or_id: "",
     });
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    useEffect(() => {
+        if (router.query.page) {
+            setCurrentPage(parseInt(router.query.page as string));
+        }
+    }, [router.query])
     const toast = useToast();
 
 
@@ -125,7 +134,7 @@ function MessageTemplates() {
             {
                 myMessageTemplates && myMessageTemplates.length > 0 ?
                     <CommonTable
-
+                        currentPage={currentPage}
                         isLoading={isLoading}
                         data={myMessageTemplates} onRowClick={(item: any) => {
                             handleCheckboxChange(item._id)

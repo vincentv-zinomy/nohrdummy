@@ -16,7 +16,13 @@ function ProductsPage() {
   const { authState } = useAuth()
   const router = useRouter();
   const toast = useToast();
+  const [currentPage, setCurrentPage] = useState(1);
 
+  useEffect(() => {
+    if (router.query.page) {
+      setCurrentPage(parseInt(router.query.page as string));
+    }
+  }, [router.query])
   const getData = async () => {
     setLoading(true);
     try {
@@ -139,7 +145,7 @@ function ProductsPage() {
 
             <CommonTable
               isLoading={loading}
-
+              currentPage={currentPage}
               data={products} onRowClick={(item: any) => {
                 console.log(item)
                 handleCheckboxChange(item._id)

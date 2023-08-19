@@ -17,7 +17,13 @@ function IntegrationSettings() {
     const router = useRouter();
     const toast = useToast();
     const [isDeleting, setIsDeleting] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
 
+    useEffect(() => {
+        if (router.query.page) {
+            setCurrentPage(parseInt(router.query.page as string));
+        }
+    }, [router.query])
     useEffect(() => {
         fetchIntegrations()
     }, [])
@@ -106,6 +112,7 @@ function IntegrationSettings() {
 
             }} /></div>
             <CommonTable
+                currentPage={currentPage}
 
                 isLoading={isLoading}
                 data={integrationData} onRowClick={(item: any) => {

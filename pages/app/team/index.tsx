@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import React, { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useRouter } from "next/router";
 import Spinner from "@/components/common/Spinner";
 import { useAuth } from "@/components/contexts/AuthContext";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
@@ -17,6 +17,13 @@ function TeamsPage() {
   const [isSendingInvite, setIsSendingInvite] = useState(false);
   const router = useRouter();
   const toast = useToast();
+  const [currentPage, setCurrentPage] = useState(1);
+
+  useEffect(() => {
+    if (router.query.page) {
+      setCurrentPage(parseInt(router.query.page as string));
+    }
+  }, [router.query])
   const { authState } = useAuth();
 
   const getData = async () => {
@@ -136,6 +143,7 @@ function TeamsPage() {
                 (isDeleting || isLoading || isSendingInvite) && <Spinner color="text-indigo-500" />
               }
               <CommonTable
+                currentPage={currentPage}
                 isLoading={isLoading}
 
                 data={teamMembers} onRowClick={(item: TeamMember) => {

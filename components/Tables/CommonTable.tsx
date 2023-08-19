@@ -10,6 +10,7 @@ import CheckBoxFilterComp from "./CheckBoxFilterComp";
 import SearchFIlterComp from "./SearchFIlterComp";
 import Spinner from "../common/Spinner";
 import { useRouter } from "next/router";
+import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
 
 
 export interface SelectionOption {
@@ -74,6 +75,7 @@ export interface CommonTableProps {
         onPageChange: (page: number) => void;
     };
     isLoading: boolean;
+    currentPage: number;
 }
 
 function CommonTable(props: CommonTableProps) {
@@ -89,7 +91,8 @@ function CommonTable(props: CommonTableProps) {
         handleCheckboxChange,
         renderCustomComponent,
         pagination,
-        isLoading
+        isLoading,
+        currentPage
     } = props;
 
     const handleRowClick = useCallback(
@@ -113,16 +116,6 @@ function CommonTable(props: CommonTableProps) {
         [onRowDoubleClick]
     );
 
-    const [currentPage, setCurrentPage] = useState(1);
-    const handlePageChange = (page: number) => {
-
-        const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
-        // Checks if the page number is within the valid range
-        if (page >= 1 && page <= totalPages) {
-            setCurrentPage(page);
-            pagination.onPageChange(page);
-        }
-    };
     useEffect(() => {
         setSelectedItems([])
     }, [data])
@@ -163,8 +156,6 @@ function CommonTable(props: CommonTableProps) {
                         </div>
                     )}
                     <div className="overflow-x-auto">
-
-
                         {
                             isLoading ?
                                 (<div className="flex justify-center items-center">
@@ -359,7 +350,7 @@ function CommonTable(props: CommonTableProps) {
                                     aria-label="Pagination"
                                 >
                                     <a
-                                        onClick={() => handlePageChange(currentPage - 1)}
+                                        onClick={() => pagination.onPageChange(currentPage - 1)}
                                         className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${currentPage === 1
                                             ? "cursor-not-allowed"
                                             : "hover:bg-gray-50"
@@ -374,7 +365,7 @@ function CommonTable(props: CommonTableProps) {
                                             if (i < 3) {
                                                 return <a
                                                     key={`pagination-${i}`}
-                                                    onClick={() => handlePageChange(i + 1)}
+                                                    onClick={() => pagination.onPageChange(i + 1)}
                                                     className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
                                                         ? "bg-indigo-600 text-white"
                                                         : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -388,7 +379,7 @@ function CommonTable(props: CommonTableProps) {
                                             if (i >= currentPage - 4 && i <= currentPage) {
                                                 return <a
                                                     key={`pagination-${i}`}
-                                                    onClick={() => handlePageChange(i + 1)}
+                                                    onClick={() => pagination.onPageChange(i + 1)}
                                                     className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
                                                         ? "bg-indigo-600 text-white"
                                                         : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -410,7 +401,7 @@ function CommonTable(props: CommonTableProps) {
 
                                                 return <a
                                                     key={`pagination-${i}`}
-                                                    onClick={() => handlePageChange(i + 1)}
+                                                    onClick={() => pagination.onPageChange(i + 1)}
                                                     className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
                                                         ? "bg-indigo-600 text-white"
                                                         : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
@@ -430,7 +421,7 @@ function CommonTable(props: CommonTableProps) {
 
 
                                     <a
-                                        onClick={() => handlePageChange(currentPage + 1)}
+                                        onClick={() => pagination.onPageChange(currentPage + 1)}
                                         className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${currentPage === Math.ceil(pagination.totalItems / pagination.itemsPerPage)
                                             ? "cursor-not-allowed"
                                             : "hover:bg-gray-50"
