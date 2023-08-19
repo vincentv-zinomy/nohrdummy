@@ -120,9 +120,6 @@ function CommonTable(props: CommonTableProps) {
     );
 
     const [currentPage, setCurrentPage] = useState(1);
-    const router = useRouter();
-
-
     const handlePageChange = (page: number) => {
 
         const totalPages = Math.ceil(pagination.totalItems / pagination.itemsPerPage);
@@ -132,6 +129,10 @@ function CommonTable(props: CommonTableProps) {
             pagination.onPageChange(page);
         }
     };
+    const router = useRouter();
+
+
+
 
     // State for checkbox Filters
     const [checkboxFilterValues, setCheckboxFilterValues] = useState<
@@ -567,6 +568,7 @@ function CommonTable(props: CommonTableProps) {
 
 
                     </div>
+
                     <div className="flex items-center justify-between border-t border-gray-200 bg-white px-4 py-3 sm:px-6">
                         <div className="flex flex-1 justify-between sm:hidden">
                             <a
@@ -609,7 +611,7 @@ function CommonTable(props: CommonTableProps) {
                                 </p>
                             </div>
 
-                            <div>
+                            <div className="overflow-x-auto whitespace-nowrap">
                                 <nav
                                     className="isolate inline-flex -space-x-px rounded-md  "
                                     aria-label="Pagination"
@@ -624,22 +626,59 @@ function CommonTable(props: CommonTableProps) {
                                         <span className="sr-only">Previous</span>
                                         <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
                                     </a>
-                                    {[
-                                        ...Array(
-                                            Math.ceil(pagination.totalItems / pagination.itemsPerPage)
-                                        ),
-                                    ].map((_, i) => (
-                                        <a
-                                            key={i}
-                                            onClick={() => handlePageChange(i + 1)}
-                                            className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
-                                                ? "bg-indigo-600 text-white"
-                                                : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                                                } focus:z-20 focus:outline-offset-0`}
-                                        >
-                                            {i + 1}
-                                        </a>
-                                    ))}
+                                    {
+                                        [...Array(Math.ceil(pagination.totalItems / pagination.itemsPerPage))].map((_, i) => {
+                                            // Show the first 3 pages
+                                            if (i < 3) {
+                                                return <a
+                                                    key={`pagination-${i}`}
+                                                    onClick={() => handlePageChange(i + 1)}
+                                                    className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                                                        ? "bg-indigo-600 text-white"
+                                                        : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                        } focus:z-20 focus:outline-offset-0`}
+                                                >
+                                                    {i + 1}
+                                                </a>;
+                                            }
+                                            // Show the current page and adjacent 3 pages
+                                            if (i >= currentPage - 4 && i <= currentPage) {
+                                                return <a
+                                                    key={`pagination-${i}`}
+                                                    onClick={() => handlePageChange(i + 1)}
+                                                    className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                                                        ? "bg-indigo-600 text-white"
+                                                        : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                        } focus:z-20 focus:outline-offset-0`}
+                                                >
+                                                    {i + 1}
+                                                </a>;
+                                            }
+
+                                            // Show the last 3 pages
+                                            if (i >= Math.ceil(pagination.totalItems / pagination.itemsPerPage) - 3) {
+
+                                                return <a
+                                                    key={`pagination-${i}`}
+                                                    onClick={() => handlePageChange(i + 1)}
+                                                    className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                                                        ? "bg-indigo-600 text-white"
+                                                        : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                                                        } focus:z-20 focus:outline-offset-0`}
+                                                >
+                                                    {i + 1}
+                                                </a>;
+                                            }
+
+
+
+                                            return null;
+                                        })
+                                    }
+
+
+
+
                                     <a
                                         onClick={() => handlePageChange(currentPage + 1)}
                                         className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${currentPage === Math.ceil(pagination.totalItems / pagination.itemsPerPage)
