@@ -73,7 +73,7 @@ function EditTeamMember() {
         email,
         name,
         roles,
-        org_agent_ids: allowedOrgAgents
+        org_project_ids: allowedOrgAgents
       });
 
       // Reset form fields
