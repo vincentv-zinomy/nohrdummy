@@ -95,13 +95,14 @@ function DashboardLayout({
     },
     [RoleTypes.TEAM_MEMBER]: {
       routes: ["/app", "/app/dashboard",
-        "/app/signout", "/app/org-project", "/app/contacts",
+        "/app/signout", "/app/org-project", "/app/contacts/*",
+        "/app/contacts",
         "/app/setting/general-settings", "/app/setting/integrations",
       ],
       navigation: [
 
         { name: "Projects", href: "/app/org-project", icon: FolderIcon, },
-        { name: "Leads", href: "/app/contacts", icon: UsersIcon },
+        { name: "Contacts", href: "/app/contacts", icon: UsersIcon },
         {
           name: "General Settings",
           href: "/app/setting/general-settings",

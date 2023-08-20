@@ -20,7 +20,7 @@ function ViewLeads() {
 
 
         try {
-            const res = await axiosAPIWithAuth.get(`/org-agent/all`);
+            const res = await axiosAPIWithAuth.get(`/org-project/all`);
             const data = await res.data as OrgAgentDataTypes[];
 
             if (data && data.length > 0) {
