@@ -3,7 +3,7 @@ import Spinner from "@/components/common/Spinner";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
 import { useRouter as navRouter, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { OrgAgentDataTypes } from "@/lib/types/ui";
+import { OrgAgentDataTypes, OrgProjectDataTypes } from "@/lib/types/ui";
 
 function AddTeamMember() {
   const router = useRouter();
@@ -13,13 +13,13 @@ function AddTeamMember() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [roles, setRoles] = useState([RoleTypes.TEAM_MEMBER]);
   const [loading, setLoading] = useState(true);
-  const [availableOrgAgents, setAvailableOrgAgents] = useState<OrgAgentDataTypes[]>([]);
+  const [availableOrgAgents, setAvailableOrgAgents] = useState<OrgProjectDataTypes[]>([]);
   const [allowedOrgAgents, setAllowedOrgAgents] = useState<string[]>([]);
 
   const getData = async () => {
     setLoading(true);
     try {
-      const res = await axiosAPIWithAuth.get("/org-agent/all");
+      const res = await axiosAPIWithAuth.get("/org-project/all");
       const data = await res.data;
 
       setAvailableOrgAgents(data);
@@ -38,7 +38,7 @@ function AddTeamMember() {
         email,
         name,
         roles,
-        org_agent_ids: allowedOrgAgents
+        org_project_ids: allowedOrgAgents
       }
       );
 
@@ -137,25 +137,25 @@ function AddTeamMember() {
               </div>
               <div className="sm:col-span-6 sm:w-full mt-2">
                 <label className="block text-sm font-medium text-gray-700">
-                  Select Org Agents For Access
+                  Select Org Projects For Access
                 </label>
                 <div className="mt-1">
                   {
-                    availableOrgAgents.map((org_agent, t_id) => {
+                    availableOrgAgents.map((org_project, t_id) => {
                       return (
-                        <div className="relative flex items-start mr-1 ml-1" key={`${org_agent._id}-${t_id}-org-agent-access`}>
+                        <div className="relative flex items-start mr-1 ml-1" key={`${org_project._id}-${t_id}-org-project-access`}>
                           <div className="flex h-5 items-center">
                             <input
 
-                              name={org_agent.title}
+                              name={org_project.title}
                               type="checkbox"
-                              checked={allowedOrgAgents.includes(org_agent._id.toString())}
+                              checked={allowedOrgAgents.includes(org_project._id.toString())}
                               onChange={() => {
                                 setAllowedOrgAgents((prevOrgAgents) => {
-                                  if (prevOrgAgents.includes(org_agent._id.toString())) {
-                                    return prevOrgAgents.filter((r) => r !== org_agent._id.toString());
+                                  if (prevOrgAgents.includes(org_project._id.toString())) {
+                                    return prevOrgAgents.filter((r) => r !== org_project._id.toString());
                                   } else {
-                                    return [...prevOrgAgents, org_agent._id.toString()];
+                                    return [...prevOrgAgents, org_project._id.toString()];
                                   }
                                 });
                               }}
@@ -165,7 +165,7 @@ function AddTeamMember() {
                           <div className="ml-3 text-sm">
                             <label className="font-medium text-gray-700">
                               <span>
-                                {org_agent.title}
+                                {org_project.title}
                               </span>
 
 

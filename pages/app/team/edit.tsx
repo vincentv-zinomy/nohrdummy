@@ -2,7 +2,7 @@ import Spinner from "@/components/common/Spinner";
 import { RoleTypes } from "@/components/contexts/AuthContext";
 import { useToast } from "@/components/hooks/useToast";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
-import { OrgAgentDataTypes } from "@/lib/types/ui";
+import { OrgAgentDataTypes, OrgProjectDataTypes } from "@/lib/types/ui";
 import { useRouter as navRouter } from "next/navigation";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
@@ -16,13 +16,13 @@ function EditTeamMember() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
   const [loading, setLoading] = useState(true);
-  const [availableOrgAgents, setAvailableOrgAgents] = useState<OrgAgentDataTypes[]>([]);
+  const [availableOrgAgents, setAvailableOrgAgents] = useState<OrgProjectDataTypes[]>([]);
   const [allowedOrgAgents, setAllowedOrgAgents] = useState<string[]>([]);
 
   const getOrgAgentData = async () => {
     setLoading(true);
     try {
-      const res = await axiosAPIWithAuth.get("/org-agent/all");
+      const res = await axiosAPIWithAuth.get("/org-project/all");
       const data = await res.data;
 
       setAvailableOrgAgents(data);
@@ -192,7 +192,7 @@ function EditTeamMember() {
                   {
                     availableOrgAgents.map((org_agent, t_id) => {
                       return (
-                        <div className="relative flex items-start mr-1 ml-1" key={`${org_agent._id}-${t_id}-org-agent-access`}>
+                        <div className="relative flex items-start mr-1 ml-1" key={`${org_agent._id}-${t_id}-org-project-access`}>
                           <div className="flex h-5 items-center">
                             <input
 
