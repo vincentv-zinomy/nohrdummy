@@ -44,7 +44,7 @@ function EditTeamMember() {
       setName(data.name);
       setEmail(data.email);
       setRoles(data.roles);
-      setAllowedOrgAgents(data.org_agents_ids);
+      setAllowedOrgAgents(data.org_project_ids);
       toast.addToast("success", "Member loaded successfully");
     } catch (err: any) {
       console.log(err);
@@ -190,21 +190,21 @@ function EditTeamMember() {
                 </label>
                 <div className="mt-1">
                   {
-                    availableOrgAgents.map((org_agent, t_id) => {
+                    availableOrgAgents.map((org_project, t_id) => {
                       return (
-                        <div className="relative flex items-start mr-1 ml-1" key={`${org_agent._id}-${t_id}-org-project-access`}>
+                        <div className="relative flex items-start mr-1 ml-1" key={`${org_project._id}-${t_id}-org-project-access`}>
                           <div className="flex h-5 items-center">
                             <input
 
-                              name={org_agent.title}
+                              name={org_project.title}
                               type="checkbox"
-                              checked={allowedOrgAgents.includes(org_agent._id.toString())}
+                              checked={allowedOrgAgents.includes(org_project._id.toString())}
                               onChange={() => {
                                 setAllowedOrgAgents((prevOrgAgents) => {
-                                  if (prevOrgAgents.includes(org_agent._id.toString())) {
-                                    return prevOrgAgents.filter((r) => r !== org_agent._id.toString());
+                                  if (prevOrgAgents.includes(org_project._id.toString())) {
+                                    return prevOrgAgents.filter((r) => r !== org_project._id.toString());
                                   } else {
-                                    return [...prevOrgAgents, org_agent._id.toString()];
+                                    return [...prevOrgAgents, org_project._id.toString()];
                                   }
                                 });
                               }}
@@ -214,7 +214,7 @@ function EditTeamMember() {
                           <div className="ml-3 text-sm">
                             <label className="font-medium text-gray-700">
                               <span>
-                                {org_agent.title}
+                                {org_project.title}
                               </span>
 
 
