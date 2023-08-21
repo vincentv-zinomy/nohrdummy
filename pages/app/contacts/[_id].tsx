@@ -317,7 +317,7 @@ function AddLeadPage() {
             <MessageTemplateSelectionModal
               show={showMessageTemplateModal}
               setShow={setShowMessageTemplateModal}
-              org_agent_id={router.query._id ? router.query._id.toString() : ""}
+              org_project_id={router.query._id ? router.query._id.toString() : ""}
               selectedMessageTemplateId={selectedMessageTemplateId}
               setSelectedMessageTemplateId={setSelectedMessageTemplateId}
               requiredMsgTemplateValues={requiredMsgTemplateValues}
