@@ -1,3 +1,4 @@
+import { ArrowRightIcon } from '@heroicons/react/24/solid';
 import React from 'react';
 
 function MessagesFooter() {
@@ -15,9 +16,14 @@ function MessagesFooter() {
         <form className="grow flex">
           <div className="grow mr-3">
             <label htmlFor="message-input" className="sr-only">Type a message</label>
-            <input id="message-input" className="form-input w-full bg-slate-100 border-transparent focus:bg-white focus:border-slate-300" type="text" placeholder="Aa" />
+            <input id="message-input" className="form-input w-full bg-slate-100 border-transparent focus:bg-white focus:border-slate-300 rounded-md" type="text" placeholder="Aa" />
           </div>
-          <button type="submit" className="btn bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap">Send -&gt;</button>
+          <button type="submit" className="btn bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap px-4 py-2 rounded-md flex gap-2 items-center">
+            <span>
+              Send 
+            </span>
+            <ArrowRightIcon className="h-5 w-5 text-white" />
+          </button>
         </form>
       </div>
     </div>

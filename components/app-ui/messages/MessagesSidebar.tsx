@@ -2,7 +2,7 @@ import React from 'react';
 import Channels from './Channels';
 import DirectMessages from './DirectMessages';
 import { FormattedMessages } from '../EditLeadModal';
-import { InboxMessageTypes } from '@/pages/app/contacts/inbox';
+import { InboxMessageTypes } from '@/pages/inbox';
 
 function MessagesSidebar({
   messages,
@@ -13,12 +13,13 @@ function MessagesSidebar({
   msgSidebarOpen: boolean,
   setMsgSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>
 }) {
+  
   return (
     <div
       id="messages-sidebar"
-      className={` z-20  w-full md:w-auto md:static md:top-auto md:bottom-auto -mr-px md:translate-x-0 transform transition-transform duration-200 ease-in-out translate-x-full`}
+      className={` z-20  w-full  md:w-auto md:static md:top-auto md:bottom-auto -mr-px md:translate-x-0 transform transition-transform duration-200 ease-in-out translate-x-full`}
     >
-      <div className=" bg-white overflow-x-hidden overflow-y-auto no-scrollbar shrink-0 border-r border-slate-200 md:w-72 xl:w-80 h-[calc(100vh-64px)]">
+      <div className=" bg-white overflow-hidden shrink-0 border-r border-slate-200 md:w-72 xl:w-80 h-screen">
 
         {/* #Marketing group */}
         <div>
