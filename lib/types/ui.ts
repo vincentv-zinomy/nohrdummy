@@ -154,6 +154,7 @@ export interface ContactTypes {
   created_at_timestamp?: number;
   updated_at_timestamp?: number;
   org_agent_id?: string;
+  org_project_id?: string;
 }
 
 

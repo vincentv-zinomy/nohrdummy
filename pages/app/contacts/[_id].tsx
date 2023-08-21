@@ -194,12 +194,12 @@ function AddLeadPage() {
           ...lead_data
 
         });
-        toast.addToast("success", "Lead updated successfully");
+        toast.addToast("success", "Contact updated successfully");
 
         getData();
       }
       else {
-        toast.addToast("error", "Invalid lead");
+        toast.addToast("error", "Invalid Contact");
       }
 
     }
