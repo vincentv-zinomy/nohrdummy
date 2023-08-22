@@ -91,6 +91,7 @@ function AddLeadPage() {
   const handleBulkStartConversation = async () => {
     setIsStartingConversation(true);
     setShowMessageTemplateModal(true);
+    // send messages
     try {
 
       const startConversationsWithSpecificUser = await axiosAPIWithAuth.post(`/contacts/start-conversation/multiple-contacts`, {
