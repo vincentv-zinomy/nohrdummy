@@ -23,15 +23,6 @@ body {
   box-shadow: 2px 2px 15px rgba(204, 204, 204, 0.3);
 }
 
-
-
-
-/* .gradient{
-    background: linear-gradient(265.56deg,rgba(59,120,31,.15) 15.09%,rgba(253,255,167,.15) 107.57%);
-} */
-
-
-
 .swiper-button-next:after,
 .swiper-rtl .swiper-button-prev:after {
   opacity: 0;
@@ -55,4 +46,69 @@ body {
 
 .customscroll::-webkit-scrollbar-thumb:hover {
   background-color: gray;
+}
+
+/* custom scroll */
+.customscroll1::-webkit-scrollbar {
+  width: 8px; /* Adjust the width as needed */
+}
+
+.customscroll1::-webkit-scrollbar-thumb {
+  
+  background-color: lightgray;
+  border-radius: 4px;
+}
+
+.customscroll1::-webkit-scrollbar-thumb:hover {
+  background-color: gray;
+}
+
+
+/* wave-blur */
+
+.wave-blur {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  overflow: hidden;
+}
+
+.wave-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 200%;
+  height: 100%;
+  animation: waveMove 4s linear infinite;
+}
+
+.wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.5));
+}
+
+@keyframes waveMove {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  font-size: 18px;
 }
