@@ -13,7 +13,7 @@ interface MessageTemplateModalProps {
     selectedMessageTemplateId: string;
     setSelectedMessageTemplateId: (selectedMessageTemplates: string) => void;
     onSubmit: () => void;
-    org_agent_id: string;
+    org_project_id: string;
     requiredMsgTemplateValues: string[];
     setRequiredMsgTemplateValues: (requiredMsgTemplateValues: string[]) => void;
 
@@ -24,7 +24,7 @@ function MessageTemplateSelectionModal({
     selectedMessageTemplateId,
     setSelectedMessageTemplateId,
     onSubmit,
-    org_agent_id,
+    org_project_id,
     requiredMsgTemplateValues,
     setRequiredMsgTemplateValues
 }: MessageTemplateModalProps) {
@@ -38,8 +38,8 @@ function MessageTemplateSelectionModal({
     const getAllMessageTemplates = async () => {
         setIsLoading(true);
         try {
-            const getData = await axiosAPIWithAuth.post("/message-template/my-templates-by-org-agent", {
-                org_agent_id: org_agent_id
+            const getData = await axiosAPIWithAuth.post("/message-template/my-templates-by-org-project", {
+                org_project_id: org_project_id
             });
             const resData = (await getData.data) as MessageTemplateResponseType[];
 
