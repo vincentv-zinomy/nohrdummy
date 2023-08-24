@@ -14,7 +14,7 @@ function MessagesHeader({
   detailsSidebarOpen: boolean;
 }) {
 
-  const {currentContact} = useContext(ContactContext) 
+  const {currentContact, messages} = useContext(ContactContext) 
 
   return ( 
       <div className="flex items-center justify-between bg-white border-b border-slate-200 px-4 sm:px-6 md:px-5 h-16 shrink-0">
@@ -37,20 +37,18 @@ function MessagesHeader({
             </svg>
           </button>
           {/* People list */}
-          <div className="flex -space-x-3 -ml-px">
+          <div className="flex  gap-4 items-center ">
             <a
               className="block w-12 h-12 bg-slate-500 rounded-full border border-slate-200 flex items-center justify-center text-lg text-white "
               href="#0"
             >
-              <span className="uppercase ">{currentContact?.full_name[0]}</span>
+              <span className="uppercase font-semibold">{currentContact?.full_name[0]}</span>
             </a>
-            <a
-              className="block w-12 h-12 bg-slate-500 rounded-full border border-slate-200 flex items-center justify-center text-lg text-white "
-              href="#0"
-            >
-              <span>U</span>
-            </a>
+            <h4 className="font-semibold">
+              {currentContact?.full_name}
+            </h4>
           </div>
+          
         </div>
         {/* Buttons on the right side */}
         <div className="flex">
@@ -66,7 +64,9 @@ function MessagesHeader({
               <path d="M8 0C3.6 0 0 3.6 0 8s3.6 8 8 8 8-3.6 8-8-3.6-8-8-8zm0 12c-.6 0-1-.4-1-1s.4-1 1-1 1 .4 1 1-.4 1-1 1zm1-3H7V4h2v5z" />
             </svg>
           </button>
-          <button
+          {
+            messages[messages.length - 1]?.admin_read_message && 
+            <button
             className="p-1.5 shrink-0 rounded border border-slate-200 hover:border-slate-300 shadow-sm ml-2"
             aria-label="mark as read"
           >
@@ -76,7 +76,9 @@ function MessagesHeader({
             >
               <path d="M14.3 2.3L5 11.6 1.7 8.3c-.4-.4-1-.4-1.4 0-.4.4-.4 1 0 1.4l4 4c.2.2.4.3.7.3.3 0 .5-.1.7-.3l10-10c.4-.4.4-1 0-1.4-.4-.4-1-.4-1.4 0z" />
             </svg>
-          </button>
+            </button>
+          }
+          
           <button
             className="p-1.5 shrink-0 rounded border border-slate-200 hover:border-slate-300 shadow-sm ml-2"
             aria-label="mark as read"

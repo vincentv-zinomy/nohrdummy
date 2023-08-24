@@ -14,37 +14,10 @@ function MessagesSidebar({
   msgSidebarOpen: boolean;
   setMsgSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
-  const contactsArea = useRef<HTMLDivElement>(null);
 
   const { contacts, setContacts, currentProject } = useContext(ContactContext);
 
-  const ContactsPageChange = async () => {
-    if (contacts.page !== contacts.noOfPages) {
-      const pageNo = contacts.page + 1;
-
-      const res = await axiosAPIWithAuth.get(
-        `/contacts/by-org-project/${currentProject._id}?page=${pageNo}`
-      );
-      setContacts({
-        ...contacts,
-        loading: false,
-        data: [...contacts.data, ...res.data.data],
-        error: null,
-        page: pageNo,
-      });
-    }
-  };
-
-  const handleScroll = (e: any) => {
-    if (contactsArea.current) {
-      if (
-        contactsArea.current.scrollHeight ===
-        e.target.scrollTop + e.target.clientHeight
-      ) {
-        ContactsPageChange();
-      }
-    }
-  };
+   
 
   return (
     <div
@@ -62,14 +35,12 @@ function MessagesSidebar({
             </div>
           </div>
           <div
-            className="h-full  overflow-y-scroll customscroll"
-            style={{ height: "calc(100vh - 129px)" }}
-            ref={contactsArea}
-            onScroll={handleScroll}
+            className="h-full flex flex-col"
+            style={{ height: "calc(100vh - 129px)" }} 
           >
             <ProjectsLists projects={projects} />
             {/* Group body */}
-            <div className="px-5 py-4 flex flex-col">
+            <div className=" px-2 pt-4 flex flex-col">
               {/* Search form */}
 
               <form className="relative">
@@ -98,21 +69,11 @@ function MessagesSidebar({
                 </button>
               </form>
               {/* Direct messages */}
-
+              
               <DirectMessages
                 msgSidebarOpen={msgSidebarOpen}
                 setMsgSidebarOpen={setMsgSidebarOpen}
               />
-              {!contacts.loading && contacts.page !== contacts.noOfPages && (
-                <>
-                
-                <div className="w-full flex justify-center">
-                  <Spinner color="text-grey-100" />
-                  
-                </div>
-                 
-              </>
-              )}
             </div>
           </div>
         </div>

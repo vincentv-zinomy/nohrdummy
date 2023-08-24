@@ -8,7 +8,7 @@ import {  ChevronDownIcon } from "@heroicons/react/24/solid";
 function MessagesBody( ) { 
   const dates:any = {}
 
-  const { messages} = useContext(ContactContext)
+  const { messages, currentContact, setMessages, contacts} = useContext(ContactContext)
   const messageArea = useRef<HTMLDivElement>(null)
   const [showScrollToBottom, setShowScrollToBottom] = useState(false)
   
@@ -20,7 +20,12 @@ function MessagesBody( ) {
 
   useEffect(() => {
     scrollToBottom();
+    
   }, [messages]);
+
+ 
+
+ 
 
   const handleScroll = useCallback(
     (e: React.UIEvent<HTMLDivElement>) => {
@@ -37,9 +42,6 @@ function MessagesBody( ) {
  
   return (
     <div className="w-full px-4 sm:px-6 md:px-5 py-6"   >
-
-      
-      
       <div
         className={`overflow-y-scroll bg-[#e4dbd4] rounded-lg p-4 [&_div]:mb-2 customscroll relative 
         ${messages.loading && 'blur-sm'} `}

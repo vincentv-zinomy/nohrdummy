@@ -1,5 +1,6 @@
+import { ContactContext } from '@/pages/app/inbox'
 import { ChevronDownIcon } from '@heroicons/react/24/outline'
-import React, { memo, useState } from 'react'
+import React, { memo, useContext, useState } from 'react'
 
 type Props = {
     projects:any
@@ -7,14 +8,19 @@ type Props = {
 
 const ProjectsLists = ({projects}: Props) => {
     const [openOrganization, setOpenOrganization] = useState(false)
-
+    const {currentProject} = useContext(ContactContext)
 
   return (
     <div className='border-b px-4'>
          <div className='w-full flex items-center justify-between h-16 '>
               <h4 className='text-lg font-semibold'>
-                  Projects
+                  Project :
               </h4>
+              {currentProject && 
+              <h3 className='font-semibold text-indigo-600'>
+                {currentProject.title}
+              </h3>
+              }
               <button onClick={()=>setOpenOrganization(!openOrganization)}>
                   <ChevronDownIcon className={`h-4 w-4 text-gray-500 font-bold ${openOrganization ? 'rotate-180' : 'rotate-0'} transition-all`} />
               </button>
