@@ -1,5 +1,5 @@
 import { ArrowRightIcon } from '@heroicons/react/24/solid';
-import React from 'react';
+import React, { memo } from 'react';
 
 function MessagesFooter() {
   return (
@@ -30,4 +30,4 @@ function MessagesFooter() {
   );
 }
 
-export default MessagesFooter;
+export default memo(MessagesFooter);

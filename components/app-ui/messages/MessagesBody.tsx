@@ -1,68 +1,96 @@
-import { InboxMessageTypes } from "@/pages/inbox";
-import { FormattedMessages } from "../EditLeadModal";
-import MediaViewer from "../MediaViewer";
 import moment from "moment";
+import { memo, useCallback, useContext, useEffect, useRef, useState } from "react";
+import { ContactContext } from "@/pages/app/inbox";
+import {  ChevronDownIcon } from "@heroicons/react/24/solid";
 
-export interface MessageBodyProps { messages: FormattedMessages[] }
+ 
 
-function MessagesBody(props: MessageBodyProps) {
-  const { messages } = props
-  console.log(messages)
+function MessagesBody( ) { 
   const dates:any = {}
-  return (
-    <div className="w-full px-4 sm:px-6 md:px-5 py-6">
 
-      {/* ${isChatLoading ? 'backdrop-blur-md opacity-50' : ''} */}
-      <div
-        className={`w-full   overflow-y-scroll bg-[#e4dbd4]	 rounded-lg p-4 [&_div]:mb-2   customscroll `}
-        style={{ backgroundImage: "url('/whatsappbg.png')",height: "calc(100vh - 176px)" }}>
+  const { messages, currentContact, setMessages, contacts} = useContext(ContactContext)
+  const messageArea = useRef<HTMLDivElement>(null)
+  const [showScrollToBottom, setShowScrollToBottom] = useState(false)
+  
+  const scrollToBottom = useCallback(() => {
+    if (messageArea.current) {
+      messageArea.current.scrollTop = messageArea.current.scrollHeight;
+    }
+  }, []);
 
-        {messages.map((x) => {
-          let date:any = undefined 
-          if(!dates[String(moment.unix(x.timestamp).format("DD/MM/YYYY"))]){
-            date = moment.unix(x.timestamp).format("DD/MM/YYYY")
-            dates[String(moment.unix(x.timestamp).format("DD/MM/YYYY"))] = 1
-          } 
-          return (
-            <>
-              {date && 
-                <div className="w-full flex justify-center">
-                  <span className="text-xs text-gray-500 bg-white px-2 py-1 rounded-full">
-                    {date}
-                  </span>
-                </div>
-              }
-               
-              <div className={`  w-fit max-w-[75%]  ${x.role === 'user' && 'ml-auto' }`}>
-                <div className={`${x.role === 'user' ? 'bg-white' : 'bg-[#dcf8c7]'} p-2 break-words rounded-b-lg  ${x.role === 'user' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>
-                {
-                  (x.url !== null && x.url !== "") && (
-                    <MediaViewer
-                      url={x.url}
-                      mime_type={x.mime_type}
-                      _id={x._id}
-                      timestamp={x.timestamp}
-                    />
-                  )
-                }
-                <p className="w-full break-all text-sm font-normal	">
-                  {x.content}
-                </p>
-                <span className="text-gray-800 text-xs">{
-                  x.timestamp > 0 ? moment.unix(x.timestamp).format('hh:mm A') : ""
-                }</span>
-                 </div>
-              </div>
-              
-            </>
-          )
+  useEffect(() => {
+    scrollToBottom();
+    
+  }, [messages]);
+
+ 
+
+ 
+
+  const handleScroll = useCallback(
+    (e: React.UIEvent<HTMLDivElement>) => {
+      if (messageArea.current) {
+        if (messageArea.current.scrollHeight !== e.currentTarget.scrollTop + e.currentTarget.clientHeight) {
+          setShowScrollToBottom(true);
+        } else {
+          setShowScrollToBottom(false);
         }
-        )}
+      }
+    },
+    []
+  );
+ 
+  return (
+    <div className="w-full px-4 sm:px-6 md:px-5 py-6"   >
+      <div
+        className={`overflow-y-scroll bg-[#e4dbd4] rounded-lg p-4 [&_div]:mb-2 customscroll relative 
+        ${messages.loading && 'blur-sm'} `}
+        style={{ backgroundImage: "url('/whatsappbg.png')", height:'calc(100vh - 240px)'}}
+        ref={messageArea} 
+        onScroll={handleScroll}
+        > 
+          <div 
+            className={`fixed bottom-[100px] left-10 z-20 p-2 bg-white shadow-md rounded-full transition transform cursor-pointer
+              ${showScrollToBottom ? 'scale-100' : 'scale-0'}`} onClick={scrollToBottom}>
 
+              <ChevronDownIcon className="h-4 w-4 text-gray-500" />
 
+          </div> 
+           
+          {messages.data && messages.data.length > 0  &&  messages.data?.map((x:any) => {
+            let date:any = undefined 
+            if(!dates[String(moment.unix(x.message_timestamp).format("DD/MM/YYYY"))]){
+              date = moment.unix(x.message_timestamp).format("DD/MM/YYYY")
+              dates[String(moment.unix(x.message_timestamp).format("DD/MM/YYYY"))] = 1
+            } 
+            return (
+              <div key={`chat_key_${x.message_timestamp}`}>
+              
+                {date && 
+                  <div   className="w-full flex justify-center">
+                    <span className="text-xs text-gray-500 bg-white px-2 py-1 rounded-full">
+                      {date}
+                    </span>
+                  </div>
+                }
+                <div  className={`  w-fit max-w-[75%]  ${x.role === 'user' && 'ml-auto' }`}>
+                  <div className={`${x.role === 'user' ? 'bg-white' : 'bg-[#dcf8c7]'} p-2 break-words rounded-b-lg  ${x.role === 'user' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>
+                  <p className="w-full break-all text-sm font-normal	">
+                    {x.content}
+                  </p>
+                  <span className="text-gray-800 text-xs">{
+                    x.message_timestamp > 0 ? moment.unix(x.message_timestamp).format('hh:mm A') : ""
+                  }</span>
+                  </div>
+                </div>
+                
+              </div>
+            )
+          }
+          )}
       </div>
     </div>
   );
 }
 
-export default MessagesBody;
+export default memo(MessagesBody);

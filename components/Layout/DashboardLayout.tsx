@@ -16,7 +16,8 @@ import {
   LinkIcon,
   PhoneIcon,
   ChatBubbleLeftEllipsisIcon,
-  FolderOpenIcon
+  FolderOpenIcon,
+  InformationCircleIcon
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -60,11 +61,12 @@ function DashboardLayout({
         { name: "Projects", href: "/app/org-project", icon: FolderIcon },
         { name: "Team Members", href: "/app/team", icon: UsersIcon },
         { name: "Contacts", href: "/app/contacts", icon: UsersIcon },
+        { name: "Inbox", href: "/app/inbox", icon: InboxIcon  },
         { name: "My Files", href: "/app/files", icon: FolderOpenIcon },
         {
           name: "Company Info",
           href: "/app/company",
-          icon: InboxIcon,
+          icon: InformationCircleIcon ,
         },
         {
           name: "Billing",
@@ -94,7 +96,7 @@ function DashboardLayout({
       ]
     },
     [RoleTypes.TEAM_MEMBER]: {
-      routes: ["/app", "/app/dashboard",
+      routes: ["/app", "/app/dashboard", "/app/inbox",
         "/app/signout", "/app/org-project", "/app/contacts/*",
         "/app/contacts",
         "/app/setting/general-settings", "/app/setting/integrations",
@@ -248,7 +250,7 @@ function DashboardLayout({
               leaveFrom="translate-x-0"
               leaveTo="-translate-x-full"
             >
-              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white">
+              <div className="relative flex-1 flex flex-col max-w-xs w-full pt-5 pb-4 bg-white customscroll">
                 <Transition.Child
                   as={Fragment}
                   enter="ease-in-out duration-300"
@@ -279,8 +281,8 @@ function DashboardLayout({
                     alt="zigment_logo"
                   />
                 </div>
-                <div className="mt-5 flex-1 h-0 overflow-y-auto">
-                  <nav className="px-2 space-y-1">
+                <div className="mt-5 flex-1 h-0 overflow-y-auto customscroll ">
+                  <nav className="px-2 space-y-1  ">
                     {navigation.map((item) => (
                       <Link
                         key={`${item.name}-main-nav-items`}
@@ -317,7 +319,7 @@ function DashboardLayout({
         {/* Static sidebar for desktop */}
         <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto">
+          <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto customscroll1">
             <div className="flex items-center flex-shrink-0 px-4">
               <img
                 className="h-24 w-auto"
@@ -417,7 +419,7 @@ function DashboardLayout({
                       <div className="py-1">
                         {
                           authState.all_orgs.map((org) => (
-                            <Menu.Item>
+                            <Menu.Item key={`menu_item_${org.org_id}`}>
                               {({ active }) => (
                                 <span
                                   className={classNames(

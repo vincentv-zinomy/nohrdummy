@@ -9,6 +9,7 @@ import Navbar from '@/components/landing-page/Navbar'
 import Footer from '@/components/landing-page/Footer'
 import { useRouter } from 'next/router' 
 import LandingPageLayout from '@/components/Layout/LandingPageLayout'
+import ChatBot from '@/components/Chatbot'
 
 declare global {
   interface Window {
@@ -26,6 +27,7 @@ export default function Home() {
   const router = useRouter();
   return (
     <> 
+
       <LandingPageLayout>
         <main className="relative  ">
           <Hero />
@@ -37,6 +39,7 @@ export default function Home() {
           <PricingSection />
         </main> 
       </LandingPageLayout>
+      {/* <ChatBot/> */}
     </>
   );
 }
