@@ -135,6 +135,7 @@ export interface OrgAgentDataTypes {
   is_website_chat_enabled: boolean;
   assigned_sms_number: string;
   assigned_whatsapp_number: string;
+  automated_meeting_reminders_enabled: boolean;
   assigned_instagram_id: string;
   assigned_email_id: string;
   assigned_voice_id: string;

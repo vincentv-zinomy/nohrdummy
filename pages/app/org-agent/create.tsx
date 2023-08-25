@@ -15,6 +15,7 @@ function CreateAgent() {
     is_email_enabled: false,
     is_voice_enabled: false,
     is_website_chat_enabled: false,
+    automated_meeting_reminders_enabled: false,
     assigned_sms_number: "",
     assigned_whatsapp_number: "",
     assigned_instagram_id: "",
