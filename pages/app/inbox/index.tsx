@@ -39,14 +39,14 @@ function index() {
     data: null,
     error: null,
   });
-  const [contacts, setContacts] = useState({
+  const [contacts, setContacts] = useState<any>({
     loading: true,
     data: null,
     error: null,
     page: 0,
     noOfPages: 0,
   });
-  const [messages, setMessages] = useState({
+  const [messages, setMessages] = useState<any>({
     loading: true,
     data: null,
     error: null,
@@ -63,14 +63,20 @@ function index() {
   }, [authState]);
 
   useEffect(() => {
-    if (currentProject) {
+    setContacts({...contacts,loading:true,error:null})
+    if (currentProject && projects.data.length > 0) {
       getContact(currentProject._id);
+    }else{
+      setContacts({...contacts,loading:false, error:'No Messages'})
     }
   }, [currentProject]);
 
   useEffect(() => { 
-    if (currentContact) {
+    if (currentContact && contacts.data.length > 0) {
       getMessages(currentContact._id);
+    }else{
+      setMessages({...messages,loading:false, error:'No Messages'})
+
     }
   }, [currentContact]);
 
@@ -180,9 +186,7 @@ function index() {
             </ContactContext.Provider>
           </div>
         </main>
-          {/* <div className="absolute w-72 h-72 inset-0 bg-white">
-
-          </div> */}
+     
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ const AllScripts = () => {
     return <>
         <GoogleAnalytics />
         <PosthogScript />
-        <CrispChatScript />
+        {/* <CrispChatScript /> */}
     </>;
 };
 

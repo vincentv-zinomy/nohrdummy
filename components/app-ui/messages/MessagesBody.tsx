@@ -1,7 +1,8 @@
 import moment from "moment";
 import { memo, useCallback, useContext, useEffect, useRef, useState } from "react";
 import { ContactContext } from "@/pages/app/inbox";
-import {  ChevronDownIcon } from "@heroicons/react/24/solid";
+import {  ChatBubbleBottomCenterIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleLeftIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
+import { Bars3BottomLeftIcon, NoSymbolIcon } from "@heroicons/react/24/outline";
 
  
 
@@ -43,9 +44,9 @@ function MessagesBody( ) {
   return (
     <div className="w-full px-4 sm:px-6 md:px-5 py-6"   >
       <div
-        className={`overflow-y-scroll bg-[#e4dbd4] rounded-lg p-4 [&_div]:mb-2 customscroll relative 
+        className={`overflow-y-scroll ${messages.error ? '' : 'bg-[#e4dbd4]'}  rounded-lg p-4 [&_div]:mb-2 customscroll relative 
         ${messages.loading && 'blur-sm'} `}
-        style={{ backgroundImage: "url('/whatsappbg.png')", height:'calc(100vh - 240px)'}}
+        style={{ backgroundImage: `${ messages.error === 'No Messages' ? '' : "url('/whatsappbg.png')"} `, height:'calc(100vh - 240px)'}}
         ref={messageArea} 
         onScroll={handleScroll}
         > 
@@ -56,7 +57,14 @@ function MessagesBody( ) {
               <ChevronDownIcon className="h-4 w-4 text-gray-500" />
 
           </div> 
-           
+          {
+            messages.error === 'No Messages' ? 
+            <div className="absolute inset-0 m-auto text-gray-300  flex flex-col items-center justify-center">
+            <Bars3BottomLeftIcon className="w-20"/>
+            <p>No Messages </p>
+          </div> : 
+            messages.error
+          }
           {messages.data && messages.data.length > 0  &&  messages.data?.map((x:any) => {
             let date:any = undefined 
             if(!dates[String(moment.unix(x.message_timestamp).format("DD/MM/YYYY"))]){
