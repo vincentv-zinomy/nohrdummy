@@ -42,12 +42,12 @@ const index = ({ data }: Props) => {
             </div>
             <div className='flex flex-wrap gap-4'>
               {data.map((x: logoDataI) => (
-                <div className='w-96 h-20	 cursor-pointer  p-2 border border-white hover:border-slate-100 hover:shadow-md rounded-md flex  gap-2 relative' key={x.id}>
-                  <div className='h-10 w-10 rounded-md border overflow-hidden border-slate-100 shrink-0'>
-                    <img src={x.logo_url} alt="" className='h-full rounded-lg  ' />
+                <div className='w-96 h-16	 cursor-pointer  p-2 border border-white hover:border-slate-100 hover:shadow-md rounded-md flex items-center gap-3 relative' key={x.id}>
+                  <div className='h-12 w-12 p-2 rounded-md border overflow-hidden border-slate-100 shrink-0 flex items-center justify-center'>
+                    <img src={x.logo_url} alt="" className='h-full rounded-lg' />
                   </div>
-                  <div className='left-[60px] top-1 absolute'>
-                    <h3 className='text-lg font-semibold'>{x.name}</h3>
+                  <div className=' '>
+                    <h3 className='text-md font-semibold'>{x.name}</h3>
                     <p className='text-md'>{x.description}</p>
                   </div>
                 </div>
