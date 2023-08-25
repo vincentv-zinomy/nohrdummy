@@ -1,4 +1,4 @@
-import React, { memo, useContext, useRef } from "react";
+import React, { useContext, useRef } from "react";
 import { FormattedMessages } from "../EditLeadModal"; 
 import { ContactContext } from "@/pages/app/inbox"; 
 import Spinner from "@/components/common/Spinner";
@@ -43,10 +43,12 @@ function DirectMessages({
     }
   };
 
+
+
   return (
     <div 
       className="mt-4 w-full  shrink-0 overflow-y-auto customscroll" 
-      style={{height:'calc(100vh - 268px )'}}
+      style={{height:'calc(100vh - 204px )'}}
       ref={contactsArea}
       onScroll={handleScroll}
       >
@@ -73,4 +75,4 @@ function DirectMessages({
   );
 }
 
-export default memo(DirectMessages);
+export default  DirectMessages;

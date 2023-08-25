@@ -91,6 +91,8 @@ function index() {
         const { data } = await axiosAPIWithAuth.get(
           `/contacts/by-org-project/${id}`
         );
+
+
         const { limit, total, page } = data;
         setContacts({
           loading: false,
@@ -116,17 +118,21 @@ function index() {
         setMessages({ loading: false, data: res.data, error: null });
 
       } catch (error: any) {
+
         setMessages({ ...messages, error: error.message, loading: false });
 
       }
     }
+
+    console.log(projects, 'projects')
   
 
   const [msgSidebarOpen, setMsgSidebarOpen] = useState(true);
   const [detailsSidebarOpen, setDetailsSidebarOpen] = useState(false);
+  const [openFilter, setOpenFilter] = useState(false)
 
   return (
-    <div className="flex  overflow-hidden   ">
+    <div className="flex    ">
       {/* Content area */}
       <div className="relative h-full flex flex-col flex-1   overflow-x-hidden ">
         <main className="h-full">
@@ -143,7 +149,8 @@ function index() {
                 setCurrentProject,
                 setContacts,
                 msgSidebarOpen, setMsgSidebarOpen,
-                detailsSidebarOpen, setDetailsSidebarOpen
+                detailsSidebarOpen, setDetailsSidebarOpen,
+                openFilter, setOpenFilter
               }}
             >
               {/* Messages sidebar */}
@@ -173,6 +180,9 @@ function index() {
             </ContactContext.Provider>
           </div>
         </main>
+          {/* <div className="absolute w-72 h-72 inset-0 bg-white">
+
+          </div> */}
       </div>
     </div>
   );

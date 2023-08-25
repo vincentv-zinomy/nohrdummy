@@ -4,6 +4,7 @@ import ProjectsLists from "./ProjectsLists";
 import Spinner from "@/components/common/Spinner";
 import { ContactContext } from "@/pages/app/inbox";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
+import { AdjustmentsHorizontalIcon, FunnelIcon } from "@heroicons/react/24/outline";
 
 function MessagesSidebar({
   projects,
@@ -15,9 +16,7 @@ function MessagesSidebar({
   setMsgSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
 
-  const { contacts, setContacts, currentProject } = useContext(ContactContext);
-
-   
+  const { contacts, setContacts, currentProject, openFilter, setOpenFilter } = useContext(ContactContext); 
 
   return (
     <div
@@ -29,45 +28,45 @@ function MessagesSidebar({
         {/* #Marketing group */}
 
         <div>
-          <div className="border-b px-4">
-            <div className="w-full flex items-center justify-between h-16 ">
-              <h4 className="text-lg font-semibold">Chats</h4>
-            </div>
-          </div>
+          
           <div
             className="h-full flex flex-col"
             style={{ height: "calc(100vh - 129px)" }} 
           >
             <ProjectsLists projects={projects} />
             {/* Group body */}
-            <div className=" px-2 pt-4 flex flex-col">
+            <div className=" px-2 pt-4 flex flex-col relative">
               {/* Search form */}
-
-              <form className="relative">
-                <label htmlFor="msg-search" className="sr-only">
-                  Search
-                </label>
-                <input
-                  id="msg-search"
-                  className="form-input w-full pl-9 focus:border-slate-300"
-                  type="search"
-                  placeholder="Search…"
-                />
-                <button
-                  className="absolute inset-0 right-auto group"
-                  type="submit"
-                  aria-label="Search"
-                >
-                  <svg
-                    className="w-4 h-4 shrink-0 fill-current text-slate-400 group-hover:text-slate-500 ml-3 mr-2"
-                    viewBox="0 0 16 16"
-                    xmlns="http://www.w3.org/2000/svg"
+              <div className="flex justify-between pr-2 items-center gap-3">
+                <form className="relative w-full">
+                  <label htmlFor="msg-search" className="sr-only">
+                    Search
+                  </label>
+                  <input
+                    id="msg-search"
+                    className="form-input w-full pl-9 focus:border-slate-300 rounded-md"
+                    type="search"
+                    placeholder="Search…"
+                  />
+                  <button
+                    className="absolute inset-0 right-auto group"
+                    type="submit"
+                    aria-label="Search"
                   >
-                    <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
-                    <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
-                  </svg>
+                    <svg
+                      className="w-4 h-4 shrink-0 fill-current text-slate-400 group-hover:text-slate-500 ml-3 mr-2"
+                      viewBox="0 0 16 16"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path d="M7 14c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zM7 2C4.243 2 2 4.243 2 7s2.243 5 5 5 5-2.243 5-5-2.243-5-5-5z" />
+                      <path d="M15.707 14.293L13.314 11.9a8.019 8.019 0 01-1.414 1.414l2.393 2.393a.997.997 0 001.414 0 .999.999 0 000-1.414z" />
+                    </svg>
+                  </button>
+                </form>
+                <button className="" onClick={()=>setOpenFilter(true)}>
+                  <AdjustmentsHorizontalIcon  className="w-6 h-6 "/> 
                 </button>
-              </form>
+              </div>
               {/* Direct messages */}
               
               <DirectMessages
@@ -82,4 +81,4 @@ function MessagesSidebar({
   );
 }
 
-export default memo(MessagesSidebar);
+export default MessagesSidebar;

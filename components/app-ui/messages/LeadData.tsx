@@ -3,6 +3,7 @@ import { BuildingOfficeIcon, ChartBarIcon, ChartBarSquareIcon, ChatBubbleLeftIco
 import { UsersIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { ContactContext } from '@/pages/app/inbox'
 import { PauseIcon } from '@heroicons/react/24/outline'
+import Toggle from './Toogle'
 
 type Props = {}
 
@@ -94,17 +95,17 @@ const LeadData = (props: Props) => {
                     <input type="text" value={formContact.phone} onChange={handleChange} name='phone'/> 
 
                 </div>
-                <div className='w-full flex gap-2 items-center '>
+                <div className='w-full flex gap-2 items-center  '>
                     <div className=' flex items-center gap-2 rounded-full shrink-0  '>
                         <span className='flex items-center justify-center  inline-block rounded-full overflow-hidden '>
                             <ChatBubbleLeftIcon className="h-4 w-4 text-gray-500" /> 
                         </span>
                         <p>Stop AI</p>
+                    </div> 
+                    <div className='flex items-center w-full'>
+
+                        <Toggle/> 
                     </div>
-                    <span className='flex items-center justify-center w-full gap-2'>
-                        {/* <button className='py-1 px-3 bg-red-400 rounded-full '><StopIcon  className='w-4 text-white font-bold'/></button> */} 
-                        <input type="radio"  id='stop_ai' />
-                    </span>
                 </div>
 
             </form>
