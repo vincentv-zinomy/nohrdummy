@@ -60,7 +60,7 @@ function MessagesFooter() {
               <span>
                 Send 
               </span>
-              <ArrowRightIcon className="h-5 w-5 text-white" />
+                <ArrowRightIcon className="h-5 w-5 text-white" />
             </>
             }
             
