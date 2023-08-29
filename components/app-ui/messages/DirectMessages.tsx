@@ -4,6 +4,7 @@ import { ContactContext } from "@/pages/app/inbox";
 import Spinner from "@/components/common/Spinner";
 import ContactBox, { ContactBoxSkeleton } from "./ContactBox";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
+import { Bars3BottomLeftIcon } from "@heroicons/react/24/outline";
 
 function DirectMessages({ 
   setMsgSidebarOpen,
@@ -59,7 +60,14 @@ function DirectMessages({
         contacts.loading &&  
           <ContactBoxSkeleton number={5} /> 
       }
-      {contacts.error && 'Error'}
+      {
+        contacts.error === 'No Messages' ? 
+        <div className="pt-10   text-gray-300 w-full flex flex-col items-center justify-center">
+          <Bars3BottomLeftIcon className="w-20"/>
+          <p>No Conversations </p>
+        </div> : 
+        contacts.error
+      }
 
       <ul className="mb-2 w-full space-y-1 pr-1">
         {contacts.data && contacts.data.map((elem:any, index:number) => {

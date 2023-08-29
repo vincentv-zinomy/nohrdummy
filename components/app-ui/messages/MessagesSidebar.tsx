@@ -21,7 +21,7 @@ function MessagesSidebar({
   return (
     <div
       id="messages-sidebar"
-      className={`  w-full  md:w-auto md:static md:top-auto md:bottom-auto -mr-px md:translate-x-0 transform transition-transform duration-200 ease-in-out translate-x-full `}
+      className={`  w-full  md:w-auto md:static md:top-auto md:bottom-auto -mr-px md:translate-x-0 transform transition-transform duration-200 ease-in-out translate-x-full relative`}
       style={{ height: "calc(100vh - 64px)" }}
     >
       <div className=" bg-white  shrink-0   md:w-72 xl:w-80 h-full ">
@@ -35,7 +35,7 @@ function MessagesSidebar({
           >
             <ProjectsLists projects={projects} />
             {/* Group body */}
-            <div className=" px-2 pt-4 flex flex-col relative">
+            <div className=" px-2 mt-20 flex flex-col relative">
               {/* Search form */}
               <div className="flex justify-between pr-2 items-center gap-3">
                 <form className="relative w-full">

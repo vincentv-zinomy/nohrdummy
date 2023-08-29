@@ -1,20 +1,17 @@
 import { useAuth } from "@/components/contexts/AuthContext";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
-import { classNames } from "@/lib/common";
-import { ContactStatus, ContactTypes, OrgAgentDataTypes } from "@/lib/types/ui";
-import { Listbox, Transition } from "@headlessui/react";
-import { CheckIcon, ChevronDownIcon, MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
+import { ContactStatus, ContactTypes } from "@/lib/types/ui";
 import { useRouter as navRouter, } from "next/navigation";
 import { useRouter } from "next/router";
-import { Fragment, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Spinner from "@/components/common/Spinner";
 import moment from "moment";
 import { useToast } from "@/components/hooks/useToast";
 import MessageTemplateSelectionModal from "@/components/app-ui/MessageTemplateSelectionModal";
 import EditLeadModal from "@/components/app-ui/EditLeadModal";
 import AddNewLeadModal from "@/components/app-ui/AddNewLeadModal";
-import CommonTable, { HeaderItemForTableTypes } from "@/components/Tables/CommonTable";
-
+import { HeaderItemForTableTypes } from "@/components/Tables/CommonTable";
+import CommonTableApi from "@/components/Tables/CommonTableApi";
 
 function AddLeadPage() {
   const router = useRouter();
@@ -385,51 +382,8 @@ function AddLeadPage() {
               <Spinner color="text-indigo-500" />
             }
 
-            <div>
-              <label
-                htmlFor="default-search"
-                className="mb-2 text-sm font-medium text-gray-900 sr-only "
-              >
-                Search
-              </label>
-              <div className="relative">
-                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                  <svg
-                    className="w-4 h-4 text-gray-500 "
-                    aria-hidden="true"
-                    xmlns="http://www.w3.org/2000/svg"
-                    fill="none"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                    />
-                  </svg>
-                </div>
-                <input
-                  type="search"
-                  value={search}
-                  onChange={(e) => {
-                    setSearch(e.target.value)
-                  }}
-                  className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 "
-                  placeholder="Search by name, status, etc."
-                />
-                <button
-                  onClick={() => {
-                    getData()
-                  }}
-                  className="text-white absolute right-2.5 bottom-2.5 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 "
-                >
-                  Search
-                </button>
-              </div>
-            </div>
-            <CommonTable
+             
+            <CommonTableApi
               data={leadsData.data}
               currentPage={currentPage}
               pagination={{
@@ -584,10 +538,7 @@ focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
 
                   ...dynamicActions,
                   ...fixedActions,
-
-
                 ]
-
                 )
               }}
 

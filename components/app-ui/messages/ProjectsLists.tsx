@@ -11,7 +11,8 @@ const ProjectsLists = ({projects}: Props) => {
     const {currentProject} = useContext(ContactContext)
 
   return (
-    <div className='border-b px-4'>
+    <>
+    <div className='border-b px-4 fixed z-50 w-full bg-white'>
          <div className='w-full flex items-center justify-between h-16 '>
               <h4 className='text-lg font-semibold'>
                   Project :
@@ -39,7 +40,8 @@ const ProjectsLists = ({projects}: Props) => {
                 }
               </button>
             </div>
-    </div>
+    </div> 
+    </>
   )
 }
 
