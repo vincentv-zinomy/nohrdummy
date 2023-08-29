@@ -229,6 +229,7 @@ function AddLeadPage() {
 
       </>
     }
+
     if (key === 'created_at_timestamp') {
       return <>
 
@@ -249,6 +250,20 @@ function AddLeadPage() {
     }
     if (key === 'stop_ai_processing') {
       if (item && item[key]) {
+        return (<span className="text-red-500">
+          Yes
+        </span>
+        )
+      }
+      else {
+        return (<span className="text-green-500">
+          No
+        </span>
+        )
+      }
+    }
+    if (key === 'meta_contact_referral') {
+      if (item && item[key] && Object.keys(item[key]).length > 0) {
         return (<span className="text-red-500">
           Yes
         </span>
@@ -382,7 +397,7 @@ function AddLeadPage() {
               <Spinner color="text-indigo-500" />
             }
 
-             
+
             <CommonTableApi
               data={leadsData.data}
               currentPage={currentPage}
@@ -426,6 +441,11 @@ function AddLeadPage() {
                 {
                   key: "stop_ai_processing",
                   label: "AI Stopped ?",
+                  type: HeaderItemForTableTypes.CUSTOM_COMPONENT
+                },
+                {
+                  key: "meta_contact_referral",
+                  label: "Direct Whatsapp Campaign ?",
                   type: HeaderItemForTableTypes.CUSTOM_COMPONENT
                 },
                 {

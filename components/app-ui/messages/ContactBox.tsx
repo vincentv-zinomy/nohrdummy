@@ -8,11 +8,11 @@ import {
 import moment from "moment";
 import Image from "next/image";
 import React, { useContext, useEffect, useRef, useState } from "react";
-import StageBadge from "./StageBadge";
 import StatusBadge from "./StatusBadge";
+import { ContactTypes } from "@/lib/types/ui";
 
 type Props = {
-  contact: any;
+  contact: ContactTypes;
 };
 
 const ContactBox = ({ contact }: Props) => {
@@ -41,9 +41,9 @@ const ContactBox = ({ contact }: Props) => {
 
   return (
     <li
-      className={`${contact._id === currentContact._id
-          ? "bg-gray-200 hover:bg-gray-300"
-          : "hover:bg-gray-100"
+      className={`${currentContact && contact._id === currentContact._id
+        ? "bg-gray-200 hover:bg-gray-300"
+        : "hover:bg-gray-100"
         }  rounded-md w-full  relative h-fit  `}
     >
       <button
@@ -55,7 +55,7 @@ const ContactBox = ({ contact }: Props) => {
       >
         <div className="w-full flex items-center  gap-4">
           <div className="w-10 h-10 rounded-full bg-slate-500 shrink-0 flex items-center justify-center relative">
-            <span className="uppercase text-white">{contact.full_name[0]}</span>
+            <span className="uppercase text-white">{contact && contact.full_name && contact.full_name[0] ? contact.full_name[0] : ``}</span>
           </div>
           <div className="w-full">
             <div className="flex w-full items-center justify-between">
@@ -66,6 +66,9 @@ const ContactBox = ({ contact }: Props) => {
                       (contact.full_name.length > 15
                         ? `${contact.full_name.substring(0, 15)} ...`
                         : contact.full_name)}
+                    <span className="text-xs text-rose-500 ml-1">
+                      {contact.stop_ai_processing ? `(AI stopped)` : ``}
+                    </span>
                   </span>
                 </div>
               </div>
@@ -110,8 +113,8 @@ const ContactBox = ({ contact }: Props) => {
           </div>
         </div>
         <div className="w-full pt-2 flex flex-row-reverse	 items-center justify-between">
-          <StatusBadge status={contact.status} />
-          <StageBadge stage={contact.contact_stage} />
+          <StatusBadge text={contact.status} type="success" />
+          <StatusBadge text={contact.contact_stage} type="warning" />
         </div>
       </button>
     </li>

@@ -4,6 +4,8 @@ import { ContactContext } from "@/pages/app/inbox";
 import { ChatBubbleBottomCenterIcon, ChatBubbleLeftEllipsisIcon, ChatBubbleLeftIcon, ChevronDownIcon } from "@heroicons/react/24/solid";
 import { Bars3BottomLeftIcon, NoSymbolIcon } from "@heroicons/react/24/outline";
 import MediaViewer from "../MediaViewer";
+import { FormattedMessages } from "../EditLeadModal";
+import { classNames } from "@/lib/common";
 
 
 
@@ -14,6 +16,7 @@ function MessagesBody() {
   const messageArea = useRef<HTMLDivElement>(null)
   const [showScrollToBottom, setShowScrollToBottom] = useState(false)
 
+
   const scrollToBottom = useCallback(() => {
     if (messageArea.current) {
       messageArea.current.scrollTop = messageArea.current.scrollHeight;
@@ -22,6 +25,7 @@ function MessagesBody() {
 
   useEffect(() => {
     scrollToBottom();
+    console.log(messages, 'messages')
 
   }, [messages]);
 
@@ -45,9 +49,9 @@ function MessagesBody() {
   return (
     <div className="w-full px-4 sm:px-6 md:px-5 py-6"   >
       <div
-        className={`overflow-y-scroll ${messages.error ? '' : 'bg-[#e4dbd4]'}  rounded-lg p-4 [&_div]:mb-2 customscroll relative 
-        ${messages.loading && 'blur-sm'} `}
-        style={{ backgroundImage: `${messages.error === 'No Messages' ? '' : "url('/whatsappbg.png')"} `, height: 'calc(100vh - 240px)' }}
+        className={`overflow-y-scroll  bg-[#e4dbd4] rounded-lg p-4 [&_div]:mb-2 customscroll relative 
+        ${messages && messages.loading && 'blur-sm'} `}
+        style={{ backgroundImage: `${messages && messages.error === 'No Messages' ? '' : "url('/whatsappbg.png')"} `, height: 'calc(100vh - 240px)' }}
         ref={messageArea}
         onScroll={handleScroll}
       >
@@ -59,21 +63,21 @@ function MessagesBody() {
 
         </div>
         {
-          messages.error === 'No Messages' ?
+          messages && messages.error === 'No Messages' ?
             <div className="absolute inset-0 m-auto text-gray-300  flex flex-col items-center justify-center">
               <Bars3BottomLeftIcon className="w-20" />
               <p>No Messages </p>
             </div> :
-            messages.error
+            messages && messages.error
         }
-        {messages.data && messages.data.length > 0 && messages.data?.map((x: any) => {
+        {messages && messages.data && messages.data.length > 0 && messages.data.map((x: FormattedMessages, ind: number) => {
           let date: any = undefined
           if (!dates[String(moment.unix(x.timestamp).format("DD/MM/YYYY"))]) {
             date = moment.unix(x.timestamp).format("DD/MM/YYYY")
             dates[String(moment.unix(x.timestamp).format("DD/MM/YYYY"))] = 1
           }
           return (
-            <div key={`chat_key_${x.timestamp}`}>
+            <div key={`chat_key_${x._id}_${ind}`}>
 
               {date &&
                 <div className="w-full flex justify-center">
@@ -83,7 +87,12 @@ function MessagesBody() {
                 </div>
               }
               <div className={`  w-fit max-w-[75%]  ${x.role === 'user' && 'ml-auto'}`}>
-                <div className={`${x.role === 'user' ? 'bg-white' : 'bg-[#dcf8c7]'} p-2 break-words rounded-b-lg  ${x.role === 'user' ? 'rounded-tl-lg' : 'rounded-tr-lg'}`}>
+                <div className={
+                  classNames(
+                    'p-2 break-words rounded-b-lg ',
+                    x.role === 'user' ? 'bg-[#dcf8c7] rounded-tr-lg' : 'bg-white rounded-tl-lg',
+                    x.role === 'user' ? 'rounded-bl-lg' : 'rounded-br-lg',
+                  )}>
                   {
                     (x.url !== null && x.url !== "") && (
                       <MediaViewer
@@ -95,7 +104,7 @@ function MessagesBody() {
                     )
                   }
                   <p className="w-full break-all text-sm font-normal	">
-                    {x.content}
+                    {x.content ? x.content : ""}
                   </p>
                   <span className="text-gray-800 text-xs">{
                     x.timestamp > 0 ? moment.unix(x.timestamp).format('hh:mm A') : ""

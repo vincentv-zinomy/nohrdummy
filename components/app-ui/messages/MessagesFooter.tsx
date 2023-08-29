@@ -8,7 +8,7 @@ import React, { memo, useContext, useState } from 'react';
 function MessagesFooter() {
 
   const toast = useToast()
-  const {currentContact} = useContext(ContactContext)
+  const { currentContact, refreshMessages } = useContext(ContactContext)
   const [msgBoxValue, setMsgBoxValue] = useState(""); // New error state
   const [isChatLoading, setIsChatLoading] = useState(false)
 
@@ -16,24 +16,25 @@ function MessagesFooter() {
     setIsChatLoading(true);
     try {
 
-        const sendMessage = await axiosAPIWithAuth.post(`/contacts/chat-manually-with-contact/${currentContact._id}`, {
-            message: msgBoxValue
-        });
-        toast.addToast("success", "Message sent to user...");
-        setMsgBoxValue("");
+      const sendMessage = await axiosAPIWithAuth.post(`/contacts/chat-manually-with-contact/${currentContact && currentContact._id}`, {
+        message: msgBoxValue
+      });
+      toast.addToast("success", "Message sent to user...");
+      refreshMessages(currentContact && currentContact._id);
+      setMsgBoxValue("");
     } catch (err: any) {
-        console.log(err);
-        let errorMsg = "Something went wrong while starting conversation";
+      console.log(err);
+      let errorMsg = "Something went wrong while starting conversation";
 
-        // Check if err object has response data and it has a message property
-        if (err.response && err.response.data && err.response.data.message) {
-            errorMsg = err.response.data.message;
-        }
+      // Check if err object has response data and it has a message property
+      if (err.response && err.response.data && err.response.data.message) {
+        errorMsg = err.response.data.message;
+      }
 
-        toast.addToast("error", errorMsg);
+      toast.addToast("error", errorMsg);
     }
     setIsChatLoading(false);
-}
+  }
 
   return (
     <div className="w-full bottom-0">
@@ -46,26 +47,38 @@ function MessagesFooter() {
           </svg>
         </button>
         {/* Message input */}
-        <form className="grow flex">
+        <div className="grow flex">
           <div className="grow mr-3">
             <label htmlFor="message-input" className="sr-only">Type a message</label>
-            <input 
-              id="message-input" className="form-input w-full bg-slate-100 border-transparent focus:bg-white focus:border-slate-300 rounded-md" type="text" 
-              placeholder="Aa" 
+            <input
+
+              className="form-input w-full bg-slate-100 
+              border-transparent focus:bg-white focus:border-slate-300 rounded-md" type="text"
+              value={msgBoxValue}
+              onChange={(e) => setMsgBoxValue(e.target.value)}
+              placeholder="Your message..."
+              onKeyDown={(e) => {
+                // Check if Command (for Mac) or Control (for Windows/Linux) is pressed along with the Enter key
+                if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') {
+                  sendMessage();
+                }
+              }}
             />
           </div>
-          <button type="submit" className="btn bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap px-4 py-2 rounded-md flex gap-2 items-center" onClick={sendMessage}>
-            {isChatLoading ? <Spinner color='white'/> : 
-            <>
-              <span>
-                Send 
-              </span>
+          <button className="btn bg-indigo-500 hover:bg-indigo-600 text-white whitespace-nowrap px-4 py-2 rounded-md flex gap-2 items-center" onClick={() => {
+            sendMessage()
+          }}>
+            {isChatLoading ? <Spinner color='white' /> :
+              <>
+                <span>
+                  Send
+                </span>
                 <ArrowRightIcon className="h-5 w-5 text-white" />
-            </>
+              </>
             }
-            
+
           </button>
-        </form>
+        </div>
       </div>
     </div>
   );

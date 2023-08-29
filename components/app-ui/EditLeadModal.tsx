@@ -31,6 +31,7 @@ export interface FormattedMessages {
     mime_type: string;
     url: string;
     timestamp: number;
+    admin_read_message: boolean;
 
 }
 
