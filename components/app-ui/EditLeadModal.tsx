@@ -45,12 +45,7 @@ function EditLeadModal({
 }: EditLeadModalProps) {
 
 
-    const [messages, setMessages] = useState<{
-        role: string;
-        content: string;
-        message_timestamp: number;
-    }[]>([]);
-    const [mediaFiles, setMediaFiles] = useState<MediaFileTypes[]>([]);
+
     const [formattedMessages, setFormattedMessages] = useState<FormattedMessages[]>([]);
     const [isSubmitting, setIsSubmitting] = useState(false); // New state
     const [leadStatus, setLeadStatus] = useState<ContactStatus>(ContactStatus.NEW); // New state
@@ -139,86 +134,22 @@ function EditLeadModal({
         }
     }, [leadData, show])
 
-
-    useEffect(() => {
-        // Combine messages and mediaFiles into a single array
-        let customMessages: FormattedMessages[] = []
-        let combined = [
-            ...messages.map((message) => ({
-                _id: message.message_timestamp.toString(), // Use a unique id or generate one as needed
-                role: message.role,
-                content: message.content,
-                mime_type: '', // Add appropriate value or keep empty if not applicable
-                url: '', // Add appropriate value or keep empty if not applicable
-                timestamp: message.message_timestamp
-            })),
-            ...mediaFiles.map((mediaFile) => {
-                customMessages.push({
-                    _id: mediaFile.timestamp.toString(), // Use a unique id or generate one as needed
-                    role: "assistant",
-                    content: "Thanks. Let me check.",
-                    mime_type: '', // Add appropriate value or keep empty if not applicable
-                    url: '', // Add appropriate value or keep empty if not applicable
-                    timestamp: mediaFile.timestamp + 10
-                })
-                return {
-                    _id: mediaFile._id,
-                    role: 'user', // Add appropriate value or keep empty if not applicable
-                    content: '', // Add appropriate value or keep empty if not applicable
-                    mime_type: mediaFile.mime_type,
-                    url: mediaFile.url,
-                    timestamp: mediaFile.timestamp
-                }
-            })
-        ];
-        combined = [...combined, ...customMessages]
-
-        // Sort the combined array by timestamp
-        const sorted = combined.sort((a, b) => a.timestamp - b.timestamp);
-
-        // Set the formattedMessages state with the sorted array
-        setFormattedMessages(sorted);
-    }, [messages, mediaFiles]);
     useEffect(() => {
         if (leadData && leadData._id && show) {
             fetchChatHistory()
-            fetchChatMedia()
         }
         if (!show) {
-            setMessages([])
+            setFormattedMessages([])
         }
     }, [show, leadData])
 
-    const fetchChatMedia = async () => {
-        setIsMediaLoading(true);
-        try {
-            const getMediaFilesResp = await axiosAPIWithAuth(`/contacts/chat-media/by-user/${leadData._id}`);
 
-            let media_file = getMediaFilesResp && getMediaFilesResp.data ? getMediaFilesResp.data : [];
-            const sortedMediaFiles: MediaFileTypes[] = [...media_file].sort((a: MediaFileTypes, b: MediaFileTypes) => b.timestamp - a.timestamp);
-
-            setMediaFiles([...sortedMediaFiles]);
-
-        }
-        catch (err: any) {
-            console.log(err);
-            let errorMsg = "Something went wrong while loading chat";
-
-            // Check if err object has response data and it has a message property
-            if (err.response && err.response.data && err.response.data.message) {
-                errorMsg = err.response.data.message;
-            }
-
-            // toast.addToast("error", errorMsg);
-        }
-        setIsMediaLoading(true);
-    }
     const fetchChatHistory = async () => {
         setIsChatLoading(true);
         try {
             const getChatResp = await axiosAPIWithAuth(`/contacts/chat-history/by-user/${leadData._id}`);
 
-            setMessages(getChatResp.data);
+            setFormattedMessages(getChatResp.data);
         }
         catch (err: any) {
             console.log(err);
@@ -396,7 +327,6 @@ function EditLeadModal({
                                                     disabled={isChatLoading}
                                                     onClick={() => {
                                                         fetchChatHistory()
-                                                        fetchChatMedia()
                                                     }}
                                                     className="float-right inline-flex items-center justify-center w-auto px-3 py-2 space-x-2 text-sm font-medium text-white transition bg-blue-700 border border-blue-700 rounded appearance-none cursor-pointer select-none hover:border-blue-800 hover:bg-blue-800 focus:border-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-300 disabled:pointer-events-none disabled:opacity-75"
                                                 >

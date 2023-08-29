@@ -41,11 +41,10 @@ const ContactBox = ({ contact }: Props) => {
 
   return (
     <li
-      className={`${
-        contact._id === currentContact._id
+      className={`${contact._id === currentContact._id
           ? "bg-gray-200 hover:bg-gray-300"
           : "hover:bg-gray-100"
-      }  rounded-md w-full  relative h-fit  `}
+        }  rounded-md w-full  relative h-fit  `}
     >
       <button
         className=" w-full p-2 rounded-md"
@@ -72,7 +71,7 @@ const ContactBox = ({ contact }: Props) => {
               </div>
               <span className="text-xs text-gray-600 flex items-center gap-2 ">
                 {lastMessage &&
-                  moment.unix(lastMessage.message_timestamp).format("hh:mm A")}
+                  moment.unix(lastMessage.timestamp).format("hh:mm A")}
               </span>
             </div>
             <div className="text-xs flex justify-between items-center text-gray-400 mt-1">
