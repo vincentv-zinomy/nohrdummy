@@ -61,12 +61,12 @@ function DashboardLayout({
         { name: "Projects", href: "/app/org-project", icon: FolderIcon },
         { name: "Team Members", href: "/app/team", icon: UsersIcon },
         { name: "Contacts", href: "/app/contacts", icon: UsersIcon },
-        { name: "Inbox", href: "/app/inbox", icon: InboxIcon  },
+        { name: "Inbox", href: "/app/inbox", icon: InboxIcon },
         { name: "My Files", href: "/app/files", icon: FolderOpenIcon },
         {
           name: "Company Info",
           href: "/app/company",
-          icon: InformationCircleIcon ,
+          icon: InformationCircleIcon,
         },
         {
           name: "Billing",
@@ -104,6 +104,11 @@ function DashboardLayout({
       navigation: [
 
         { name: "Projects", href: "/app/org-project", icon: FolderIcon, },
+        {
+          name: "Inbox",
+          href: "/app/inbox",
+          icon: InboxIcon,
+        },
         { name: "Contacts", href: "/app/contacts", icon: UsersIcon },
         {
           name: "General Settings",
