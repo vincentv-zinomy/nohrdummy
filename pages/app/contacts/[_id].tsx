@@ -28,7 +28,7 @@ function AddLeadPage() {
     data: [],
     total: 0,
     page: 1,
-    limit: 10,
+    limit: 50,
   });
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingLeads, setIsLoadingLeads] = useState(false);
