@@ -285,6 +285,8 @@ function AddLeadPage() {
       const res = await axiosAPIWithAuth.get(`/contacts/by-org-project/${router.query._id}`, {
         params: {
           ...router.query,
+          limit: leadsData.limit,
+          page: currentPage,
           search: search
         }
       });
