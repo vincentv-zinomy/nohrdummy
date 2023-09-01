@@ -292,9 +292,6 @@ function AddLeadPage() {
       });
       const data = await res.data
 
-
-      console.log(data);
-
       setLeadsData(data);
     } catch (err) {
       console.log(err);
