@@ -410,6 +410,7 @@ function AddLeadPage() {
                     query: {
                       ...router.query,
                       page: page,
+                      limit: leadsData.limit
                     },
                   }, undefined, { shallow: true });
                 }
