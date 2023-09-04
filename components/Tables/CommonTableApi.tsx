@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import { MagnifyingGlassCircleIcon } from "@heroicons/react/24/outline";
 import SortSelect from "../app-ui/contacts/SortSelect";
 import SearchFilterCompApi from "./SearchFilterCompApi";
- 
+
 
 export interface SelectionOption {
   button_name: string;
@@ -76,6 +76,10 @@ export interface CommonTableProps {
   };
   isLoading: boolean;
   currentPage: number;
+  search: string;
+  setSearch: (search: string) => void;
+  submitSearch: () => void;
+
 }
 
 function CommonTable(props: CommonTableProps) {
@@ -93,6 +97,9 @@ function CommonTable(props: CommonTableProps) {
     pagination,
     isLoading,
     currentPage,
+    search,
+    setSearch,
+    submitSearch
   } = props;
 
   const handleRowClick = useCallback(
@@ -116,7 +123,6 @@ function CommonTable(props: CommonTableProps) {
     [onRowDoubleClick]
   );
 
-  const [search, setSearch] = useState("");
 
   useEffect(() => {
     setSelectedItems([]);
@@ -130,10 +136,13 @@ function CommonTable(props: CommonTableProps) {
         {/* Dropdown filters */}
         <div className="flex gap-2 mb-4 items-center  ">
           <SortSelect options={header_items} />
-          <SearchFilterCompApi 
-            search={search} 
+          <SearchFilterCompApi
+            search={search}
             setSearch={setSearch}
-            />
+            onSubmit={() => {
+              submitSearch();
+            }}
+          />
         </div>
 
         <div className="relative overflow-hidden   ring-1 ring-black ring-opacity-10 md:rounded-b-lg">
@@ -277,12 +286,11 @@ function CommonTable(props: CommonTableProps) {
                                   key={item.key}
                                 >
                                   {data_item && data_item[item.key]
-                                    ? `${
-                                        data_item[item.key].length > 75
-                                          ? data_item[item.key].slice(0, 75) +
-                                            "..."
-                                          : data_item[item.key]
-                                      }`
+                                    ? `${data_item[item.key].length > 75
+                                      ? data_item[item.key].slice(0, 75) +
+                                      "..."
+                                      : data_item[item.key]
+                                    }`
                                     : ``}
                                 </td>
                               );
@@ -358,11 +366,10 @@ function CommonTable(props: CommonTableProps) {
                       currentPage > 1 &&
                         pagination.onPageChange(currentPage - 1);
                     }}
-                    className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${
-                      currentPage === 1
-                        ? "cursor-not-allowed"
-                        : "hover:bg-gray-50"
-                    } focus:z-20 focus:outline-offset-0`}
+                    className={`relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${currentPage === 1
+                      ? "cursor-not-allowed"
+                      : "hover:bg-gray-50"
+                      } focus:z-20 focus:outline-offset-0`}
                   >
                     <span className="sr-only">Previous</span>
                     <ChevronLeftIcon className="h-5 w-5" aria-hidden="true" />
@@ -378,11 +385,10 @@ function CommonTable(props: CommonTableProps) {
                         <a
                           key={`pagination-${i}`}
                           onClick={() => pagination.onPageChange(i + 1)}
-                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                            currentPage === i + 1
-                              ? "bg-indigo-600 text-white"
-                              : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          } focus:z-20 focus:outline-offset-0 cursor-pointer`}
+                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                            ? "bg-indigo-600 text-white"
+                            : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            } focus:z-20 focus:outline-offset-0 cursor-pointer`}
                         >
                           {i + 1}
                         </a>
@@ -395,11 +401,10 @@ function CommonTable(props: CommonTableProps) {
                         <a
                           key={`pagination-${i}`}
                           onClick={() => pagination.onPageChange(i + 1)}
-                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                            currentPage === i + 1
-                              ? "bg-indigo-600 text-white"
-                              : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          } focus:z-20 focus:outline-offset-0`}
+                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                            ? "bg-indigo-600 text-white"
+                            : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            } focus:z-20 focus:outline-offset-0`}
                         >
                           {i + 1}
                         </a>
@@ -408,10 +413,10 @@ function CommonTable(props: CommonTableProps) {
                     if (
                       currentPage > 15 &&
                       i ===
-                        Math.ceil(
-                          pagination.totalItems / pagination.itemsPerPage
-                        ) /
-                          2
+                      Math.ceil(
+                        pagination.totalItems / pagination.itemsPerPage
+                      ) /
+                      2
                     ) {
                       return (
                         <span className="relative inline-flex items-center px-4 py-2 text-sm font-semibold text-gray-700 ring-1 ring-inset ring-gray-300 focus:outline-offset-0">
@@ -426,17 +431,16 @@ function CommonTable(props: CommonTableProps) {
                       Math.ceil(
                         pagination.totalItems / pagination.itemsPerPage
                       ) -
-                        3
+                      3
                     ) {
                       return (
                         <a
                           key={`pagination-${i}`}
                           onClick={() => pagination.onPageChange(i + 1)}
-                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${
-                            currentPage === i + 1
-                              ? "bg-indigo-600 text-white"
-                              : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-                          } focus:z-20 focus:outline-offset-0`}
+                          className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ${currentPage === i + 1
+                            ? "bg-indigo-600 text-white"
+                            : "text-gray-900 ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+                            } focus:z-20 focus:outline-offset-0`}
                         >
                           {i + 1}
                         </a>
@@ -453,12 +457,11 @@ function CommonTable(props: CommonTableProps) {
                           pagination.totalItems / pagination.itemsPerPage
                         ) && pagination.onPageChange(currentPage + 1);
                     }}
-                    className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${
-                      currentPage ===
+                    className={`relative inline-flex items-center rounded-r-md px-2 py-2 text-gray-400 ring-1 ring-inset ring-gray-300 ${currentPage ===
                       Math.ceil(pagination.totalItems / pagination.itemsPerPage)
-                        ? "cursor-not-allowed"
-                        : "hover:bg-gray-50"
-                    } focus:z-20 focus:outline-offset-0`}
+                      ? "cursor-not-allowed"
+                      : "hover:bg-gray-50"
+                      } focus:z-20 focus:outline-offset-0`}
                   >
                     <span className="sr-only">Next</span>
                     <ChevronRightIcon className="h-5 w-5" aria-hidden="true" />

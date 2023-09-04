@@ -277,6 +277,8 @@ function AddLeadPage() {
       }
     }
   }
+
+
   const getData = async () => {
 
 
@@ -414,6 +416,11 @@ function AddLeadPage() {
                   }, undefined, { shallow: true });
                 }
 
+              }}
+              search={search}
+              setSearch={setSearch}
+              submitSearch={() => {
+                getData()
               }}
               isLoading={isLoadingLeads}
               renderCustomComponent={showCustomComponent}
