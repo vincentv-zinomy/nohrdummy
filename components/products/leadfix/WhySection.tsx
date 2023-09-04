@@ -5,6 +5,7 @@ import whyimage2 from '@/assets/images/products/leadfix/WhySection/whysection2.s
 import whyimage3 from '@/assets/images/products/leadfix/WhySection/whysection3.svg'
 import whyimage4 from '@/assets/images/products/leadfix/WhySection/whysection4.svg'
 
+
 type Props = {};
 
 export default function WhySection({}: Props) {

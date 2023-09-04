@@ -1,7 +1,7 @@
 import Image from "next/image";
-import IconArrow from "@/assets/images/products/nohr/hero/icon-arrow.svg";
 import ImgHero from "@/assets/images/products/nohr/hero/img-hero.svg";
 import Link from "next/link";
+import IconArrow from "@/assets/images/products/leadfix/HeroSection/arrow.svg";
 
 const Hero = () => {
   return (
@@ -25,7 +25,7 @@ const Hero = () => {
           </p>
           <Link
             href="/signin"
-            className="group w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
+            className="group w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
           >
             <span>Get Started</span>
             <svg

@@ -1,8 +1,7 @@
 import Image from "next/image";
 
-import ImgHello from "@/assets/images/products/nohr/IntrodSection/img-hello.svg";
-
-import IconGreenTitle from "@/assets/images/products/nohr/IntrodSection/icon-green-title.svg";
+import imgHello from "@/assets/images/products/leadfix/IntroSection/img-hello.3c9879c2.svg";
+import blueTitle from "@/assets/images/products/leadfix/IntroSection/icon-green-title.d661a043.svg";
 import IconPlay from "@/assets/images/products/nohr/IntrodSection/icon-play.svg";
 import IconLine from "@/assets/images/products/nohr/IntrodSection/icon-line.svg";
 import { useRouter } from "next/navigation";
@@ -35,12 +34,12 @@ const IntrodSection = () => {
             <span className="relative inline-flex justify-center items-center">
               <span className="ml-2">
                 No
-                <span className="text-brand-green">HR</span>
+                <span className="text-brand-blue-100">HR</span>
               </span>
 
               <div className="absolute w-[140%]">
                 <Image
-                  src={IconGreenTitle}
+                  src={blueTitle}
                   alt="img"
                   className="w-full h-full"
                 />
@@ -79,7 +78,7 @@ const IntrodSection = () => {
             
             <Image
               className="aspect-square mx-auto lg:mx-0"
-              src={ImgHello}
+              src={imgHello}
               alt="Image"
             />
           </div>
@@ -90,7 +89,7 @@ const IntrodSection = () => {
             <div className="relative space-y-5 sm:space-y-7 md:space-y-10 md:text-lg mt-5 md:mt-7">
               <div className="flex items-center space-x-4">
                 <div className="relative bg-white z-30 w-12 h-12 shrink-0 grid place-content-center">
-                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-green text-white">
+                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-blue-100 text-white">
                     1
                   </div>
                 </div>
@@ -98,7 +97,7 @@ const IntrodSection = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <div className="relative bg-white z-30 w-12 h-12 shrink-0 grid place-content-center">
-                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-green text-white">
+                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-blue-100 text-white">
                     2
                   </div>
                 </div>
@@ -109,7 +108,7 @@ const IntrodSection = () => {
               </div>
               <div className="flex items-center space-x-4">
                 <div className="relative bg-white z-30 w-12 h-12 shrink-0 grid place-content-center">
-                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-green text-white">
+                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-blue-100 text-white">
                     3
                   </div>
                 </div>
@@ -125,7 +124,7 @@ const IntrodSection = () => {
               />
             </div>
             <button
-              className="group mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 px-4 py-2.5 md:py-3.5 md:px-7 mt-9"
+              className="group mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 px-4 py-2.5 md:py-3.5 md:px-7 mt-9"
               onClick={() => {
                 posthog.capture('my event', { property: 'value' })
                 router.push("/signin");

@@ -73,7 +73,7 @@ export const ModalVideo = (props) => {
     <>
       <button
         onClick={() => setOpenModal(true)}
-        className="w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 text-brand-green font-semibold rounded-lg border border-brand-green transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
+        className="w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 text-brand-blue-100 font-semibold rounded-lg border border-brand-blue-100 transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
       >
         Watch Demo
       </button>

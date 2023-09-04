@@ -1,11 +1,12 @@
 import Image from "next/image";
-import Img1 from "@/assets/images/products/nohr/WhySection/img-1.svg";
-import Img2 from "@/assets/images/products/nohr/WhySection/img-2.svg";
-import Img3 from "@/assets/images/products/nohr/WhySection/img-3.svg";
-import Img4 from "@/assets/images/products/nohr/WhySection/img-4.svg"; 
+import whyimage1 from '@/assets/images/products/leadfix/WhySection/whysection1.svg'
+import whyimage2 from '@/assets/images/products/leadfix/WhySection/whysection2.svg'
+import whyimage3 from '@/assets/images/products/leadfix/WhySection/whysection3.svg'
+import whyimage4 from '@/assets/images/products/leadfix/WhySection/whysection4.svg'
 import Link from "next/link";
 
 const WhySection = () => {
+  
   return (
     <section className="bg-white">
       <div className="max-w-[56.9375rem] flex flex-col gap-12 md:gap-24 mx-auto px-5 py-14 md:py-28">
@@ -22,7 +23,7 @@ const WhySection = () => {
 
             <Link
               href="/signin"
-              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 py-2 px-4 mt-5 md:mt-7"
+              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
             >
               <span>Get Started</span>
               <svg
@@ -30,7 +31,7 @@ const WhySection = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-green group-hover:translate-x-2 transition duration-200"
+                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
               >
                 <path
                   strokeLinecap="round"
@@ -42,13 +43,13 @@ const WhySection = () => {
           </div>
 
           <div className="">
-            <Image src={Img1} alt="img" className="w-full h-full" />
+            <Image src={whyimage1} alt="img" className="w-full h-full" />
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 items-center gap-12 md:gap-16">
           <div className="order-2 md:order-1">
-            <Image src={Img2} alt="img" className="w-full h-full" />
+            <Image src={whyimage2} alt="img" className="w-full h-full" />
           </div>
 
           <div className="order-1 md:order-2 font-outfit text-center md:text-left">
@@ -63,7 +64,7 @@ const WhySection = () => {
 
             <Link
               href="/signin"
-              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 py-2 px-4 mt-5 md:mt-7"
+              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
             >
               <span>Get Started</span>
               <svg
@@ -71,7 +72,7 @@ const WhySection = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-green group-hover:translate-x-2 transition duration-200"
+                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
               >
                 <path
                   strokeLinecap="round"
@@ -95,7 +96,7 @@ const WhySection = () => {
 
             <Link
               href="/signin"
-              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 py-2 px-4 mt-5 md:mt-7"
+              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
             >
               <span>Get Started</span>
               <svg
@@ -103,7 +104,7 @@ const WhySection = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-green group-hover:translate-x-2 transition duration-200"
+                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
               >
                 <path
                   strokeLinecap="round"
@@ -115,13 +116,13 @@ const WhySection = () => {
           </div>
 
           <div>
-            <Image src={Img3} alt="img" className="w-full h-full" />
+            <Image src={whyimage3} alt="img" className="w-full h-full" />
           </div>
         </div>
 
         <div className="grid md:grid-cols-2 items-center gap-12 md:gap-16">
           <div className="order-2 md:order-1">
-            <Image src={Img4} alt="img" className="w-full h-full" />
+            <Image src={whyimage4} alt="img" className="w-full h-full" />
           </div>
 
           <div className="order-1 md:order-2 font-outfit text-center md:text-left">
@@ -135,7 +136,7 @@ const WhySection = () => {
 
             <Link
               href="/signin"
-              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-white hover:text-brand-green border border-brand-green transition duration-200 py-2 px-4 mt-5 md:mt-7"
+              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
             >
               <span>Get Started</span>
               <svg
@@ -143,7 +144,7 @@ const WhySection = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-green group-hover:translate-x-2 transition duration-200"
+                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
               >
                 <path
                   strokeLinecap="round"
