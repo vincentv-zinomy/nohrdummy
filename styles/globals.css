@@ -70,6 +70,21 @@ body {
   animation: 1.5s shine linear infinite;
 }
 
+ 
+
+.custom-input::placeholder {
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.custom-input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+ color: white;
+}
+
+.custom-input::-ms-input-placeholder { /* Microsoft Edge */
+ color: white;
+}
+
 @keyframes shine {
   to {
     background-position-x: -200%;

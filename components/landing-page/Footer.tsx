@@ -215,7 +215,7 @@ const Footer = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
-              className="w-full md:max-w-sm rounded-xl bg-brand-gray-400 border-none outline-brand-orange text-sm md:text-base py-3 px-4 mt-3"
+              className="w-full md:max-w-sm rounded-xl bg-brand-gray-400 border-none outline-brand-orange text-sm md:text-base py-3 px-4 mt-3 text-white custom-input"
             />
             <button
               type="submit"

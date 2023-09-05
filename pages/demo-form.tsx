@@ -1,11 +1,13 @@
 
 import LandingPageLayout from "@/components/Layout/LandingPageLayout";
 import { CalendarDaysIcon, ChartBarIcon, ChatBubbleBottomCenterTextIcon, EnvelopeIcon, PhoneIcon, UserGroupIcon } from "@heroicons/react/24/outline"; 
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState } from "react";
 import SelectCountry from '@/components/SelectCountry'
 import { COUNTRIES } from "@/lib/countries";
+import ModalVideo1 from "@/components/ModalVideo1";
+import videojs from 'video.js';
 
-const items = [
+const steps = [
   {
     id: 1,
     title: "Intelligent, Human-like Interactions",
@@ -37,6 +39,31 @@ const items = [
 ];
 
 export default function DemoForm() {
+  const playerRef =  useRef(null);
+
+    const videoJsOptions = {
+        autoplay: false,
+        controls: true,
+        responsive: true,
+        fluid: true,
+        sources: [{
+          src: "https://drive.google.com/uc?export=download&id=1tCpC4j2irpWPL3GF9u8Vo4dj8MXEDY60",
+          type: 'video/mp4'
+        }]
+      };
+    
+      const handlePlayerReady = (player:any) => {
+        playerRef.current = player;
+    
+        // You can handle player events here, for example:
+        player.on('waiting', () => {
+          videojs.log('player is waiting');
+        });
+    
+        player.on('dispose', () => {
+          videojs.log('player will dispose');
+        });
+      };
 
   const [formData, setFormData] = useState({
     "first-name":"",
@@ -57,28 +84,34 @@ export default function DemoForm() {
           <div className="absolute inset-0">
             <div className="absolute inset-y-0 left-0 w-1/2 bg-gray-50" />
           </div>
-          <div className="relative mx-auto max-w-7xl lg:grid lg:grid-cols-4">
-            <div className="bg-gray-50 py-16 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
+          <h2 className="hidden lg:block absolute top-8 mx-auto w-full text-center z-10 text-2xl font-bold tracking-tight text-gray-900 sm:text-4xl  ">
+            Schedule Interviews Without Spending Hours
+          </h2>
+          <div className="relative lg:mt-10 mx-auto max-w-7xl lg:grid lg:grid-cols-4">
+            <div className="bg-gray-50 py-8 px-4 sm:px-6 lg:col-span-2 lg:px-8 lg:py-24 xl:pr-12">
               <div className="mx-auto max-w-lg">
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">
+                <h2 className=" text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl lg:hidden">
                   Schedule Interviews Without Spending Hours
                 </h2>
+                <div className="h-48 md:h-72    ">
+                  <ModalVideo1 options={videoJsOptions} onReady={handlePlayerReady}/>
+                </div>
                 <div className="py-8">
                   <ul role="list" className="space-y-3">
-                    {items.map((item) => (
+                    {steps.map((item) => (
                       <li
                         key={item.id}
                         className="overflow-hidden bg-white px-4 py-4 shadow sm:rounded-md sm:px-6"
                       >
                         <div className="sm:flex items-center">
                           <div className="mb-4 flex-shrink-0 sm:mb-0 sm:mr-4">
-                             <div className="w-24 h-24 rounded-full flex items-center justify-center bg-brand-blue-100 ">
+                             <div className="w-12 h-12 md:w-24 md:h-24 rounded-full flex items-center justify-center bg-brand-blue-100 ">
                              
-                                <item.icon className="h-12 w-12 text-white group-hover:text-indigo-600" aria-hidden="true"/>
+                                <item.icon className="w-8 md:h-12 md:w-12 text-white group-hover:text-indigo-600" aria-hidden="true"/>
                              </div>
                           </div>
                           <div>
-                            <h4 className="text-lg font-bold">{item.title}</h4>
+                            <h4 className="md:text-lg font-bold">{item.title}</h4>
                             <p className="mt-1 text-sm">{item.description}</p>
                           </div>
                         </div>
@@ -88,13 +121,13 @@ export default function DemoForm() {
                 </div>
               </div>
             </div>
-            <div className="bg-white pb-10 md:py-16 px-4 sm:px-6 lg:col-span-2 lg:py-24 lg:px-8 xl:pl-12">
-              <div className="mx-auto max-w-lg lg:max-w-none md:p-10 border rounded-lg bg-white drop-shadow-md">
+            <div className=" rounded-lg md:bg-slate-100 my-auto pb-10 md:py-16 px-4 sm:px-6 lg:col-span-2 lg:py-24 lg:px-8 xl:pl-12  ">
+              <div className="mx-auto max-w-lg lg:max-w-none md:p-10 md:border rounded-lg bg-white md:drop-shadow-md">
                 <p className="mb-6 text-2xl font-semibold text-center">See How  NO<span className="text-brand-blue-100">HR</span>  Works</p>
                 <form
                   action="#"
                   method="POST"
-                  className="grid grid-cols-1 gap-y-6"
+                  className="grid grid-cols-1 gap-y-6  "
                 >
                   <div>
                     <label htmlFor="first-name" className="sr-only">
@@ -192,6 +225,7 @@ export default function DemoForm() {
               </div>
             </div>
           </div>
+          
         </div>
       </LandingPageLayout>
     </>

@@ -10,7 +10,6 @@ import heroImg from '@/assets/images/solutions/nohr/hero/rafiki.svg'
 
 const Hero = ( ) => {
     const playerRef =  useRef(null);
-
     const videoJsOptions = {
         autoplay: false,
         controls: true,
