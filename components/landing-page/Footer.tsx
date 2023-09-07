@@ -1,6 +1,6 @@
 import Image from "next/image";
 import React from "react";
-import phone from '@/assets/Footer/phone.svg'
+import phone from "@/assets/Footer/phone.svg";
 import Link from "next/link";
 
 const Footer = () => {
@@ -8,16 +8,33 @@ const Footer = () => {
     <footer className="bg-brand-blue-100">
       <div className="max-w-[79.1875rem] mx-auto px-5 text-white">
         <div className="flex flex-col md:flex-row gap-y-3 justify-between items-center py-4 md:py-9">
-          <h1 className="font-montserrat font-extrabold  text-[30px] md:text-[40px]">
-            Zigment.ai
-          </h1>
-          <div className="w-full md:w-72 flex justify-between items-center gap-3">
+          <div className="">
+            <h1 className="font-montserrat font-extrabold  text-[30px] md:text-[40px]">
+              Zigment.ai
+            </h1>
+            <p>By Zinomy</p>
+          </div>
+
+          <div className="w-full md:w-72 flex   items-center gap-3">
             <p className="font-poppins md:text-lg font-semibold">
               Follow US on
             </p>
             <div className="flex items-center gap-2">
-              <Link href="https://www.facebook.com/zigmentai
-" target="_blank" aria-label="Follow us on facebook">
+              <Link
+                href="https://www.linkedin.com/company/zinomy"
+                aria-label="Follow us on Linkedin"
+              >
+                <svg
+                  className="fill-white hover:fill-brand-orange"
+                  width="32"
+                  height="32"
+                  viewBox="0 0 32 32"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path d="M16 0C7.16479 0 0 7.16479 0 16C0 24.8352 7.16479 32 16 32C24.8352 32 32 24.8352 32 16C32 7.16479 24.8352 0 16 0ZM11.3506 24.1875H7.45386V12.4641H11.3506V24.1875ZM9.40234 10.8633H9.37695C8.06934 10.8633 7.22363 9.96313 7.22363 8.83813C7.22363 7.68774 8.09521 6.8125 9.42822 6.8125C10.7612 6.8125 11.5815 7.68774 11.6069 8.83813C11.6069 9.96313 10.7612 10.8633 9.40234 10.8633ZM25.4014 24.1875H21.5051V17.9158C21.5051 16.3396 20.9409 15.2646 19.531 15.2646C18.4546 15.2646 17.8135 15.9897 17.5317 16.6897C17.4287 16.9402 17.4036 17.2903 17.4036 17.6406V24.1875H13.5071C13.5071 24.1875 13.5581 13.564 13.5071 12.4641H17.4036V14.124C17.9214 13.3252 18.8479 12.189 20.9153 12.189C23.479 12.189 25.4014 13.8645 25.4014 17.4653V24.1875Z"></path>
+                </svg>
+              </Link>
+                {/* <Link href="https://www.facebook.com/zigmentai" target="_blank" aria-label="Follow us on facebook">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -27,8 +44,8 @@ const Footer = () => {
                 >
                   <path d="M16 0C7.17764 0 0 7.17764 0 16C0 24.8217 7.17764 32 16 32C24.8217 32 32 24.8217 32 16C32 7.17764 24.823 0 16 0ZM19.9791 16.5633H17.376V25.8413H13.5187C13.5187 25.8413 13.5187 20.7718 13.5187 16.5633H11.6852V13.2841H13.5187V11.1631C13.5187 9.64408 14.2406 7.27044 17.4114 7.27044L20.2697 7.2814V10.4645C20.2697 10.4645 18.5328 10.4645 18.1951 10.4645C17.8574 10.4645 17.3773 10.6334 17.3773 11.3578V13.2848H20.3161L19.9791 16.5633Z"></path>
                 </svg>
-              </Link>
-              <Link href="https://www.instagram.com/zigment.ai/" target="_blank" aria-label="Follow us on instagram">
+              </Link>   */}
+              {/* <Link href="https://www.instagram.com/zigment.ai/" target="_blank" aria-label="Follow us on instagram">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -48,19 +65,9 @@ const Footer = () => {
                     </clipPath>
                   </defs>
                 </svg>
-              </Link>
-              <Link href="https://www.linkedin.com/company/zigment" aria-label="Follow us on Linkedin">
-                <svg
-                  className="fill-white hover:fill-brand-orange"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 32 32"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path d="M16 0C7.16479 0 0 7.16479 0 16C0 24.8352 7.16479 32 16 32C24.8352 32 32 24.8352 32 16C32 7.16479 24.8352 0 16 0ZM11.3506 24.1875H7.45386V12.4641H11.3506V24.1875ZM9.40234 10.8633H9.37695C8.06934 10.8633 7.22363 9.96313 7.22363 8.83813C7.22363 7.68774 8.09521 6.8125 9.42822 6.8125C10.7612 6.8125 11.5815 7.68774 11.6069 8.83813C11.6069 9.96313 10.7612 10.8633 9.40234 10.8633ZM25.4014 24.1875H21.5051V17.9158C21.5051 16.3396 20.9409 15.2646 19.531 15.2646C18.4546 15.2646 17.8135 15.9897 17.5317 16.6897C17.4287 16.9402 17.4036 17.2903 17.4036 17.6406V24.1875H13.5071C13.5071 24.1875 13.5581 13.564 13.5071 12.4641H17.4036V14.124C17.9214 13.3252 18.8479 12.189 20.9153 12.189C23.479 12.189 25.4014 13.8645 25.4014 17.4653V24.1875Z"></path>
-                </svg>
-              </Link>
-              <Link href="https://twitter.com/zigment" target="_blank" aria-label="Follow us on Twiter">
+              </Link> */}
+
+              {/* <Link href="https://twitter.com/zigment" target="_blank" aria-label="Follow us on Twiter">
                 <svg
                   className="fill-white hover:fill-brand-orange"
                   width="32"
@@ -70,7 +77,7 @@ const Footer = () => {
                 >
                   <path d="M16 0C7.17764 0 0 7.17764 0 16C0 24.8217 7.17764 32 16 32C24.8217 32 32 24.8217 32 16C32 7.17764 24.823 0 16 0ZM23.1377 12.338C23.1448 12.4966 23.1486 12.6564 23.1486 12.8162C23.1486 17.6828 19.4454 23.2924 12.6699 23.2924C10.5902 23.2924 8.65415 22.6846 7.02489 21.6392C7.31298 21.6734 7.60622 21.6908 7.90333 21.6908C9.62926 21.6908 11.2166 21.1017 12.4772 20.1144C10.866 20.0847 9.50552 19.0201 9.03698 17.5564C9.26126 17.599 9.49263 17.6228 9.72915 17.6228C10.0649 17.6228 10.391 17.579 10.6997 17.4946C9.01506 17.1569 7.74607 15.6687 7.74607 13.8835C7.74607 13.868 7.74607 13.8519 7.74672 13.8371C8.24297 14.1123 8.81076 14.2786 9.414 14.2973C8.42665 13.638 7.77636 12.5101 7.77636 11.2327C7.77636 10.5573 7.95746 9.92443 8.27455 9.38049C10.0901 11.6091 12.8046 13.0747 15.8647 13.2294C15.8015 12.9593 15.7699 12.679 15.7699 12.3896C15.7699 10.3562 17.4185 8.707 19.4519 8.707C20.5114 8.707 21.4672 9.15427 22.14 9.86965C22.9798 9.70466 23.7661 9.39918 24.4795 8.97575C24.2024 9.83614 23.6204 10.5573 22.858 11.0136C23.6036 10.9247 24.3152 10.7275 24.9732 10.4342C24.4821 11.1715 23.8576 11.8205 23.1377 12.338Z"></path>
                 </svg>
-              </Link>
+              </Link> */}
             </div>
           </div>
         </div>
@@ -82,7 +89,7 @@ const Footer = () => {
             <h3 className="font-semibold md:text-lg">Contact US</h3>
             <div className="flex flex-col text-sm md:text-base gap-4 mt-5">
               <div className="flex gap-4 group">
-                <span >
+                <span>
                   <svg
                     className="fill-white cursor-pointer"
                     width="31"
@@ -91,7 +98,7 @@ const Footer = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <circle cx="15.5" cy="15" r="15"></circle>
-                    <g clip-path="url(#clip0_112_27)">
+                    <g clipPath="url(#clip0_112_27)">
                       <path
                         d="M15.5 7C12.192 7 9.5 9.71067 9.5 13.0433C9.5 17.7787 14.936 22.668 15.1673 22.8733C15.2627 22.958 15.3813 23 15.5 23C15.6187 23 15.7373 22.958 15.8327 22.874C16.064 22.668 21.5 17.7787 21.5 13.0433C21.5 9.71067 18.808 7 15.5 7ZM15.5 16.3333C13.662 16.3333 12.1667 14.838 12.1667 13C12.1667 11.162 13.662 9.66667 15.5 9.66667C17.338 9.66667 18.8333 11.162 18.8333 13C18.8333 14.838 17.338 16.3333 15.5 16.3333Z"
                         fill="#455A64"
@@ -110,8 +117,12 @@ const Footer = () => {
                 </span>
                 <div>
                   <p className="text-brand-gray">Office Locations</p>
-                  <Link href="#" className="group-hover:text-brand-orange" aria-label="View on google maps">
-                    Brookfield Place, 10 Carrington St, Sydney NSW 2000
+                  <Link
+                    href="https://goo.gl/maps/RcTkTbQrxnocAvey5"
+                    className="group-hover:text-brand-orange"
+                    aria-label="View on google maps"
+                  >
+                    17th Cross, Sector 1 HSR, Bengaluru 560102
                   </Link>
                 </div>
               </div>
@@ -125,7 +136,7 @@ const Footer = () => {
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <circle cx="15.5" cy="15" r="15"></circle>
-                    <g clip-path="url(#clip0_112_51)">
+                    <g clipPath="url(#clip0_112_51)">
                       <path
                         d="M17.8671 15.1641L16.5271 16.5086C15.9837 17.0539 15.0276 17.0657 14.4724 16.5086L13.1323 15.1641L8.31934 19.9927C8.49849 20.0755 8.69602 20.125 8.90602 20.125H22.0935C22.3035 20.125 22.501 20.0756 22.6801 19.9927L17.8671 15.1641Z"
                         fill="#455A64"
@@ -156,23 +167,12 @@ const Footer = () => {
                 </span>
                 <div>
                   <p className="text-brand-gray">Email</p>
-                  <Link href="mailto:contact@zigment.ai" className="group-hover:text-brand-orange" aria-label="Email us">
-                    contact@zigment.ai
-                  </Link>
-                </div>
-              </div>
-              <div className="flex gap-4 group">
-                <span >
-                  <Image src={phone} alt="phone" />
-                </span>
-                <div>
-                  <p className="text-brand-gray">Phone</p>
                   <Link
+                    href="mailto:contact@zigment.ai"
                     className="group-hover:text-brand-orange"
-                    href="tel:+1-669-215-4556"
-                    aria-label="Call us"
+                    aria-label="Email us"
                   >
-                    +1 669 215 4556
+                    contact@zigment.com
                   </Link>
                 </div>
               </div>
@@ -184,13 +184,25 @@ const Footer = () => {
               <Link href="/about-us" className="hover:text-brand-orange">
                 About Us
               </Link>
-              <Link href="/terms-of-service" className="hover:text-brand-orange" aria-label="our terms and services">
+              <Link
+                href="/terms-of-service"
+                className="hover:text-brand-orange"
+                aria-label="our terms and services"
+              >
                 Terms Of Service
               </Link>
-              <Link href="/privacy-policy" className="hover:text-brand-orange" aria-label="Our privacy policy">
+              <Link
+                href="/privacy-policy"
+                className="hover:text-brand-orange"
+                aria-label="Our privacy policy"
+              >
                 Privacy Policy
               </Link>
-              <Link href="/refund-policy" className="hover:text-brand-orange" aria-label="our terms and services">
+              <Link
+                href="/refund-policy"
+                className="hover:text-brand-orange"
+                aria-label="our terms and services"
+              >
                 Refunds & Cancellation
               </Link>
             </div>
@@ -203,7 +215,7 @@ const Footer = () => {
               id="email"
               type="email"
               placeholder="Enter your email"
-              className="w-full md:max-w-sm rounded-xl bg-brand-gray-400 border-none outline-brand-orange text-sm md:text-base py-3 px-4 mt-3"
+              className="w-full md:max-w-sm rounded-xl bg-brand-gray-400 border-none outline-brand-orange text-sm md:text-base py-3 px-4 mt-3 text-white custom-input"
             />
             <button
               type="submit"

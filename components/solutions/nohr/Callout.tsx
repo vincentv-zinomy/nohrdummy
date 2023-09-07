@@ -16,7 +16,7 @@ const Callout = (props: Props) => {
             are constantly evolving and would love to hear from you if have any
             specific request for a feature or any integration.{" "}
           </p>
-          <Link href="/signin" className="bg-brand-green text-white py-2 px-4 rounded-lg font-semibold text-lg">Start for free</Link>
+          <Link href="/signin" className="bg-brand-blue-100 text-white py-2 px-4 rounded-lg font-semibold text-lg">Start for free</Link>
         </div>
         <div className="w-full max-w-[300px] lg:max-w-[500px]">
           <Image src={calloutImage} alt="" />

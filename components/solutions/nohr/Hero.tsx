@@ -10,7 +10,6 @@ import heroImg from '@/assets/images/solutions/nohr/hero/rafiki.svg'
 
 const Hero = ( ) => {
     const playerRef =  useRef(null);
-
     const videoJsOptions = {
         autoplay: false,
         controls: true,
@@ -36,7 +35,7 @@ const Hero = ( ) => {
       };
 
     return (
-        <section className="px-5 bg-brand-green/20">
+        <section className="px-5 bg-brand-blue-100/20">
             <div className="max-w-5xl md:px-12 mx-auto flex flex-col-reverse lg:flex-row items-center justify-between py-10 lg:py-14">
                 <div className="relative w-full font-outfit text-center lg:text-start mt-10 lg:mt-0">
                     <div className="flex gap-3 items-center mb-6">
@@ -53,7 +52,7 @@ const Hero = ( ) => {
 
                         <Link
                             href="/signin"
-                            className="group w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-lg hover:bg-inherit hover:text-brand-green border border-brand-green transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
+                            className="group w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-lg hover:bg-inherit hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
                         >
                             <span>Start Free trial</span>
 

@@ -5,7 +5,6 @@ import whyImage1 from "@/assets/images/solutions/nohr/why/img-1.svg";
 import whyImage2 from "@/assets/images/solutions/nohr/why/img-2.svg";
 import whyImage3 from "@/assets/images/solutions/nohr/why/img-3.svg";
 import whyImage4 from "@/assets/images/solutions/nohr/why/img-4.svg"
-type Props = {}
 
 
 
@@ -33,7 +32,7 @@ const WhySection = () => {
         }
     ]
   return (
-    <section className="bg-brand-green/20">
+    <section className="bg-brand-blue-100/20">
     <div className="max-w-[56.9375rem] flex flex-col gap-12 md:gap-24 mx-auto px-5 py-14 md:py-28">
 
 
@@ -57,7 +56,7 @@ const WhySection = () => {
 
             <Link
               href="/signin"
-              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-green font-semibold text-white rounded-full hover:bg-inherit hover:text-brand-green border border-brand-green transition duration-200 py-2 px-4 mt-5 md:mt-7"
+              className="group mx-auto lg:mx-0 inline-flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-inherit hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 py-2 px-4 mt-5 md:mt-7"
               style={{
                 direction: i % 2 === 0 ? 'ltr' : 'ltr'
               }}
@@ -68,7 +67,7 @@ const WhySection = () => {
                 viewBox="0 0 24 24"
                 strokeWidth="1.5"
                 stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-green group-hover:translate-x-2 transition duration-200"
+                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
               >
                 <path
                   strokeLinecap="round"

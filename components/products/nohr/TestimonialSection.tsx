@@ -12,6 +12,19 @@ import IconArrowLeft from "@/assets/images/products/nohr/TestimonialSection/icon
 import IconArrowRight from "@/assets/images/products/nohr/TestimonialSection/icon-arrow-right.svg";
 import IconStar from "@/assets/images/products/nohr/TestimonialSection/icon-start.svg"; 
 import IconGreenRound from "@/assets/images/shared/icon-green-round.svg";
+import leftArrow from "@/assets/images/products/leadfix/TestimonialSection/icon-arrow-left.cd6806ed.svg";
+import rightArrow from "@/assets/images/products/leadfix/TestimonialSection/icon-arrow-right.ef593212.svg";
+import Johndoe from "@/assets/images/products/leadfix/TestimonialSection/Ellipse24.png";
+import bluecurve from "@/assets/images/products/leadfix/TestimonialSection/OBJECTS(1).svg";
+import iconsQuoteTop from "@/assets/images/products/leadfix/TestimonialSection/icon-quote-top.d7aa55f6.svg";
+import iconsQuoteBottom from "@/assets/images/products/leadfix/TestimonialSection/icon-quote-bottom.d839784c.svg";
+import star from "@/assets/images/products/leadfix/TestimonialSection/icon-start.7d14c686.svg";
+
+import profilepic2 from '@/assets/images/products/leadfix/TestimonialSection/1balance.svg'
+import profilepic3 from '@/assets/images/products/leadfix/TestimonialSection/service_buddy_logo.webp'
+import profilepic4 from '@/assets/images/products/leadfix/TestimonialSection/unigage_logo.jpeg'
+
+import titlecircle from '@/assets/images/products/leadfix/TestimonialSection/OBJECTS.svg' 
 
 const data = [
   {
@@ -48,6 +61,7 @@ const data = [
   },
 ];
 
+
 const TestimonialSection = () => {
   return (
     <section className="relative gradient">
@@ -56,14 +70,14 @@ const TestimonialSection = () => {
           What People
           <span className="inline-flex justify-center items-center ml-2">
             Say
-            <Image className="absolute" src={IconGreenTitle} alt="Icon" />
+            <Image className="absolute" src={titlecircle} alt="Icon" />
           </span>
         </h2>
         <div className="flex items-center justify-between mt-5 sm:mt-14 md:mt-16">
           <button className="prev relative hidden sm:grid place-items-center w-10 h-10 shrink-0 rounded-full bg-brand-green/10">
             <Image
               className="absolute left-1/3"
-              src={IconArrowLeft}
+              src={leftArrow}
               alt="Left Arrow"
             />
           </button>
@@ -82,7 +96,7 @@ const TestimonialSection = () => {
                   <div className="relative flex items-center justify-between">
                     <Image
                       className="absolute top-0 left-0"
-                      src={IconGreenRound}
+                      src={bluecurve}
                       alt="Green Icon"
                     />
                     <img
@@ -92,7 +106,7 @@ const TestimonialSection = () => {
                     />
                     <Image
                       className="absolute top-10 right-0"
-                      src={IconGreenRound}
+                      src={bluecurve}
                       alt="Green Icon"
                     />
                   </div>
@@ -129,7 +143,7 @@ const TestimonialSection = () => {
           <button className="next relative hidden sm:grid place-items-center w-10 h-10 shrink-0 rounded-full bg-brand-green/10">
             <Image
               className="absolute right-1/3"
-              src={IconArrowRight}
+              src={rightArrow}
               alt="Right Arrow"
             />
           </button>

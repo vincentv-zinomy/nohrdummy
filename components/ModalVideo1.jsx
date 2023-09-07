@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState, useMemo, useCallback } from 'react';
 import videojs from 'video.js';
 import 'video.js/dist/video-js.css';
+import Image from "next/image";
 
-export const ModalVideo = (props) => {
+import IconPlay from "@/assets/images/products/nohr/IntrodSection/icon-play.svg";
+import thumbnailImage from '@/assets/images/products/nohr/IntrodSection/thumbnail.jpeg'
+
+export const ModalVideo1 = (props) => {
   const videoRef = useRef(null);
   const playerRef = useRef(null);
   const { options, onReady } = props;
@@ -73,9 +77,18 @@ export const ModalVideo = (props) => {
     <>
       <button
         onClick={() => setOpenModal(true)}
-        className="w-fit mx-auto lg:mx-0 flex items-center space-x-2.5 text-brand-blue-100 font-semibold rounded-lg border border-brand-blue-100 transition duration-200 px-6 py-2.5 md:py-3.5 md:px-9 mt-6 md:mt-9"
+        className="w-fit mx-auto lg:mx-0 flex items-center   text-brand-blue-100 font-semibold rounded-lg overflow-hidden    transition duration-200 px-6 py-2.5 md:py-3.5   mt-6 md:mt-9 relative"
       >
-        Watch Demo
+        <Image
+              src={IconPlay}
+              alt=""
+              className={`absolute m-auto inset-0 rounded-lg`}
+            />
+        <Image
+          className={`w-full object-cover rounded-lg `}
+          src={thumbnailImage}
+          alt="Video Thumbnail"
+        />
       </button>
 
       <div className={modalOverlayClasses} onClick={closeModal}></div>
@@ -86,4 +99,4 @@ export const ModalVideo = (props) => {
   );
 };
 
-export default ModalVideo;
+export default ModalVideo1;

@@ -3,8 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { FaHouseMedical } from 'react-icons/fa6';
 import TailwindNav2 from './TailwindNav2';
-import { AiOutlineLeft, AiOutlineRight } from 'react-icons/ai'
-import { ClinicType, AppointmentDataType } from '@/pages/ivf/novo';
+import {  AppointmentDataType } from '@/pages/ivf/novo';
 
 
 type Props = {
