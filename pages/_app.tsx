@@ -1,12 +1,12 @@
-import { AuthProvider } from "@/components/contexts/AuthContext";
 import DashboardLayout from "@/components/Layout/DashboardLayout";
+import { AuthProvider } from "@/components/contexts/AuthContext";
 import ToastContainer from "@/components/hooks/ToastContainer";
 import { ToastProvider } from "@/components/hooks/useToast";
 import { useRouter } from "next/router";
+
+import AllScripts from "@/components/Scripts/AllScripts";
 import "@/styles/globals.css";
 import type { AppProps } from "next/app";
-import AllScripts from "@/components/Scripts/AllScripts";
-import { useEffect } from "react";
 
 declare global {
   interface Window {

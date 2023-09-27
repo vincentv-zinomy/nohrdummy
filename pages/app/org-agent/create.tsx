@@ -26,7 +26,8 @@ function CreateAgent() {
     status: "draft",
     agent_use_case_id: "",
     custom_values: {},
-    _id: ""
+    _id: "",
+    org_project_id: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 

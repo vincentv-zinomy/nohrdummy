@@ -127,6 +127,7 @@ export interface OrgAgentDataTypes {
   title: string;
   description: string;
   agent_use_case_id: string;
+  org_project_id: string;
   is_sms_enabled: boolean;
   is_whatsapp_enabled: boolean;
   is_instagram_enabled: boolean;

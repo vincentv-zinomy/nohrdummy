@@ -53,6 +53,7 @@
     "react-hook-form": "^7.43.9",
     "react-icons": "^4.10.1",
     "react-markdown": "^8.0.7",
+    "reactflow": "^11.9.2",
     "remark": "^14.0.2",
     "remark-mdx": "^2.3.0",
     "simple-oauth2": "^5.0.0",
