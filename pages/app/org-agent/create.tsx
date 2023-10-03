@@ -28,6 +28,7 @@ function CreateAgent() {
     custom_values: {},
     _id: "",
     org_project_id: "",
+    assigned_website_chat_widget_id: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 

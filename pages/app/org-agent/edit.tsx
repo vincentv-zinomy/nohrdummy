@@ -29,6 +29,7 @@ function EditAgent() {
     custom_values: {},
     _id: "",
     org_project_id: "",
+    assigned_website_chat_widget_id: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -61,6 +62,7 @@ function EditAgent() {
         agent_use_case_id: agents_data.agent_use_case_id,
         custom_values: agents_data.custom_values,
         org_project_id: agents_data.org_project_id,
+        assigned_website_chat_widget_id: agents_data.assigned_website_chat_widget_id,
       });
     } catch (err) {
       console.log(err);
