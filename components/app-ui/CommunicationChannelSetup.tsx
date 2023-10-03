@@ -21,6 +21,13 @@ function CommunicationChannelSetup() {
     smtp_port: "",
     tls: "true"
   });
+  const [websiteChatData, setWebsiteChatData] = useState<{
+    website_domain: string,
+    welcome_message: string,
+  }>({
+    website_domain: "",
+    welcome_message: "",
+  })
   const [myCommunicationChannels, setMyCommunicationChannels] = useState<CommunicationChannelTypes[]>([]);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -65,7 +72,33 @@ function CommunicationChannelSetup() {
       });
       const resData = await getData.data;
 
-      toast.addToast("success", "Number purchased successfully");
+      toast.addToast("success", "Email added successfully");
+      getAllMyChannels();
+    } catch (err: any) {
+      console.log(err);
+      let errorMsg = "Failed to purchase number. Please try again later.";
+
+      // Check if err object has response data and it has a message property
+      if (err.response && err.response.data && err.response.data.message) {
+        errorMsg = err.response.data.message;
+      }
+
+      toast.addToast("error", errorMsg);
+
+
+    }
+
+    setIsSubmitting(false);
+  }
+  const AddNewWebsiteChatBot = async () => {
+    setIsSubmitting(true);
+    try {
+      const getData = await axiosAPIWithAuth.post("/communication-channels/add-web-chat", {
+        ...websiteChatData
+      });
+      const resData = await getData.data;
+
+      toast.addToast("success", "Added website successfully");
       getAllMyChannels();
     } catch (err: any) {
       console.log(err);
@@ -163,6 +196,7 @@ function CommunicationChannelSetup() {
           <option value={ChatChannelType.WHATSAPP}>WhatsApp</option>
           <option value={ChatChannelType.INSTAGRAM}>Instagram</option>
           <option value={ChatChannelType.EMAIL}>Email</option>
+          <option value={ChatChannelType.WEBCHAT}>Web Chat</option>
         </select>
         {
           selectedChannelToAdd === ChatChannelType.SMS &&
@@ -219,7 +253,15 @@ function CommunicationChannelSetup() {
               focus:ring-offset-2 focus:ring-indigo-500
               disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => {
-              alert("Coming Soon")
+              const width = 600;
+              const height = 700;
+              const left = window.innerWidth / 2 - width / 2;
+              const top = window.innerHeight / 2 - height / 2;
+
+              const scopes = ['instagram_basic', 'instagram_content_publish', 'instagram_manage_comments', 'instagram_manage_insights', 'pages_show_list', 'pages_read_engagement', 'pages_messaging', 'pages_manage_metadata'];
+              window.open(`https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://localhost:3000/auth-callback/instagram&response_type=token&scope=${scopes.join(",")}`,
+                "integrationAuthPopupForIG",
+                `width=${width},height=${height},left=${left},top=${top}`);
             }}
             disabled={isSubmitting}
           >
@@ -363,6 +405,63 @@ function CommunicationChannelSetup() {
               disabled={isSubmitting}
             >
               Add Email
+            </button>
+          </>
+
+        }
+        {
+          selectedChannelToAdd === ChatChannelType.WEBCHAT &&
+          <>
+            <div className="mt-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Website Domain
+              </label>
+              <input
+                value={websiteChatData.website_domain}
+
+                onChange={(e) => {
+                  setWebsiteChatData({
+                    ...websiteChatData,
+                    website_domain: e.target.value
+                  })
+                }}
+                name="customer_variable_"
+                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+              />
+            </div>
+
+            <div className="mt-1">
+              <label className="block text-sm font-medium text-gray-700">
+                Welcome Message
+              </label>
+              <input
+                value={websiteChatData.welcome_message}
+
+                onChange={(e) => {
+                  setWebsiteChatData({
+                    ...websiteChatData,
+                    welcome_message: e.target.value
+                  })
+                }}
+                name="customer_variable_"
+                className="p-2 shadow-sm focus:ring-indigo-500 focus:border-indigo-500 block w-full sm:text-sm border border-gray-300 rounded-md disabled:bg-gray-200 disabled:cursor-not-allowed"
+              />
+            </div>
+            <button
+              className="mt-2 inline-flex justify-center 
+              py-2 px-4 border border-transparent 
+              shadow-sm text-sm font-medium 
+              rounded-md text-white 
+              bg-indigo-600 hover:bg-indigo-700 
+              focus:outline-none focus:ring-2 
+              focus:ring-offset-2 focus:ring-indigo-500
+              disabled:opacity-50 disabled:cursor-not-allowed"
+              onClick={() => {
+                AddNewWebsiteChatBot();
+              }}
+              disabled={isSubmitting}
+            >
+              Add Website Chat
             </button>
           </>
 

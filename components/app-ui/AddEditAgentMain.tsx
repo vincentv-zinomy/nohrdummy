@@ -165,7 +165,7 @@ function AddEditAgentMain({
                 </label>
                 <select
                   className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                  value={formData.agent_use_case_id}
+                  value={formData.org_project_id}
                   onChange={(e) => {
                     setFormDataMain({
                       ...formData,
@@ -175,8 +175,8 @@ function AddEditAgentMain({
                 >
                   <option value={""}>Select Project</option>
                   {
-                    orgProjects.map((use_case) => {
-                      return <option value={use_case._id}>{use_case.title}</option>
+                    orgProjects.map((org_projects_) => {
+                      return <option value={org_projects_._id}>{org_projects_.title}</option>
                     })
                   }
                 </select>
@@ -341,6 +341,55 @@ function AddEditAgentMain({
                       }
 
                       <div className="mt-4">
+                        {/* Web Chat Channel */}
+                        <div className="flex items-center">
+                          <input
+
+                            name={`Enable Web Chat`}
+                            type="checkbox"
+                            className="h-4 w-4 
+                            rounded border-gray-300 text-indigo-600 focus:ring-indigo-500
+                            disabled:bg-gray-200 disabled:cursor-not-allowed
+                            "
+                            onChange={(e) => {
+                              setFormDataMain({
+                                ...formData,
+                                is_website_chat_enabled: e.target.checked
+                              })
+                            }}
+                            checked={formData.is_website_chat_enabled}
+                            disabled={myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.WEBCHAT) ? false : true}
+                          />
+                          <label
+                            className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
+                          >
+                            Enable Website Chat
+
+                          </label>
+                          <span className="text-sm text-gray-600">{
+                            myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.WEBCHAT) ? `` : `No Emails Found`
+                          }</span>
+                          {
+                            formData.is_website_chat_enabled &&
+                            <select
+                              className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                              value={formData.assigned_website_chat_widget_id}
+                              onChange={(e) => {
+                                setFormDataMain({
+                                  ...formData,
+                                  assigned_website_chat_widget_id: e.target.value
+                                })
+                              }}
+                            >
+                              <option value={""}>Select Website Chat</option>
+                              {
+                                myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.WEBCHAT).map((comm_channel: CommunicationChannelTypes) => {
+                                  return <option value={comm_channel.WEB_CHAT_METADATA?.widget_id}>{comm_channel.WEB_CHAT_METADATA?.website_domain}</option>
+                                })
+                              }
+                            </select>
+                          }
+                        </div>
                         {/* Email Channel */}
                         <div className="flex items-center">
                           <input

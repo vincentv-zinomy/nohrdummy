@@ -44,6 +44,7 @@ export enum ChatChannelType {
   WHATSAPP = 'WHATSAPP',
   INSTAGRAM = 'INSTAGRAM',
   VOICE = 'VOICE',
+  WEBCHAT = 'WEBCHAT',
 }
 export interface MessageTemplateResponseType {
   org_id?: string;
@@ -86,11 +87,18 @@ export interface CommunicationChannelTypes {
   instagram_id: string;
   voice_id: string;
   WHATSAPP_METADATA?: WhatsAppMetadata;
+  WEB_CHAT_METADATA?: WebChatMetadata;
   updated_at_timestamp: number;
 
   created_at_timestamp: number;
 
   is_deleted: boolean;
+}
+export interface WebChatMetadata {
+  widget_id: string;            // Unique identifier for the chat widget on the website
+  website_domain: string;       // The domain where the chat widget will be placed
+  welcome_message: string;      // Initial message when a user starts a chat
+  // ... any other relevant properties
 }
 export interface WhatsAppMetadata {
   waba_id: string;
@@ -140,6 +148,7 @@ export interface OrgAgentDataTypes {
   assigned_instagram_id: string;
   assigned_email_id: string;
   assigned_voice_id: string;
+  assigned_website_chat_widget_id: string;
   status: string;
   contacts_count?: number;
   custom_values: any;
