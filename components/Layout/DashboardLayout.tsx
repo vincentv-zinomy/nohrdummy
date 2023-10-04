@@ -17,7 +17,9 @@ import {
   PhoneIcon,
   ChatBubbleLeftEllipsisIcon,
   FolderOpenIcon,
-  InformationCircleIcon
+  InformationCircleIcon,
+  RocketLaunchIcon,
+  BoltIcon
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -57,6 +59,7 @@ function DashboardLayout({
       routes: ["/app", "/app/*"],
       navigation: [
 
+        { name: "Flow Editor", href: "/app/org-agent/flow-editor", icon: BoltIcon },
         { name: "Agents", href: "/app/org-agent", icon: FolderIcon },
         { name: "Projects", href: "/app/org-project", icon: FolderIcon },
         { name: "Team Members", href: "/app/team", icon: UsersIcon },
@@ -100,9 +103,11 @@ function DashboardLayout({
         "/app/signout", "/app/org-project", "/app/contacts/*",
         "/app/contacts",
         "/app/setting/general-settings", "/app/setting/integrations",
+        "/app/org-agent/*"
       ],
       navigation: [
 
+        { name: "Flow Editor", href: "/app/org-agent/flow-editor", icon: BoltIcon },
         { name: "Projects", href: "/app/org-project", icon: FolderIcon, },
         {
           name: "Inbox",
