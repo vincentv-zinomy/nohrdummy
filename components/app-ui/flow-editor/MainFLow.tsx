@@ -1,10 +1,10 @@
 import {
   BoltIcon,
-  ChatBubbleLeftRightIcon, 
+  ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
 import Dagre from "@dagrejs/dagre";
 
-import  {
+import {
   useState,
   useRef,
   useCallback,
@@ -24,7 +24,7 @@ import "reactflow/dist/style.css";
 import ConnectionLine from "./ConnectionLine";
 import { defineNodesTypes } from "./NodeTypes";
 
- 
+
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -46,15 +46,15 @@ const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
   };
 };
 
-const initialNodes:any[] = [
-  
+const initialNodes: any[] = [
+
 ];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
- 
 
- 
+
+
 
 
 
@@ -137,6 +137,9 @@ const MainFLow = () => {
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
+          proOptions={{
+            hideAttribution: true,
+          }}
           nodeTypes={nodeTypes}
           fitView
           connectionLineComponent={ConnectionLine}
@@ -162,10 +165,10 @@ const MainFLow = () => {
           </Panel>
           <Panel position="bottom-right" className="space-y-2 flex flex-col">
 
-              <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
-                {" "}
-                <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
-              </button>
+            <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
+              {" "}
+              <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
+            </button>
 
             <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
               {" "}

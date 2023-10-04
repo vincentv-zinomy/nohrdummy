@@ -259,7 +259,7 @@ function CommunicationChannelSetup() {
               const top = window.innerHeight / 2 - height / 2;
 
               const scopes = ['instagram_basic', 'instagram_content_publish', 'instagram_manage_comments', 'instagram_manage_insights', 'pages_show_list', 'pages_read_engagement', 'pages_messaging', 'pages_manage_metadata'];
-              window.open(`https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=https://localhost:3000/auth-callback/instagram&response_type=token&scope=${scopes.join(",")}`,
+              window.open(`https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/auth-callback/instagram&response_type=token&scope=${scopes.join(",")}`,
                 "integrationAuthPopupForIG",
                 `width=${width},height=${height},left=${left},top=${top}`);
             }}
