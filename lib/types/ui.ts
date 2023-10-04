@@ -88,11 +88,23 @@ export interface CommunicationChannelTypes {
   voice_id: string;
   WHATSAPP_METADATA?: WhatsAppMetadata;
   WEB_CHAT_METADATA?: WebChatMetadata;
+  IG_PAGE_METADATA?: IGPageMetadata;
   updated_at_timestamp: number;
 
   created_at_timestamp: number;
 
   is_deleted: boolean;
+}
+export interface IGPageMetadata {
+  page_id: string;
+  page_name: string;
+  page_access_token: string;
+  instagram_account_id: string;
+  instagram_account_name: string;
+  instagram_account_username: string;
+  instagram_account_profile_picture_url: string;
+  instagram_website: string;
+  instagram_biography: string;
 }
 export interface WebChatMetadata {
   widget_id: string;            // Unique identifier for the chat widget on the website

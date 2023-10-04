@@ -553,7 +553,7 @@ function AddEditAgentMain({
                                 is_instagram_enabled: e.target.checked
                               })
                             }}
-                            checked={formData.is_whatsapp_enabled}
+                            checked={formData.is_instagram_enabled}
                             disabled={myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.INSTAGRAM) ? false : true}
                           />
                           <label
@@ -569,7 +569,7 @@ function AddEditAgentMain({
                             formData.is_instagram_enabled &&
                             <select
                               className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                              value={formData.assigned_whatsapp_number}
+                              value={formData.assigned_instagram_id}
                               onChange={(e) => {
                                 setFormDataMain({
                                   ...formData,
@@ -580,7 +580,7 @@ function AddEditAgentMain({
                               <option value={""}>Select INSTAGRAM Account</option>
                               {
                                 myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.INSTAGRAM).map((comm_channel: CommunicationChannelTypes) => {
-                                  return <option value={comm_channel.instagram_id}>{comm_channel.instagram_id}</option>
+                                  return <option value={comm_channel.instagram_id}>{comm_channel.IG_PAGE_METADATA?.instagram_account_name ?? "No account name..."}</option>
                                 })
                               }
                             </select>
