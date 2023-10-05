@@ -35,6 +35,8 @@ export default function App({ Component, pageProps }: AppProps) {
     router.pathname.startsWith("/resources/apps") ||
     router.pathname.startsWith("/solutions") ||
     router.pathname.startsWith("/inbox") ||
+    router.pathname.startsWith("/app/inbox") ||
+    router.pathname.startsWith("/app/org-agent") ||
     noAuthRoutes.includes(router.pathname)
   ) {
     return (
