@@ -1,48 +1,52 @@
 import {
   AdjustmentsHorizontalIcon,
   ArrowTopRightOnSquareIcon,
+  ChatBubbleLeftIcon,
   DocumentDuplicateIcon,
+  EnvelopeIcon,
+  PhoneIcon,
   RocketLaunchIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useContext, useEffect, useState } from "react";
 import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
+import { CustomValuesContext } from "../ReactFlowComponent";
 import CustomSelelct from "../CustomSelelct";
-import { InputType } from "../NodeTypes";
 import EditTextModal from "../EditTextModal";
+import { handleStyle } from "../NodeTypes";
+import { BsFacebook, BsWhatsapp } from "react-icons/bs";
+import TextInputComp from "../InputComponents/TextInputComp";
+import TextAreaInputComp from "../InputComponents/TextAreaInputComp";
+import NumberInputComp from "../InputComponents/NumberInputCompt";
 
-// for (const key in object) {
-//     if (Object.prototype.hasOwnProperty.call(object, key)) {
-//         const element = object[key];
-        
-//     }
-// }
+ 
 
-const arrToObj = (array:InputType[]) => {
-    const obj:any = {}
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-        obj[element.name] = element.value
-    }
-    return obj
-}
+export default function UseCaseNode(props: any) {
+  const [textModalContent, setTextModalContent] = useState<any>();
 
-export default function AgentNode(props: any) {
-  
-  const { setNodes, getNodes } = useReactFlow();
+  const { openTextModal, setOpenTextModal, openEditModal, setOpenEditModal } =
+    useContext(CustomValuesContext);
 
-  const [openTextModal, setOpenTextModal] = useState(false)
-  const [textModalContent, setTextModalContent] = useState<any>()
-
+  // console.log(commChannel)
+  const { setNodes, getNodes,addNodes, addEdges } = useReactFlow();
   const divRef = useRef<HTMLDivElement>(null);
 
-  const [organization, setOrganization] = useState<any>({
-    id: 0,
-    label: "Select Option",
-    value: null,
+  const [nodeData, setNodeData] = useState({
+    name: "" || props.data?.values?.name,
+    agent_type: "" || props.data?.values?.agent_type,
+    description:
+      "" || props.data?.values?.description,
+    provider:
+      "" || props.data?.values?.provider,
+    model:
+      "" || props.data?.values?.model, 
+    temperature:"" || props.data?.values?.model,
+    max_tokens:200 || props.data?.values?.max_tokens,
+    top_p:""|| props.data?.values?.top_p,
+    prompt:"" ||  props.data?.values?.prompt,
+    requirements:"" || props.data?.values?.requirements,
+    parameters:""||props.data?.values?.parameters
   });
-
-  const [nodeData, setNodeData] = useState( props.data?.values || arrToObj(props.inputs));
 
 
   useEffect(() => {
@@ -55,11 +59,6 @@ export default function AgentNode(props: any) {
       })
     );
   }, [nodeData]);
-
-  const handleChange = (e: any) => {
-    // console.log(e.target.value)
-    setNodeData({ ...nodeData, [e.target.name]: e.target.value });
-  };
 
   const deleteNodes = () => {
     const nodesleft = getNodes().filter((x) => x.id !== props.id);
@@ -82,6 +81,14 @@ export default function AgentNode(props: any) {
       },
     ]);
   };
+  
+ 
+
+  const handleChange = (e: any) => {
+    setNodeData({ ...nodeData, [e.target.name]: e.target.value });
+  };
+
+  
 
   return (
     <>
@@ -101,7 +108,7 @@ export default function AgentNode(props: any) {
         </button>
         <button
           className="p-1.5"
-          onClick={() =>  {}}
+          onClick={() => setOpenEditModal(!openEditModal)}
         >
           <AdjustmentsHorizontalIcon className="h-5 w-5  " />
         </button>
@@ -112,12 +119,7 @@ export default function AgentNode(props: any) {
         position={Position.Right}
         className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
         id="a"
-      />
-      <Handle
-        type="target"
-        position={Position.Left}
-        className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
-        id="b"
+        style={handleStyle}
       />
       <div
         className={` border ${
@@ -133,105 +135,124 @@ export default function AgentNode(props: any) {
         <div className="p-5 text-sm text-slate-400">Create Agent</div>
 
         <div className="space-y-1 pb-6 relative">
-          {/* Text */}
-          {props.inputs &&
-            props.inputs.map((input: InputType) => {
-              return (
-                <div key={`agent_input_key_${input.name}`}>
-                  <>
-                    {input.type === "text" && (
-                      <div className=" bg-slate-50 py-2 px-6 gap-2 relative">
-                        <label
-                          htmlFor="name"
-                          className="block    text-black text-left"
-                        >
-                          {input.label}
-                        </label>
-                        <div>
-                          <input
-                            type="text"
-                            className="block  w-full px-2 py-1.5 mt-2 rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
-                            name={input.name}
-                            value={nodeData[input.name]}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                    )}
+          <TextInputComp 
+            name={'name'}
+            value={nodeData.name}
+            label={'Agent Name'}
+            handleChange={handleChange}
+          />
+        
 
-                    {input.type === "number" && (
-                      <div className=" bg-slate-50 py-2 px-6 gap-2 relative">
-                        <label
-                          htmlFor="name"
-                          className="block    text-black text-left"
-                        >
-                          {input.label}
-                        </label>
-                        <div>
-                          <input
-                            type="number"
-                            className="block  w-full px-2 py-1.5 mt-2 rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
-                            name={input.name}
-                            min={input.min}
-                            max={input.max}
-                            value={nodeData[input.name]}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                    )}
+          <CustomSelelct
+            state={nodeData}
+            setState={setNodeData} 
+            name="agent_type"
+            label="Agent Type"
+            list={[
+              {
+                id: 1,
+                value: "llm",
+                label: "LLM",
+              },
+              {
+                id: 2,
+                value: "function",
+                label: "Function",
+              },
+            ]}
+          />
+          <TextAreaInputComp
+            label='Description'
+            value={nodeData.description}
+            handleChange={handleChange}
+            name={'description'} 
+          />
 
-                    {input.type === "select" && (
-                      <CustomSelelct
-                        selected={organization}
-                        setSelected={setOrganization}
-                        label={input.label}
-                        list={input.options}
-                      />
-                    )}
+          <CustomSelelct
+            state={nodeData}
+            setState={setNodeData} 
+            name="provider"
+            label="Provider"
+            list={[
+              {
+                id:'provider_id_0',
+                label:'Open AI',
+                value:'open_ai'
+              },
+            ]}
+          />
+          <CustomSelelct
+            state={nodeData}
+            setState={setNodeData} 
+            name="model"
+            label="Model"
+            list={[
+              {
+                id:'model_id_0',
+                label:'GPT 4',
+                value:'gpt-4'
+              },
+              {
+                id:'model_id_1',
+                label:'GPT 3.5 (turbo)',
+                value:'gpt_3.5'
+              },
+              
+            ]}
+          />
+          
+           <NumberInputComp 
+            label={'Temprature'} 
+            name={'temprature'}
+            value={nodeData.temperature} 
+            handleChange={handleChange}
+            min={0}
+            max={0}
+            />
+             <NumberInputComp 
+              label={'Max Tokens'} 
+              name={'max_tokens'}
+              value={nodeData.max_tokens} 
+              handleChange={handleChange}
+              min={0}
+              max={4096}
+            />
+            <NumberInputComp 
+              label={'Top P'} 
+              name={'top_p'}
+              value={nodeData.top_p} 
+              handleChange={handleChange}
+              min={0}
+              max={1}
+            />
+            <TextAreaInputComp
+              label='Prompt'
+              value={nodeData.prompt}
+              handleChange={handleChange}
+              name={'prompt'}
+            />
+             <TextAreaInputComp
+              label='Requirements'
+              value={nodeData.requirements}
+              handleChange={handleChange}
+              name={'requirements'}
+            />
+            <TextAreaInputComp
+              label='Parameters'
+              value={nodeData.parameters}
+              handleChange={handleChange}
+              name={'parameters'}
+            />
 
-                    {input.type === "textarea" && (
-                      <div className=" bg-slate-50 py-2 px-6 gap-2 relative">
-                        <label
-                          htmlFor="name"
-                          className="block    text-black text-left"
-                        >
-                          {input.label}
-                        </label>
-                        <div className="mt-2 flex item-center gap-2">
-                          <textarea
-                            rows={1}
-                            className="block resize-none	 w-full px-2 py-1.5  rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
-                            name={input.name}
-                            value={nodeData[input.name]}
-                            onChange={handleChange}
-                          />
-                          <button
-                            onClick={() => {
-                                setOpenTextModal(!openTextModal);
-                                setTextModalContent(input.name) 
-                              }}
-                          >
-                            <ArrowTopRightOnSquareIcon className="h-7 w-7 text-gray-700" />
-                          </button>
-                        </div>
-                      </div>
-                    )}
-                  </>
-                </div>
-              );
-            })}
+          
 
          
+
+        
+           
         </div>
       </div>
-      <EditTextModal 
-        open={openTextModal} 
-        setOpen={setOpenTextModal} 
-        name={textModalContent}
-        state={nodeData} 
-        setState={setNodeData}   
-      />
+       
     </>
   );
 }

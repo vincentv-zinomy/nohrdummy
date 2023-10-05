@@ -25,12 +25,12 @@ const DragMenuItems = ({ item }: Props) => {
         <button
         key={item.name}
         className={
-            "w-full flex items-center justify-between px-2 py-2 text-sm border-b border-slate-300 bg-slate-100  "
+            "w-full flex items-center justify-between px-2 py-2 text-sm border-b border-slate-300   "
         }
 
         onClick={() => setOpen(!open)}
         >
-        <div className="flex items-center">
+        <div className="flex items-center text-xs">
             <item.icon
             className={"mr-3 flex-shrink-0 h-6 w-6"}
             aria-hidden="true"
@@ -41,8 +41,9 @@ const DragMenuItems = ({ item }: Props) => {
             className={`h-4 w-4 text-gray-500 ${open ? "rotate-90" : "rotate-0"}`}
         />
         </button>
-        <div className={`${open ? 'h-fit opacity-1' : 'h-0 opacity-0'}     w-full `}>
-            <div className="p-2 space-y-2">
+        <div className={` h-fit     w-full `}>
+          {open && 
+            <div className="p-2 space-y-2 bg-slate-50">
 
                  
                 
@@ -51,6 +52,7 @@ const DragMenuItems = ({ item }: Props) => {
                         <div className="  flex h-8 overflow-hidden" 
                     onDragStart={(event) => onDragStart(event, x.name)} 
                     draggable 
+                    key={`sub_menu_keys${x.id}`}
                 >
                     <div className="w-2 rounded-l-md  shrink-0 h-8" style={{border:`1px solid ${item.color}`,background:item.color}}>
  
@@ -68,6 +70,7 @@ const DragMenuItems = ({ item }: Props) => {
 
                  
             </div>
+          }
         </div>
     </div>
   );

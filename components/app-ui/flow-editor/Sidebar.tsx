@@ -42,7 +42,7 @@ const Sidebar = ( ) => {
             </div>
             <div className=" ">
               {navigation.map((item) => (
-                <DragMenuItems key={item.name} item={item} />
+                <DragMenuItems key={`${item.id}_drag_keys`} item={item} />
               ))}
             </div>
           </nav>

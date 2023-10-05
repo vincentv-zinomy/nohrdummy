@@ -1,10 +1,10 @@
 import {
   BoltIcon,
-  ChatBubbleLeftRightIcon,
+  ChatBubbleLeftRightIcon, 
 } from "@heroicons/react/24/outline";
 import Dagre from "@dagrejs/dagre";
 
-import {
+import  {
   useState,
   useRef,
   useCallback,
@@ -19,12 +19,20 @@ import ReactFlow, {
   BackgroundVariant,
   Panel,
   useReactFlow,
+  NodeProps,
 } from "reactflow";
 import "reactflow/dist/style.css";
 import ConnectionLine from "./ConnectionLine";
-import { defineNodesTypes } from "./NodeTypes";
+import CustomNode from "./CustomNodes/CustomNode";
+import CustomNode1 from "./CustomNodes/CustomNode1";
+import CustomNode2 from "./CustomNodes/CustomNode2";
+import UseCaseNode from "./CustomNodes/UseCaseNode";
+import AgentNode from "./CustomNodes/AgentNode";
+import { agentsInputs, defineNodesTypes } from "./NodeTypes";
+import CommChannelNode from "./CustomNodes/CommChannelNode";
+// import { defineNodesTypes } from "./NodeTypes";
 
-
+ 
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -46,15 +54,16 @@ const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
   };
 };
 
-const initialNodes: any[] = [
-
+const initialNodes:any[] = [
+  
 ];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
+ 
 
-
-
+ 
+ 
 
 
 
@@ -137,14 +146,11 @@ const MainFLow = () => {
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
-          proOptions={{
-            hideAttribution: true,
-          }}
           nodeTypes={nodeTypes}
           fitView
           connectionLineComponent={ConnectionLine}
           deleteKeyCode={"Delete"}
-          // onNodeClick={}
+          proOptions={{hideAttribution:true}}
           minZoom={0.001}
         >
           <Background color="gray" variant={BackgroundVariant.Dots} />
@@ -165,10 +171,10 @@ const MainFLow = () => {
           </Panel>
           <Panel position="bottom-right" className="space-y-2 flex flex-col">
 
-            <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
-              {" "}
-              <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
-            </button>
+              <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
+                {" "}
+                <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
+              </button>
 
             <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
               {" "}

@@ -15,6 +15,7 @@ import MainFLow from "./MainFLow";
 
 export const navigation = [
   {
+    id:1,
     name: "Use Case",
     icon: TrashIcon,
     color:'rgb(144, 59, 190)',
@@ -23,10 +24,11 @@ export const navigation = [
         id: 1,
         name: "usecase",
         label: "Use Case",
-      },
+      } 
     ],
   },
   {
+    id:2,
     name: "Agents",
     icon: RocketLaunchIcon,
     color:'rgb(254, 117, 0)',
@@ -70,82 +72,85 @@ export const navigation = [
   },
 
   {
+    id:3,
     name: "Peer Agents",
     icon: LinkIcon,
     color:'rgb(122, 174, 66)',
     sub_menus: [
       {
-        id: `peer_agents_key_2`,
+        id: 8,
         name: "customNode2",
         label: "Qualification Agent",
       },
       {
-        id: `peer_agents_key_3`,
+        id: 9,
         name: "customNode2",
         label: "Follow Up Agent",
       },
     ],
   },
   {
+    id:4,
     name: "Data Store",
     icon: CircleStackIcon,
     color:'rgb(66, 186, 167)',
     sub_menus: [
       {
-        id: `data_stroe_key_2`,
+        id: 10,
         name: "customNode2",
         label: "Google Drive",
       },
       {
-        id: `data_stroe_key_3`,
+        id: 11,
         name: "customNode2",
         label: "File(s): PDF, Excel, etc",
       },
       {
-        id: `data_stroe_key_4`,
+        id: 13,
         name: "customNode2",
         label: "URL",
       },
 
       {
-        id: `data_stroe_key_5`,
+        id: 14,
         name: "customNode2",
         label: "DropBox",
       },
     ],
   },
   {
+    id:5,
     name: "Communication Channels",
     color:'rgb(99, 68, 190)',
     icon: PhoneIcon,
     sub_menus: [
       {
-        id: `communication_channels_2`,
-        name: "customNode2",
+        id: 15,
+        name: "commChannelNode",
         label: "SMS",
       },
       {
-        id: `communication_channels_3`,
-        name: "customNode2",
+        id: 16,
+        name: "commChannelNode",
         label: "WhatsApp",
       },
       {
-        id: `communication_channels_4`,
-        name: "customNode2",
+        id: 17,
+        name: "commChannelNode",
         label: "Email",
       },
       {
-        id: `communication_channels_5`,
-        name: "customNode2",
+        id: 18,
+        name: "commChannelNode",
         label: "Facebook Messenger",
       },
       {
-        id: `communication_channels_5`,
-        name: "customNode2",
+        id: 19,
+        name: "commChannelNode",
         label: "Voice",
       },
     ],
-  },
+  }, 
 ];
 
 interface CustomValues {

@@ -14,6 +14,7 @@ import {
     useReactFlow,
   } from "reactflow";
 import { CustomValuesContext } from "../ReactFlowComponent";
+import { handleStyle } from "../NodeTypes";
   
   
  
@@ -128,8 +129,9 @@ import { CustomValuesContext } from "../ReactFlowComponent";
               <Handle
                 type="source"
                 position={Position.Right}
-                id="a"
+                id="asasvsfvsfd"
                 className="w-2.5 h-2.5  absolute  -right-[5px] border-2 bg-white border-red-500"
+                style={handleStyle}
               />
               <p>
                 LLM <span className="text-red-500 ">*</span>

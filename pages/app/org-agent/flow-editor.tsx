@@ -3,7 +3,7 @@ import React from 'react'
 
 function FlowEditor() {
     return (
-        <div className='p-4 h-screen'>
+        <div className='' style={{height:'calc(100vh - 64px)'}}>
             <ReactFlowComponent />
         </div>
     )

@@ -14,6 +14,7 @@ import {
   useReactFlow,
 } from "reactflow";
 import { CustomValuesContext } from "../ReactFlowComponent";
+import { handleStyle } from "../NodeTypes";
 
  
 
@@ -94,6 +95,7 @@ export default function CustomNode1(props: any) {
               position={Position.Left}
               className="w-2.5 h-2.5  absolute -left-[5px] border-2 bg-white border-red-500"
               id="a"
+              style={handleStyle}
             />
             <p>
               LLM <span className="text-red-500 ">*</span>
@@ -114,7 +116,7 @@ export default function CustomNode1(props: any) {
             <Handle
               type="source"
               position={Position.Right}
-              id="a"
+              id="c"
               className="w-2.5 h-2.5  absolute  -right-[5px] border-2 bg-white border-red-500"
             />
             <p>

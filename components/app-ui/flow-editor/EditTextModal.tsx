@@ -5,15 +5,21 @@ import { Dialog, Transition } from '@headlessui/react'
 type Props = {
   open:boolean,
   setOpen:(value:boolean)=>void,
-  name:string,
-  state:any,
-  setState:any
+  name:string, 
+  value:any,
+  handleChange:any
 }
 
-export default function EditTextModal({open,setOpen,name}:Props) {
+export default function EditTextModal({
+  open,
+  setOpen,
+  name,  
+  value,
+  handleChange
+}:Props) {
   // const {   textModalData } =
   //   useContext(CustomValuesContext);
-  console.log(name)
+  // console.log(name)
     // console.log(textModalData)
     // const {name, value, setState, state} = textModalData
 
@@ -26,12 +32,12 @@ export default function EditTextModal({open,setOpen,name}:Props) {
 
     // console.log(content)
     
-    const handleChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
-      console.log(e.target.value)
-      // setContent(e.target.value)
+    // const handleChange = (e:ChangeEvent<HTMLTextAreaElement>) => {
+    //   // console.log(e.target.value)
+    //   // setContent(e.target.value)
 
-      // setState({...state, [name]:e.target.value})
-    }
+    //   setState({...state, [name]:e.target.value})
+    // }
  
 
   return (
@@ -52,7 +58,7 @@ export default function EditTextModal({open,setOpen,name}:Props) {
         </Transition.Child>
 
         <div className="fixed inset-0 z-10 overflow-y-auto">
-          <div className="flex min-h-full items-end justify-center p-4 text-center sm:items-center sm:p-0">
+          <div className="flex   h-full   items-end justify-center p-4 text-center sm:items-center sm:p-0">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-300"
@@ -62,7 +68,7 @@ export default function EditTextModal({open,setOpen,name}:Props) {
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white px-4 pt-5 pb-4 text-left shadow-xl transition-all sm:my-8 sm:h-full  max-w-lg sm:p-6">
+              <Dialog.Panel className="  transform overflow-hidden rounded-lg bg-white   px-4 pt-5 pb-4 text-left shadow-xl transition-all  h-[90%] w-full flex flex-col   max-w-3xl sm:p-6">
                 <div>
                    
                   <div className="  text-left  ">
@@ -76,11 +82,11 @@ export default function EditTextModal({open,setOpen,name}:Props) {
                     </div>
                   </div>
                 </div>
-                <div className="mt-5 sm:mt-6">
-                  <textarea  id="" className='inline-flex w-full justify-center rounded-md border  px-4 py-2 text-base   shadow-sm hover:border-indigo-700 focus:outline-none   sm:text-sm ' 
-                  rows={12}  
-                    // name={name}
-                    // value={value}
+                <div className="mt-5 sm:mt-6 flex flex-col relative     h-full">
+                  <textarea  id="" className='inline-flex h-full shrink  w-full justify-center rounded-md border  px-4 py-3  text-base   shadow-sm hover:border-indigo-700 focus:outline-none   sm:text-sm ' 
+                    name={name}
+                    style={{height:'100%'}}
+                    value={value}
                     onChange={handleChange}
                   ></textarea>
                   <button
@@ -97,6 +103,7 @@ export default function EditTextModal({open,setOpen,name}:Props) {
         </div>
       </Dialog>
     </Transition.Root>
+    
     </>
   )
 }
