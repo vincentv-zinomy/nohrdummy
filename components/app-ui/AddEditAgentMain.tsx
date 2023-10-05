@@ -1,4 +1,4 @@
-import { ChatChannelType, CommunicationChannelTypes, IAgentUseCase, OrgAgentDataTypes } from "@/lib/types/ui";
+import { ChatChannelType, CommunicationChannelTypes, IAgentUseCase, OrgAgentDataTypes, OrgProjectDataTypes } from "@/lib/types/ui";
 import { useEffect, useState } from "react";
 
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
@@ -23,10 +23,22 @@ function AddEditAgentMain({
 
   const [myCommunicationChannels, setMyCommunicationChannels] = useState<CommunicationChannelTypes[]>([]);
   const [agentUseCases, setAgentUseCases] = useState<IAgentUseCase[]>([]);
+  const [orgProjects, setOrgProjects] = useState<OrgProjectDataTypes[]>([]);
   const [isCommunicationChannelsLoading, setIsCommunicationChannelsLoading] = useState(true);
 
 
   const { authState } = useAuth();
+  const getAllOrgProjects = async () => {
+
+    try {
+      const res = await axiosAPIWithAuth.get("/org-project/all");
+      const data = await res.data;
+
+      setOrgProjects(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   const getAllAgentUseCases = async () => {
     try {
       const getData = await axiosAPIWithAuth.get("/agents/all-use-cases");
@@ -84,6 +96,7 @@ function AddEditAgentMain({
     if (authState.isAuthenticated) {
       getAllMyNumbers()
       getAllAgentUseCases()
+      getAllOrgProjects()
     }
   }, [authState]);
 
@@ -142,6 +155,28 @@ function AddEditAgentMain({
                   {
                     agentUseCases.map((use_case) => {
                       return <option value={use_case.id}>{use_case.name}</option>
+                    })
+                  }
+                </select>
+              </div>
+              <div className="sm:col-span-6 sm:w-full md:w-1/2">
+                <label className="block text-sm font-medium text-gray-700">
+                  Org Project
+                </label>
+                <select
+                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                  value={formData.org_project_id}
+                  onChange={(e) => {
+                    setFormDataMain({
+                      ...formData,
+                      org_project_id: e.target.value
+                    })
+                  }}
+                >
+                  <option value={""}>Select Project</option>
+                  {
+                    orgProjects.map((org_projects_) => {
+                      return <option value={org_projects_._id}>{org_projects_.title}</option>
                     })
                   }
                 </select>
@@ -306,6 +341,55 @@ function AddEditAgentMain({
                       }
 
                       <div className="mt-4">
+                        {/* Web Chat Channel */}
+                        <div className="flex items-center">
+                          <input
+
+                            name={`Enable Web Chat`}
+                            type="checkbox"
+                            className="h-4 w-4 
+                            rounded border-gray-300 text-indigo-600 focus:ring-indigo-500
+                            disabled:bg-gray-200 disabled:cursor-not-allowed
+                            "
+                            onChange={(e) => {
+                              setFormDataMain({
+                                ...formData,
+                                is_website_chat_enabled: e.target.checked
+                              })
+                            }}
+                            checked={formData.is_website_chat_enabled}
+                            disabled={myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.WEBCHAT) ? false : true}
+                          />
+                          <label
+                            className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
+                          >
+                            Enable Website Chat
+
+                          </label>
+                          <span className="text-sm text-gray-600">{
+                            myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.WEBCHAT) ? `` : `No Emails Found`
+                          }</span>
+                          {
+                            formData.is_website_chat_enabled &&
+                            <select
+                              className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                              value={formData.assigned_website_chat_widget_id}
+                              onChange={(e) => {
+                                setFormDataMain({
+                                  ...formData,
+                                  assigned_website_chat_widget_id: e.target.value
+                                })
+                              }}
+                            >
+                              <option value={""}>Select Website Chat</option>
+                              {
+                                myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.WEBCHAT).map((comm_channel: CommunicationChannelTypes) => {
+                                  return <option value={comm_channel.WEB_CHAT_METADATA?.widget_id}>{comm_channel.WEB_CHAT_METADATA?.website_domain}</option>
+                                })
+                              }
+                            </select>
+                          }
+                        </div>
                         {/* Email Channel */}
                         <div className="flex items-center">
                           <input
@@ -469,7 +553,7 @@ function AddEditAgentMain({
                                 is_instagram_enabled: e.target.checked
                               })
                             }}
-                            checked={formData.is_whatsapp_enabled}
+                            checked={formData.is_instagram_enabled}
                             disabled={myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.INSTAGRAM) ? false : true}
                           />
                           <label
@@ -485,7 +569,7 @@ function AddEditAgentMain({
                             formData.is_instagram_enabled &&
                             <select
                               className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                              value={formData.assigned_whatsapp_number}
+                              value={formData.assigned_instagram_id}
                               onChange={(e) => {
                                 setFormDataMain({
                                   ...formData,
@@ -496,7 +580,7 @@ function AddEditAgentMain({
                               <option value={""}>Select INSTAGRAM Account</option>
                               {
                                 myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.INSTAGRAM).map((comm_channel: CommunicationChannelTypes) => {
-                                  return <option value={comm_channel.instagram_id}>{comm_channel.instagram_id}</option>
+                                  return <option value={comm_channel.instagram_id}>{comm_channel.IG_PAGE_METADATA?.instagram_account_name ?? "No account name..."}</option>
                                 })
                               }
                             </select>
