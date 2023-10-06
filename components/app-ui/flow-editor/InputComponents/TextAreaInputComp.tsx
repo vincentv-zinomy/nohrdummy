@@ -2,9 +2,19 @@ import { ArrowTopRightOnSquareIcon } from '@heroicons/react/24/outline'
 import React, { useState } from 'react'
 import EditTextModal from '../EditTextModal'
 
-type Props = {}
+type Props = {
+  value:string | number,
+  handleChange:(e:any)=>void,
+  label:string,
+  name:string
+}
 
-const TextAreaInputComp = ({value, handleChange, label, name }: any) => {
+const TextAreaInputComp = ({
+  value, 
+  handleChange, 
+  label, 
+  name 
+}: Props) => {
   const [open, setOpen] = useState<boolean>(false)
   return (
     <>

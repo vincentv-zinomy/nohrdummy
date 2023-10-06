@@ -7,15 +7,15 @@ import {
   RocketLaunchIcon,
   TrashIcon,
 } from "@heroicons/react/24/outline";
-import {  useRef,  useContext, useEffect } from "react";
+import {  useRef,  useContext, useEffect, useState } from "react";
 import {
   Handle,
   NodeToolbar,
   Position,
   useReactFlow,
 } from "reactflow";
-import { CustomValuesContext } from "../ReactFlowComponent";
-import { handleStyle } from "../NodeTypes";
+import { handleStyle } from "../../NodeTypes";
+import EditModal from "../../EditModal";
 
  
 
@@ -23,19 +23,20 @@ import { handleStyle } from "../NodeTypes";
 
 export default function CommChannelNode(props: any) {
   
-  const { openEditModal, setOpenEditModal} = useContext(CustomValuesContext)
-  const { setNodes, getNodes } = useReactFlow();
+  const [ openEditModal, setOpenEditModal] = useState(false)
+
+  const { setNodes, getNodes, deleteElements } = useReactFlow();
   const divRef = useRef<HTMLDivElement>(null);
 
 
   useEffect(()=>{
 
-    console.log(getNodes())
+    // console.log(getNodes())
   },[])
 
   const deleteNodes = () => {
-    const nodesleft = getNodes().filter((x) => x.id !== props.id);
-    setNodes(nodesleft);
+     
+    deleteElements({nodes:[{id:props.id}]})
   };
 
   const addNodesHandler = () => {
@@ -109,6 +110,7 @@ export default function CommChannelNode(props: any) {
           
         </div>
       </div>
+      <EditModal open={openEditModal} setOpen={setOpenEditModal}/>
     </>
   );
 }

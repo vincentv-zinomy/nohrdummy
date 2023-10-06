@@ -71,9 +71,9 @@ export default function EditModal({ open, setOpen }: Props) {
                             viewBox="0 0 24 24"
                             fill="none"
                             stroke="currentColor"
-                            stroke-width="1.5"
-                            stroke-linecap="round"
-                            stroke-linejoin="round"
+                            strokeWidth="1.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
                             className="w-5"
                           >
                             <path d="M8 21s-4-3-4-9 4-9 4-9"></path>
@@ -151,9 +151,9 @@ export default function EditModal({ open, setOpen }: Props) {
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="1.5"
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
+                        strokeWidth="1.5"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
                         className="h-4 w-4"
                       >
                         <line x1="18" x2="6" y1="6" y2="18"></line>

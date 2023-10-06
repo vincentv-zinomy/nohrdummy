@@ -1,6 +1,6 @@
-import { navigation } from "./ReactFlowComponent";
 import { CodeBracketIcon, DocumentArrowDownIcon, DocumentArrowUpIcon, FolderArrowDownIcon, MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import DragMenuItems from "./DragMenuItems";
+import { navigation } from "./NodeTypes";
 
 
 const Sidebar = ( ) => {

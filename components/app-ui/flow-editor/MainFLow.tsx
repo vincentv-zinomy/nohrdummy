@@ -23,14 +23,10 @@ import ReactFlow, {
 } from "reactflow";
 import "reactflow/dist/style.css";
 import ConnectionLine from "./ConnectionLine";
-import CustomNode from "./CustomNodes/CustomNode";
-import CustomNode1 from "./CustomNodes/CustomNode1";
-import CustomNode2 from "./CustomNodes/CustomNode2";
-import UseCaseNode from "./CustomNodes/UseCaseNode";
-import AgentNode from "./CustomNodes/AgentNode";
-import { agentsInputs, defineNodesTypes } from "./NodeTypes";
-import CommChannelNode from "./CustomNodes/CommChannelNode";
-// import { defineNodesTypes } from "./NodeTypes";
+import UseCaseNode from "./CustomNodes/UseCase/UseCaseNode";
+import AgentNode from "./CustomNodes/Agents/AgentNode";
+import {   defineNodesTypes } from "./NodeTypes";
+import CommChannelNode from "./CustomNodes/CommunicationChannel/CommChannelNode";
 
  
 
@@ -69,7 +65,6 @@ const getId = () => `dndnode_${id++}`;
 
 const MainFLow = () => {
   const { fitView } = useReactFlow();
-
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
