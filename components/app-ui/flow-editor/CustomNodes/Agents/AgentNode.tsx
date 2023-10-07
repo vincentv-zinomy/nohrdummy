@@ -19,14 +19,14 @@ import TextAreaInputComp from "../../InputComponents/TextAreaInputComp";
 import NumberInputComp from "../../InputComponents/NumberInputCompt";
 import EditModal from "../../EditModal";
 
- 
+
 
 export default function UseCaseNode(props: any) {
 
   const [openEditModal, setOpenEditModal] = useState(false)
 
   // console.log(commChannel)
-  const { setNodes, getNodes,addNodes, addEdges, deleteElements } = useReactFlow();
+  const { setNodes, getNodes, addNodes, addEdges, deleteElements } = useReactFlow();
 
   const [nodeData, setNodeData] = useState({
     name: "" || props.data?.values?.name,
@@ -36,13 +36,13 @@ export default function UseCaseNode(props: any) {
     provider:
       "" || props.data?.values?.provider,
     model:
-      "" || props.data?.values?.model, 
-    temperature:"" || props.data?.values?.model,
-    max_tokens:200 || props.data?.values?.max_tokens,
-    top_p:""|| props.data?.values?.top_p,
-    prompt:"" ||  props.data?.values?.prompt,
-    requirements:"" || props.data?.values?.requirements,
-    parameters:""||props.data?.values?.parameters
+      "" || props.data?.values?.model,
+    temperature: "" || props.data?.values?.model,
+    max_tokens: 200 || props.data?.values?.max_tokens,
+    top_p: "" || props.data?.values?.top_p,
+    prompt: "" || props.data?.values?.prompt,
+    requirements: "" || props.data?.values?.requirements,
+    parameters: "" || props.data?.values?.parameters
   });
 
 
@@ -58,8 +58,8 @@ export default function UseCaseNode(props: any) {
   }, [nodeData]);
 
   const deleteNodes = () => {
-     
-    deleteElements({nodes:[{id:props.id}]})
+
+    deleteElements({ nodes: [{ id: props.id }] })
   };
 
   const addNodesHandler = () => {
@@ -67,7 +67,7 @@ export default function UseCaseNode(props: any) {
       delete x.zIndex;
       return { ...x };
     });
-    
+
     setNodes([
       ...nodes,
       {
@@ -79,14 +79,14 @@ export default function UseCaseNode(props: any) {
       },
     ]);
   };
-  
- 
+
+
 
   const handleChange = (e: any) => {
     setNodeData({ ...nodeData, [e.target.name]: e.target.value });
   };
 
-  
+
 
   return (
     <>
@@ -120,9 +120,8 @@ export default function UseCaseNode(props: any) {
         style={handleStyle}
       />
       <div
-        className={` border ${
-          props.selected && "border-slate-500"
-        }    rounded-md bg-white`}
+        className={` border ${props.selected && "border-slate-500"
+          }    rounded-md bg-white`}
       >
         <div
           className={` node w-96 bg-slate-50 border-b p-5 rounded-t-md flex items-center gap-2`}
@@ -132,17 +131,17 @@ export default function UseCaseNode(props: any) {
         <div className="p-5 text-sm text-slate-400">Create Agent</div>
 
         <div className="space-y-1 pb-6 relative">
-          <TextInputComp 
+          <TextInputComp
             name={'name'}
             value={nodeData.name}
             label={'Agent Name'}
             handleChange={handleChange}
           />
-        
+
 
           <CustomSelelct
             state={nodeData}
-            setState={setNodeData} 
+            setState={setNodeData}
             name="agent_type"
             label="Agent Type"
             list={[
@@ -162,95 +161,115 @@ export default function UseCaseNode(props: any) {
             label='Description'
             value={nodeData.description}
             handleChange={handleChange}
-            name={'description'} 
+            name={'description'}
           />
 
           <CustomSelelct
             state={nodeData}
-            setState={setNodeData} 
+            setState={setNodeData}
             name="provider"
             label="Provider"
             list={[
               {
-                id:'provider_id_0',
-                label:'Open AI',
-                value:'open_ai'
+                id: 'provider_id_0',
+                label: 'Open AI',
+                value: 'open_ai'
+              },
+              {
+                id: 'provider_id_1',
+                label: 'Claude',
+                value: 'claude'
+              },
+              {
+                id: 'provider_id_2',
+                label: 'Llama',
+                value: 'llama'
+              },
+              {
+                id: 'provider_id_3',
+                label: 'Falcon',
+                value: 'falcon'
+              },
+              {
+                id: 'provider_id_4',
+                label: 'Bard',
+                value: 'bard'
               },
             ]}
           />
           <CustomSelelct
             state={nodeData}
-            setState={setNodeData} 
+            setState={setNodeData}
             name="model"
             label="Model"
             list={[
               {
-                id:'model_id_0',
-                label:'GPT 4',
-                value:'gpt-4'
+                id: 'model_id_0',
+                label: 'GPT 4',
+                value: 'gpt-4'
               },
               {
-                id:'model_id_1',
-                label:'GPT 3.5 (turbo)',
-                value:'gpt_3.5'
+                id: 'model_id_1',
+                label: 'GPT 3.5 (turbo)',
+                value: 'gpt_3.5'
               },
-              
+
             ]}
           />
-          
-           <NumberInputComp 
-            label={'Temprature'} 
+
+          <NumberInputComp
+            label={'Temprature'}
             name={'temprature'}
-            value={nodeData.temperature} 
+            value={nodeData.temperature}
             handleChange={handleChange}
             min={0}
             max={1}
-            />
-             <NumberInputComp 
-              label={'Max Tokens'} 
-              name={'max_tokens'}
-              value={nodeData.max_tokens} 
-              handleChange={handleChange}
-              min={0}
-              max={4096}
-            />
-            <NumberInputComp 
-              label={'Top P'} 
-              name={'top_p'}
-              value={nodeData.top_p} 
-              handleChange={handleChange}
-              min={0}
-              max={1}
-            />
-            <TextAreaInputComp
-              label='Prompt'
-              value={nodeData.prompt}
-              handleChange={handleChange}
-              name={'prompt'}
-            />
-             <TextAreaInputComp
-              label='Requirements'
-              value={nodeData.requirements}
-              handleChange={handleChange}
-              name={'requirements'}
-            />
-            <TextAreaInputComp
-              label='Parameters'
-              value={nodeData.parameters}
-              handleChange={handleChange}
-              name={'parameters'}
-            />
+          />
+          <NumberInputComp
+            label={'Max Tokens'}
+            name={'max_tokens'}
+            value={nodeData.max_tokens}
+            handleChange={handleChange}
+            min={0}
+            max={4096}
+          />
+          <NumberInputComp
+            label={'Top P'}
+            name={'top_p'}
+            value={nodeData.top_p}
+            handleChange={handleChange}
+            min={0}
+            max={1}
+          />
+          <TextAreaInputComp
+            label='Instructions'
+            value={nodeData.prompt}
+            handleChange={handleChange}
+            name={'prompt'}
+          />
+          <TextAreaInputComp
+            label='Requirements'
+            value={nodeData.requirements}
+            handleChange={handleChange}
+            name={'requirements'}
+          />
+          <TextAreaInputComp
+            label='Parameters'
+            value={nodeData.parameters}
+            handleChange={handleChange}
+            name={'parameters'}
+          />
 
-          
 
-         
 
-        
-           
+
+
+
+
         </div>
       </div>
-      <EditModal 
-        open={openEditModal} 
+      <EditModal
+        open={openEditModal}
         setOpen={setOpenEditModal}
       />
     </>
