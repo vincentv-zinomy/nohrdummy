@@ -26,7 +26,7 @@ export default function AgentNode(props: any) {
   const [openEditModal, setOpenEditModal] = useState(false)
 
   // console.log(commChannel)
-  const { setNodes, getNodes, addNodes, addEdges, deleteElements, getEdge, getEdges, setEdges } = useReactFlow();
+  const { setNodes, getNodes, addNodes, addEdges, deleteElements } = useReactFlow();
 
   const [nodeData, setNodeData] = useState({
     name: "" || props.data?.values?.name,
@@ -45,11 +45,6 @@ export default function AgentNode(props: any) {
     parameters: "" || props.data?.values?.parameters
   });
 
-  useEffect(() => {
-    console.log('edges')
-    console.log(getEdges())
-
-  }, [])
 
   useEffect(() => {
     setNodes((nodes) =>
@@ -131,9 +126,9 @@ export default function AgentNode(props: any) {
         <div
           className={` node w-96 bg-slate-50 border-b p-5 rounded-t-md flex items-center gap-2`}
         >
-          <RocketLaunchIcon className="w-7 h-7" /> Agent
+          <RocketLaunchIcon className="w-7 h-7" /> Conversation Agent
         </div>
-        <div className="p-5 text-sm text-slate-400">Create Agent</div>
+        <div className="p-5 text-sm text-slate-400">Create Conversation Agent</div>
 
         <div className="space-y-1 pb-6 relative">
           <TextInputComp

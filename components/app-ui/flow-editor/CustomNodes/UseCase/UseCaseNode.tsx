@@ -56,49 +56,49 @@ const communicationchannel = [
   }
 ];
 
-const channels:any = {
-  whatsapp:{
-    id:'commwhatsapp',
-    nodename:'whatappCommNode',
-    source:'whatsapp-source',
-    target:'whatsapp-target'
+const channels: any = {
+  whatsapp: {
+    id: 'commwhatsapp',
+    nodename: 'whatappCommNode',
+    source: 'whatsapp-source',
+    target: 'whatsapp-target'
   },
-  email:{
-    id:'commemail',
-    nodename:'emailCommNode',
-    source:'email-source',
-    target:'email-target'
+  email: {
+    id: 'commemail',
+    nodename: 'emailCommNode',
+    source: 'email-source',
+    target: 'email-target'
   },
-  sms:{
-    id:'commsms',
-    nodename:'smsCommNode',
-    source:'sms-source',
-    target:'sms-target'
+  sms: {
+    id: 'commsms',
+    nodename: 'smsCommNode',
+    source: 'sms-source',
+    target: 'sms-target'
   },
-  facebook:{
-    id:'commfacebook',
-    nodename:'facebookCommNode',
-    source:'facebook-source',
-    target:'facebook-target'
+  facebook: {
+    id: 'commfacebook',
+    nodename: 'facebookCommNode',
+    source: 'facebook-source',
+    target: 'facebook-target'
   },
-  voice:{
-    id:'commvoice',
-    nodename:'voiceCommNode',
-    source:'voice-source',
-    target:'voice-target'
+  voice: {
+    id: 'commvoice',
+    nodename: 'voiceCommNode',
+    source: 'voice-source',
+    target: 'voice-target'
   },
-  instagram:{
-    id:'comminstagram',
-    nodename:'instagramCommNode',
-    source:'instagram-source',
-    target:'instagram-target'
+  instagram: {
+    id: 'comminstagram',
+    nodename: 'instagramCommNode',
+    source: 'instagram-source',
+    target: 'instagram-target'
   }
 }
 
 
 
 export default function UseCaseNode(props: any) {
-  const [ openEditModal, setOpenEditModal ] = useState(false);
+  const [openEditModal, setOpenEditModal] = useState(false);
   const [commChannel, setCommChannel] = useState(communicationchannel);
   const [openQualificationCheck, setOpenQualificationCheck] = useState(false)
 
@@ -133,61 +133,58 @@ export default function UseCaseNode(props: any) {
 
   useEffect(() => {
 
-    
 
-    const addNewNode = (type:string) => {
-      const id = `${Math.random()*10**6}`;
+
+    const addNewNode = (type: string) => {
+      const id = `${Math.random() * 10 ** 6}`;
       const newNode = {
-        id:type,
+        id: type,
         position: {
           x: props.xPos - 500,
-          y: props.yPos + Math.floor(Math.random()*1000),
+          y: props.yPos + Math.floor(Math.random() * 1000),
         },
         data: {
           label: `Node ${id}`,
         },
-        type:type,
-        deletable:false
+        type: type,
+        deletable: false
       };
       addNodes(newNode)
 
     }
 
-    console.log(getEdge('commwhatsapp'), 'getEdge')
-    commChannel.forEach((x)=>{
+    commChannel.forEach((x) => {
 
-      if(x.show){
+      if (x.show) {
         addNewNode(channels[x.key].nodename)
 
-        if(!getEdge(channels[x.key].id)){
-          setEdges((eds)=>eds.concat({
+        if (!getEdge(channels[x.key].id)) {
+          setEdges((eds) => eds.concat({
             id: `${channels[x.key].id}`,
-            source:channels[x.key].nodename,
-            target:props.id,
-            sourceHandle:channels[x.key].source,
-            targetHandle:channels[x.key].target,
-            deletable:false
-          } ))
+            source: channels[x.key].nodename,
+            target: props.id,
+            sourceHandle: channels[x.key].source,
+            targetHandle: channels[x.key].target,
+            deletable: false
+          }))
         }
-       
-      }else{
-        
-        if(getNode(channels[x.key].nodename)){
-          setNodes((nodes)=>nodes.filter((node)=>node.id !== channels[x.key].nodename))
+
+      } else {
+
+        if (getNode(channels[x.key].nodename)) {
+          setNodes((nodes) => nodes.filter((node) => node.id !== channels[x.key].nodename))
           deleteElements({
             // nodes:[{id:channels[x.key].nodename}],
-             
-            edges:[{id: `${channels[x.key].id}`}] 
+
+            edges: [{ id: `${channels[x.key].id}` }]
           })
         }
       }
     })
-    
-     
+
+
     // addNodes
   }, [commChannel]);
-
-  console.log(getEdges(), 'edges')
 
   const handleChange = (e: any) => {
     setNodeData({ ...nodeData, [e.target.name]: e.target.value });
@@ -221,13 +218,12 @@ export default function UseCaseNode(props: any) {
         type="source"
         position={Position.Right}
         className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
-        id="a"
+        id="use_case_main_pointer"
         style={handleStyle}
       />
       <div
-        className={` border ${
-          props.selected && "border-slate-500"
-        }    rounded-md bg-white`}
+        className={` border ${props.selected && "border-slate-500"
+          }    rounded-md bg-white`}
         ref={divRef}
       >
         <div
@@ -247,7 +243,7 @@ export default function UseCaseNode(props: any) {
 
           <CustomSelelct
             state={nodeData}
-            setState={setNodeData} 
+            setState={setNodeData}
             name="organization"
             label="Organization"
             list={[
@@ -264,27 +260,27 @@ export default function UseCaseNode(props: any) {
             ]}
           />
           {
-            openQualificationCheck ? 
-            <div className="relative h-fit">
-              <button className="absolute top-2 right-2 z-10 cursor-pointer bg-slate-400 " onClick={()=>setOpenQualificationCheck(!openQualificationCheck)}><XMarkIcon className="w-6 h-6 text-black "/></button>
+            openQualificationCheck ?
+              <div className="relative h-fit">
+                <button className="absolute top-2 right-2 z-10 cursor-pointer bg-slate-400 " onClick={() => setOpenQualificationCheck(!openQualificationCheck)}><XMarkIcon className="w-6 h-6 text-black " /></button>
 
-              <TextAreaInputComp
-              label="Qualification Requirement Check"
-              value={nodeData.qualification_requirement_check}
-              handleChange={handleChange}
-              name={"qualification_requirement_check"}
-            />
-            </div> 
-            : 
-            <>
-              <div className="bg-slate-50 py-2 px-6 gap-2 relative flex items-center justify-between">
-                <p>
-                  Qualification Requirement Check
-                </p>
-                <button className="hover:bg-slate-100 p-1 bg-white rounded" onClick={()=>setOpenQualificationCheck(!openQualificationCheck)}><PlusIcon className="w-6 h-6"/></button>
+                <TextAreaInputComp
+                  label="Qualification Requirement Check"
+                  value={nodeData.qualification_requirement_check}
+                  handleChange={handleChange}
+                  name={"qualification_requirement_check"}
+                />
               </div>
-            </>
-            
+              :
+              <>
+                <div className="bg-slate-50 py-2 px-6 gap-2 relative flex items-center justify-between">
+                  <p>
+                    Qualification Requirement Check
+                  </p>
+                  <button className="hover:bg-slate-100 p-1 bg-white rounded" onClick={() => setOpenQualificationCheck(!openQualificationCheck)}><PlusIcon className="w-6 h-6" /></button>
+                </div>
+              </>
+
           }
           <TextAreaInputComp
             label="Default Followup Message"
@@ -355,8 +351,8 @@ export default function UseCaseNode(props: any) {
                         <div className="w-5 h-5">
                           <comm.logo className="w-full h-full" />
                         </div>
-                        <p onClick={()=>{
-                          
+                        <p onClick={() => {
+
                           console.log('clicked')
                         }}>{comm.name}</p>
                       </div>
@@ -368,7 +364,7 @@ export default function UseCaseNode(props: any) {
           </div>
         </div>
       </div>
-      <EditModal open={openEditModal} setOpen={setOpenEditModal}/>
+      <EditModal open={openEditModal} setOpen={setOpenEditModal} />
 
     </>
   );

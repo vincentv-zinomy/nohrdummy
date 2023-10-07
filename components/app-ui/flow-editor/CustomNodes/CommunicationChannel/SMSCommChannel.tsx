@@ -26,7 +26,7 @@ export default function SMSCommNode(props: any) {
     phone_number: null || Number(props.data?.values?.phone_number),
   });
 
-  useEffect(() => {}, []);
+  useEffect(() => { }, []);
 
   const handleChange = (e: any) => {
     setNodeData({ ...nodeData, [e.target.name]: e.target.value });
@@ -80,9 +80,8 @@ export default function SMSCommNode(props: any) {
       />
 
       <div
-        className={` border ${
-          props.selected && "border-slate-500"
-        }    rounded-md bg-white`}
+        className={` border ${props.selected && "border-slate-500"
+          }    rounded-md bg-white`}
         ref={divRef}
       >
         <div
@@ -108,7 +107,7 @@ export default function SMSCommNode(props: any) {
               {
                 id: 2,
                 value: "function",
-                label: "900000000",
+                label: "Mamabe.fit (+91 76191 01017)",
               },
             ]}
           />

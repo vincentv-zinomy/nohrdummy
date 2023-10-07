@@ -14,8 +14,9 @@ import EditModal from "../../EditModal";
 import AddContactModal from "../../AddContactModal";
 import ButtonComp from "../../InputComponents/ButtonComp";
 import CustomSelelct from "../../CustomSelelct";
+import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 
-const modalStateData:modalStateDataI[] = [
+const modalStateData: modalStateDataI[] = [
   { id: 1, name: 'waba_id', type: 'text', label: 'Weba Id' },
   { id: 2, name: 'waba_number_id', type: 'text', label: 'Weba Number Id' },
   { id: 3, name: 'waba_display_number', type: 'number', label: 'Weba Display Number' },
@@ -98,21 +99,23 @@ export default function WhatappCommNode(props: any) {
       />
 
       <div
-        className={` border ${
-          props.selected && "border-slate-500"
-        }    rounded-md bg-white`}
+        className={` border ${props.selected && "border-slate-500"
+          }    rounded-md bg-white`}
         ref={divRef}
       >
         <div
           className={` node w-96 bg-slate-50 border-b p-5 rounded-t-md flex items-center gap-2`}
         >
-          <PhoneIcon className="w-7 h-7" /> Whatsapp Channel
+          <div className="w-7 h-7">
+            <BsWhatsapp className="w-full h-full" />
+          </div>
+          Whatsapp Channel
         </div>
         <div className="p-5 text-sm text-slate-400">
           Connect Communication Channel
         </div>
         <div className="space-y-1 pb-6 relative">
-        <CustomSelelct
+          <CustomSelelct
             state={nodeData}
             setState={setNodeData}
             name="select_number"
@@ -121,27 +124,27 @@ export default function WhatappCommNode(props: any) {
               {
                 id: 1,
                 value: "0",
-                label: "Select Number",
+                label: "Select Whatsapp Number",
               },
               {
                 id: 2,
                 value: "function",
-                label: "900000000",
+                label: "Mamabe.fit (+91 76191 01017)",
               },
             ]}
           />
-        <ButtonComp handleClick={handleClick}>Add Number</ButtonComp>
+          <ButtonComp handleClick={handleClick}>Add Number</ButtonComp>
 
         </div>
       </div>
       {/* Modals */}
       <EditModal open={openEditModal} setOpen={setOpenEditModal} />
 
-   
-      <AddContactModal 
-        open={openAddModal} 
+
+      <AddContactModal
+        open={openAddModal}
         setOpen={setOpenAddmodal}
-        data={modalStateData} 
+        data={modalStateData}
         label='Add Whatsapp Number'
       />
     </>

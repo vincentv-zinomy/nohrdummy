@@ -38,7 +38,10 @@ export default function App({ Component, pageProps }: AppProps) {
   ) {
     return (
       <ToastProvider>
-        <AllScripts />
+        {
+          process.env.NEXT_PUBLIC_APP_ENV === "production" &&
+          <AllScripts />
+        }
         <Component {...pageProps} />
         <ToastContainer />
       </ToastProvider>
@@ -47,7 +50,10 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <AuthProvider>
-      <AllScripts />
+      {
+        process.env.NEXT_PUBLIC_APP_ENV === "production" &&
+        <AllScripts />
+      }
       <ToastProvider>
         <DashboardLayout>
           <Component {...pageProps} />

@@ -3,6 +3,7 @@ import {
   ArrowTopRightOnSquareIcon,
   DocumentDuplicateIcon,
   DocumentMagnifyingGlassIcon,
+  EnvelopeIcon,
   PhoneIcon,
   RocketLaunchIcon,
   TrashIcon,
@@ -19,7 +20,7 @@ import AddContactModal from "../../AddContactModal";
 
 
 
-const modalStateData:modalStateDataI[] = [
+const modalStateData: modalStateDataI[] = [
   { id: 1, name: 'user', label: 'User', type: 'text' },
   { id: 2, name: 'password', label: 'Password', type: 'password' },
   { id: 3, name: 'imap_host', label: 'Imap host', type: 'text' },
@@ -29,7 +30,7 @@ const modalStateData:modalStateDataI[] = [
   { id: 7, name: 'tls', label: 'Tls', type: 'text' }
 ]
 
- 
+
 
 export default function EmailCommNode(props: any) {
   const [openEditModal, setOpenEditModal] = useState(false);
@@ -40,7 +41,7 @@ export default function EmailCommNode(props: any) {
   const [nodeData, setNodeData] = useState({
     select_contact: "" || props.data?.values?.select_contact,
   });
- 
+
 
   const deleteNodes = () => {
     const nodesleft = getNodes().filter((x) => x.id !== props.id);
@@ -72,7 +73,7 @@ export default function EmailCommNode(props: any) {
     setOpenAddmodal(!openAddModal)
   };
 
- 
+
 
   return (
     <>
@@ -106,15 +107,17 @@ export default function EmailCommNode(props: any) {
       />
 
       <div
-        className={` border ${
-          props.selected && "border-slate-500"
-        }    rounded-md bg-white`}
+        className={` border ${props.selected && "border-slate-500"
+          }    rounded-md bg-white`}
         ref={divRef}
       >
         <div
           className={` node w-96 bg-slate-50 border-b p-5 rounded-t-md flex items-center gap-2`}
         >
-          <PhoneIcon className="w-7 h-7" /> Email Channel
+          <div className="w-7 h-7">
+            <EnvelopeIcon className="w-full h-full" />
+          </div>
+          Email Channel
         </div>
         <div className="p-5 text-sm text-slate-400">
           Connect Communication Channel
@@ -134,20 +137,20 @@ export default function EmailCommNode(props: any) {
               {
                 id: 2,
                 value: "function",
-                label: "example@gmail.com",
+                label: "admin@mambefit.com",
               },
             ]}
           />
           <ButtonComp handleClick={handleClick}>Add Email</ButtonComp>
-        
+
         </div>
       </div>
       {/* Modals */}
       <EditModal open={openEditModal} setOpen={setOpenEditModal} />
-      <AddContactModal 
-        open={openAddModal} 
+      <AddContactModal
+        open={openAddModal}
         setOpen={setOpenAddmodal}
-        data={modalStateData} 
+        data={modalStateData}
         label='Add Email'
       />
     </>
