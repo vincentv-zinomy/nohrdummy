@@ -1,34 +1,31 @@
+import Dagre from "@dagrejs/dagre";
 import {
   BoltIcon,
-  ChatBubbleLeftRightIcon, 
+  ChatBubbleLeftRightIcon,
 } from "@heroicons/react/24/outline";
-import Dagre from "@dagrejs/dagre";
 
-import  {
-  useState,
-  useRef,
+import {
   useCallback,
   useMemo,
+  useRef,
+  useState,
 } from "react";
 import ReactFlow, {
-  addEdge,
-  useNodesState,
-  useEdgesState,
-  Controls,
   Background,
   BackgroundVariant,
+  Controls,
   Panel,
-  useReactFlow,
-  NodeProps,
+  addEdge,
+  useEdgesState,
+  useNodesState,
+  useReactFlow
 } from "reactflow";
 import "reactflow/dist/style.css";
 import ConnectionLine from "./ConnectionLine";
-import UseCaseNode from "./CustomNodes/UseCase/UseCaseNode";
-import AgentNode from "./CustomNodes/Agents/AgentNode";
-import {   defineNodesTypes } from "./NodeTypes";
-import CommChannelNode from "./CustomNodes/CommunicationChannel/CommChannelNode";
+import { defineNodesTypes } from "./NodeTypes";
+import { v4 as uuidv4 } from 'uuid'
 
- 
+
 
 const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
@@ -50,16 +47,11 @@ const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
   };
 };
 
-const initialNodes:any[] = [
-  
+const initialNodes: any[] = [
+
 ];
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
- 
 
- 
- 
 
 
 
@@ -103,14 +95,32 @@ const MainFLow = () => {
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
         });
+        const temp_id = `${uuidv4()}-${type}`;
         const newNode = {
-          id: getId(),
+          id: type === 'usecase' ? `use_case_0` : temp_id,
           type,
           position,
           data: { label: `${type} node` },
         };
 
+        console.log("node added")
+        console.log(newNode)
+
         setNodes((nds) => nds.concat(newNode));
+        console.log(edges)
+        console.log(type);
+        console.log(nodes);
+
+        if (type !== 'usecase') {
+          setEdges((eds) => eds.concat({
+            id: `${uuidv4()}-edge__`,
+            source: `use_case_0`,
+            target: newNode.id,
+            targetHandle: 'a',
+            sourceHandle: 'use_case_main_pointer'
+
+          }));
+        }
       }
     },
     [reactFlowInstance]
@@ -145,7 +155,7 @@ const MainFLow = () => {
           fitView
           connectionLineComponent={ConnectionLine}
           deleteKeyCode={"Delete"}
-          proOptions={{hideAttribution:true}}
+          proOptions={{ hideAttribution: true }}
           minZoom={0.001}
         >
           <Background color="gray" variant={BackgroundVariant.Dots} />
@@ -166,10 +176,10 @@ const MainFLow = () => {
           </Panel>
           <Panel position="bottom-right" className="space-y-2 flex flex-col">
 
-              <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
-                {" "}
-                <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
-              </button>
+            <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
+              {" "}
+              <BoltIcon className="h-8 w-8 text-orange-400 fill-orange-400" />
+            </button>
 
             <button className="drop-shadow-md hover:drop-shadow-lg bg-white border p-2.5 rounded-full hover:bg-slate-100   ">
               {" "}
