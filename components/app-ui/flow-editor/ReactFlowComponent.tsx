@@ -1,11 +1,3 @@
-import {
-  CircleStackIcon, 
-  LinkIcon, 
-  PhoneIcon,
-  RocketLaunchIcon,
-  TrashIcon,
-} from "@heroicons/react/24/outline";
-
 import React, { useState, createContext } from "react";
 import { ReactFlowProvider } from "reactflow";
 import "reactflow/dist/style.css";

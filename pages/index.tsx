@@ -5,11 +5,8 @@ import TestimonialSection from '@/components/landing-page/Home/TestimonialSectio
 import WhySection from '@/components/landing-page/Home/WhySection'
 import Solution from '@/components/landing-page/Home/Solution'
 import PricingSection from '@/components/landing-page/Home/PricingSection'
-import Navbar from '@/components/landing-page/Navbar'
-import Footer from '@/components/landing-page/Footer'
 import { useRouter } from 'next/router' 
 import LandingPageLayout from '@/components/Layout/LandingPageLayout'
-import ChatBot from '@/components/Chatbot'
 
 declare global {
   interface Window {

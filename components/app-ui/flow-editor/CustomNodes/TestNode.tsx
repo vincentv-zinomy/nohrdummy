@@ -8,13 +8,24 @@ import {
   TrashIcon,
 } from "@heroicons/react/24/outline";
 import { useRef, useContext, useEffect, useState } from "react";
-import { Handle, NodeToolbar, Position, useReactFlow } from "reactflow";
+import { Handle, NodeProps, NodeToolbar, Position, useReactFlow, applyNodeChanges, NodeResizeControl, NodeResizer    } from "reactflow";
 import { handleStyle } from "../NodeTypes";
+import { v4 as uuidv4 } from 'uuid'
 
-export default function TestNode(props: any) {
+ 
+
+export default function TestNode(props: NodeProps) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [openAddModal, setOpenAddmodal] = useState(false);
-  const { setNodes, getNodes, addNodes, deleteElements } = useReactFlow();
+  const { setNodes, getNodes, addNodes, deleteElements, getEdges} = useReactFlow();
+  const nodes = getNodes() 
+
+  const [nodeSize, setNodeSize] = useState({
+    width:1200,
+    height:1200
+  })
+
+ 
 
   const [nodeData, setNodeData] = useState({
     select_contact: "" || props.data?.values?.select_contact,
@@ -28,12 +39,6 @@ export default function TestNode(props: any) {
       deleteElements({nodes:[{id:props.id}]})
      }
   };
-
-  // console.log(props, 'props')
-
-  useEffect(()=>{
-    AddSubNode()
-  },[])
 
   const addNodesHandler = () => {
     const nodes = getNodes().map((x: any) => {
@@ -52,6 +57,13 @@ export default function TestNode(props: any) {
     ]);
   };
 
+ 
+ 
+
+
+
+ 
+
   const handleChange = (e: any) => {
     setNodeData({ ...nodeData, [e.target.name]: e.target.value });
   };
@@ -61,13 +73,13 @@ export default function TestNode(props: any) {
   };
 
   const AddSubNode = () => {
-    const id = String(Math.floor(Math.random()*100**2))
+    const id = uuidv4()
      
     addNodes(
 
       {
         id,
-        data: { label: 'Node B.1' },
+        data: { label: 'Parent Node', level:1 },
         position: { x: 15, y: 65 },
         parentNode: props.id,
         extent: 'parent',
@@ -79,37 +91,48 @@ export default function TestNode(props: any) {
   }
 
   return (
-    <div className="border w-[600px] h-[600px] bg-white" >
-      <NodeToolbar
-        isVisible={props.data.toolbarVisible}
-        position={props.data.toolbarPosition}
-        className="border bg-white divide-x text-gray-800  rounded-md flex items-center   justify-center drop-shadow-sm  "
-      >
-        <button
-          onClick={() => deleteNodes()}
-          className="p-1.5 flex items-center justify-center"
+    // <Node
+    <>
+      
+      <div className="border w-[1200px] h-[1200px] bg-white" 
+          style={
+            {
+              width:`${nodeSize.width}px`,
+              height:`${nodeSize.height}px`
+            }
+          }
         >
-          <TrashIcon className="w-5 h-5  " />
-        </button>
-        <button onClick={() => addNodesHandler()} className="p-1.5">
-          <DocumentDuplicateIcon className="h-5 w-5 " />
-        </button>
-        <button
-          className="p-1.5"
-          onClick={() => setOpenEditModal(!openEditModal)}
+        <NodeToolbar
+          isVisible={props.data.toolbarVisible}
+          position={props.data.toolbarPosition}
+          className="border bg-white divide-x text-gray-800  rounded-md flex items-center   justify-center drop-shadow-sm  "
         >
-          <AdjustmentsHorizontalIcon className="h-5 w-5  " />
-        </button>
-      </NodeToolbar>
-      <Handle
-        type="source"
-        position={Position.Right}
-        className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
-        id="email-source"
-        style={handleStyle}
-      />
+          <button
+            onClick={() => deleteNodes()}
+            className="p-1.5 flex items-center justify-center"
+          >
+            <TrashIcon className="w-5 h-5  " />
+          </button>
+          <button onClick={() => addNodesHandler()} className="p-1.5">
+            <DocumentDuplicateIcon className="h-5 w-5 " />
+          </button>
+          <button
+            className="p-1.5"
+            onClick={() => setOpenEditModal(!openEditModal)}
+          >
+            <AdjustmentsHorizontalIcon className="h-5 w-5  " />
+          </button>
+        </NodeToolbar>
+        <Handle
+          type="source"
+          position={Position.Right}
+          className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
+          id="email-source"
+          style={handleStyle}
+        />
 
-        <button onClick={()=>AddSubNode()}>Add Node</button>
-    </div>
+          <button onClick={()=>AddSubNode()}>Add Node</button>
+      </div>
+    </>
   );
 }

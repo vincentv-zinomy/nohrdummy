@@ -24,6 +24,7 @@ import "reactflow/dist/style.css";
 import ConnectionLine from "./ConnectionLine";
 import { defineNodesTypes } from "./NodeTypes";
 import { v4 as uuidv4 } from 'uuid'
+import ButtonEdge from "./CustomEdges/ButtonEdge";
 
 
 
@@ -50,6 +51,10 @@ const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
 const initialNodes: any[] = [
 
 ];
+
+const edgeType = {
+  buttonedge:ButtonEdge
+}
 
 
 
@@ -95,6 +100,13 @@ const MainFLow = () => {
           x: event.clientX - reactFlowBounds.left,
           y: event.clientY - reactFlowBounds.top,
         });
+
+        console.log(type, 'type')
+
+        if(type==='subNode'){
+          
+        }
+
         const temp_id = `${uuidv4()}-${type}`;
         const newNode = {
           id: type === 'usecase' ? `use_case_0` : temp_id,
@@ -103,13 +115,13 @@ const MainFLow = () => {
           data: { label: `${type} node` },
         };
 
-        console.log("node added")
-        console.log(newNode)
+        // console.log("node added")
+        // console.log(newNode)
 
         setNodes((nds) => nds.concat(newNode));
-        console.log(edges)
-        console.log(type);
-        console.log(nodes);
+        // console.log(edges)
+        // console.log(type);
+        // console.log(nodes);
 
         if (type !== 'usecase') {
           setEdges((eds) => eds.concat({
@@ -152,8 +164,9 @@ const MainFLow = () => {
           onDrop={onDrop}
           onDragOver={onDragOver}
           nodeTypes={nodeTypes}
+          edgeTypes={edgeType}
           fitView
-          connectionLineComponent={ConnectionLine}
+          // connectionLineComponent={ConnectionLine}
           deleteKeyCode={"Delete"}
           proOptions={{ hideAttribution: true }}
           minZoom={0.001}

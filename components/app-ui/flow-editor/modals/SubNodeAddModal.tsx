@@ -4,18 +4,13 @@ import { Dialog, Transition } from '@headlessui/react'
 
 type Props = {
   open:boolean,
-  setOpen:(value:boolean)=>void,
-  name:string, 
-  value:any,
-  handleChange:any
+  setOpen:(value:boolean)=>void 
 }
 
-export default function EditTextModal({
+export default function SubNodeAddModal({
   open,
   setOpen,
-  name,  
-  value,
-  handleChange
+  
 }:Props) {
    
  
@@ -63,12 +58,7 @@ export default function EditTextModal({
                   </div>
                 </div>
                 <div className="mt-5 sm:mt-6 flex flex-col relative     h-full">
-                  <textarea  id="" className='inline-flex h-full shrink  w-full justify-center rounded-md border  px-4 py-3  text-base   shadow-sm hover:border-indigo-700 focus:outline-none   sm:text-sm ' 
-                    name={name}
-                    style={{height:'100%'}}
-                    value={value}
-                    onChange={handleChange}
-                  ></textarea>
+
                   <button
                     type="button"
                     className="inline-flex mt-2 w-fit justify-center rounded-md border border-transparent bg-indigo-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:text-sm"
