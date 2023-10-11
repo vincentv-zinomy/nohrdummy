@@ -29,7 +29,7 @@ export default function ButtonEdge({
   });
 
   const [isSplitButtonVisible, setIsSplitButtonVisible] = useState<boolean>(false);
-  const {getEdges, getEdge, getNode, addEdges, addNodes, setNodes} = useReactFlow()
+  const {getEdges, getEdge, getNodes, getNode, addEdges, addNodes, setNodes} = useReactFlow()
 
   const handleClick = useCallback( (evt:MouseEvent, id:string) => {
     const {source, target}:Edge | any = getEdge(id)
@@ -38,13 +38,14 @@ export default function ButtonEdge({
     if(getNode(source) && getNode(target)){
       // console.log(source, 'source')
       const sourceNode = getNode(source)
-      const node:any = getNode(target)
-      const parentNode:any = getNode(node.parentNode)
+      const targetNode:any = getNode(target)
+      const parentNode:any = getNode(targetNode.parentNode)
       // console.log(props.xPos - (parentNode?.position.x as number) , 'parent_node')
 
-      const xPos = node.position.x + 400
-      const yPos = node.position.y 
+      const xPos = targetNode.position.x + 400
+      const yPos = targetNode.position.y 
       
+      console.log(getNodes().map((node)=>node.data.level===targetNode.data.level).length)
       
 
       addEdges(
@@ -63,7 +64,12 @@ export default function ButtonEdge({
       addNodes(
           {
             id:newId,
-            data: { label: 'Node B.1',level:node?.data.level , parentNode:sourceNode?.id },
+            data: { 
+              label: 'Node B.1',
+              level:targetNode?.data.level , 
+              parentNode:sourceNode?.id, 
+              column:targetNode?.data.column + 1 
+            },
             position: { x: xPos   , y: yPos     },
             parentNode: parentNode.id ,
             extent: 'parent',

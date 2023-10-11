@@ -241,7 +241,7 @@ export default function UseCaseNode(props: any) {
             handleChange={handleChange}
           />
 
-          <CustomSelelct
+          {/* <CustomSelelct
             state={nodeData}
             setState={setNodeData}
             name="organization"
@@ -258,7 +258,7 @@ export default function UseCaseNode(props: any) {
                 label: "Lazy Aardvark Organization",
               },
             ]}
-          />
+          /> */}
           {
             openQualificationCheck ?
               <div className="relative h-fit">

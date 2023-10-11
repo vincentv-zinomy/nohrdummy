@@ -10,33 +10,80 @@ import {
   useReactFlow,
 } from "reactflow";
 import { handleStyle } from "../NodeTypes";
-
-type Props = {};
 import { v4 as uuidv4 } from 'uuid'
 import SubNodeAddModal from "../modals/SubNodeAddModal";
 import CustomSelelct from "../CustomSelelct";
+import AppSelect from "./SubFlow/components/AppSelect";
+import TextInputComp from "../InputComponents/TextInputComp";
+import NumberInputComp from "../InputComponents/NumberInputCompt";
+
+ 
+  const inputs = [
+      {
+          "type": "array",
+          "exampleValue": [],
+          "label": "calendar_events",
+          "input_type": "DATA_DISPLAY"
+      },
+      {
+          "type": "string",
+          "exampleValue": "Asia/Kolkata",
+          "label": "time_zone",
+          "input_type": "DROPDOWN",
+          "choices": ["Asia/Kolkata", "Asia/Singapore", "Europe/London", "America/New_York"]
+      },
+      {
+          "type": "number",
+          "exampleValue": 9,
+          "label": "schedule_from_time",
+          "input_type": "NUMBER_INPUT"
+      },
+      {
+          "type": "number",
+          "exampleValue": 17,
+          "label": "schedule_to_time",
+          "input_type": "NUMBER_INPUT"
+      },
+      {
+          "type": "array",
+          "exampleValue": ["Monday", "Tuesday"],
+          "label": "schedule_days",
+          "input_type": "MULTI_SELECT_DROPDOWN",
+          "choices": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"]
+      },
+      {
+          "type": "number",
+          "exampleValue": 7,
+          "label": "schedule_interval",
+          "input_type": "NUMBER_INPUT"
+      },
+      {
+          "type": "number",
+          "exampleValue": 30,
+          "label": "interview_timeslot_minutes",
+          "input_type": "NUMBER_INPUT"
+      }
+  ]
+ 
+ 
 
 
 const ChildNode = (props: NodeProps) => {
   const [show, setShow] = useState(true);
   const { getNode, getNodes, deleteElements, addNodes, addEdges, getEdges, setNodes } = useReactFlow();
   const [openModal, setOpenModal] = useState(false)
+  
+
   const [nodeData, setNodeData] = useState({
-    name: "" || props.data?.values?.name,
     agent_type: "" || props.data?.values?.agent_type,
-    description:
-      "" || props.data?.values?.description,
-    provider:
-      "" || props.data?.values?.provider,
-    model:
-      "" || props.data?.values?.model,
-    temperature: "" || props.data?.values?.model,
-    max_tokens: 200 || props.data?.values?.max_tokens,
-    top_p: "" || props.data?.values?.top_p,
-    prompt: "" || props.data?.values?.prompt,
-    requirements: "" || props.data?.values?.requirements,
-    parameters: "" || props.data?.values?.parameters
+    parameters: "" || props.data?.values?.parameters,
+    app:"" || props.data.values?.app,
+    function:"" || props.data.values?.function,
+    name:"" || props.data.values?.name,
+    number:""|| props.data.values?.number
   });
+
+  console.log(nodeData.function, 'function')
   const deleteNodes = (id: string) => {
     const childNodes = getNodes().filter((x) => x.data.parentNode === id);
     if (childNodes.length > 0) {
@@ -48,7 +95,9 @@ const ChildNode = (props: NodeProps) => {
   };
   
   
-
+  const handleChange = (e: any) => {
+    setNodeData({ ...nodeData, [e.target.name]: e.target.value });
+  };
   useEffect(()=>{
 
     if(getNodes().filter((x)=>x.data.parentNode === props.id).length===0){
@@ -64,14 +113,14 @@ const ChildNode = (props: NodeProps) => {
     const parent_id = getNode(props.id)?.parentNode;
     const id = uuidv4() 
     const level = props.data.level + 1
-
+    console.log(level, 'level')
 
     if (getNode(props.id)) {
       const node: any = getNode(props.id);
       const parentNode = getNode(node.parentNode);
 
       const xPos = props.xPos - (parentNode?.position.x as number);
-      const yPos = props.yPos - (parentNode?.position.y as number) + 300;
+      const yPos = props.yPos - (parentNode?.position.y as number) + 600;
 
       addEdges({
         id: `${id}_${parent_id}`,
@@ -83,10 +132,16 @@ const ChildNode = (props: NodeProps) => {
         type: "buttonedge",
       });
 
+      setNodes((nodes)=>nodes.map((node)=>{
+        if(node.id===parent_id){
+          node.data.max_level = level
+        }
+        return node
+      }))
 
       addNodes({
         id,
-        data: { label: "Node B.1", level, parentNode:props.id  },
+        data: { label: "Node B.1", level, parentNode:props.id,column:props.data.column  },
         position: { x: xPos, y: yPos },
         parentNode: parent_id,
         extent: "parent",
@@ -94,33 +149,22 @@ const ChildNode = (props: NodeProps) => {
         draggable: true,
         zIndex: 2000,
       });
-
-   
     }
   };
 
   return (
     <>
     <div className="w-fit  flex   flex-col relative gap-1 items-center">
-      <NodeToolbar
-        isVisible={props.data.toolbarVisible}
-        position={Position.Top}
-        className="border bg-white divide-x text-gray-800  rounded-full flex items-center   justify-center drop-shadow-sm "
-      >
-        <button
-          onClick={() => deleteNodes(props.id)}
-          className="p-0.5 flex items-center bg-red-500 rounded-full text-white font-bold justify-center"
-        >
-          <XMarkIcon className="w-4 h-4  " />
-        </button>
-      </NodeToolbar>
-      <Handle
-        type="target"
-        position={Position.Top}
-        className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
-        id="b"
-        style={handleStyle}
-      />
+ 
+      {props.data.level !== 1 &&
+        <Handle
+          type="target"
+          position={Position.Top}
+          className="w-2.5 h-2.5     border-2 z-10 bg-white border-red-500"
+          id="b"
+          style={handleStyle}
+        />
+      }
 
     
       <div
@@ -128,16 +172,14 @@ const ChildNode = (props: NodeProps) => {
           }    rounded-md bg-white`}
       >
         <div
-          className={` node w-72 bg-slate-50 border-b p-5 rounded-t-md flex items-center gap-2`}
+          className={` node w-[300px] bg-slate-50 border-b p-4 rounded-t-md flex items-center gap-2`}
         >
-          <RocketLaunchIcon className="w-7 h-7" /> Conversation Agent
+           
         </div>
 
         <div className="space-y-1 pb-6 relative z-[2000]">
       
-
-          
-          <CustomSelelct
+        <CustomSelelct
             state={nodeData}
             setState={setNodeData}
             name="agent_type"
@@ -145,8 +187,39 @@ const ChildNode = (props: NodeProps) => {
             list={[
               {
                 id: 1,
-                value: "llm",
+                value: "APP/Integration",
+                label: "APP/Integration",
+              },
+              {
+                id: 2,
+                value: "Custom Function",
+                label: "Custom Function",
+              },
+              {
+                id: 3,
+                value: "LLM",
                 label: "LLM",
+              },
+              {
+                id: 4,
+                value: "Response Channel",
+                label: "Response Channel",
+              },
+            ]}
+          />
+          <AppSelect/>
+          
+        
+          <CustomSelelct
+            state={nodeData}
+            setState={setNodeData}
+            name="function"
+            label="Action"
+            list={[
+              {
+                id: 1,
+                value: "llm",
+                label: "Create Google Calendar Event",
               },
               {
                 id: 2,
@@ -158,21 +231,57 @@ const ChildNode = (props: NodeProps) => {
           
 
            
+            {nodeData.function === 'function' && 
 
+              <>
+                {inputs.map((input:any)=>{
+                  return (
+                    <>
+                      {input.type === 'string'
+                      &&
+                        <TextInputComp
+                        name={'name'}
+                        value={nodeData.name}
+                        label={'Agent Name'}
+                        handleChange={handleChange}
+                      />
+                      }
+                       {input.type === "number" && (
+                            <NumberInputComp
+                              label={input.label}
+                              name={'number'}
+                              handleChange={handleChange}
+                              value={nodeData.number}
+                            />
+                          )}
+
+                    </>
+                  )
+                })}
+              </>
+            }
 
 
 
         </div>
       </div>
-
+      {
+        props.selected && 
+        <button
+        onClick={() => deleteNodes(props.id)}
+        className="p-0.5 flex items-center bg-slate-400 hover:bg-slate-600 rounded-full absolute text-white font-bold justify-center right-2 top-2"
+      >
+        <XMarkIcon className="w-4 h-4  " />
+      </button>
+      }
       {show ? (
         <div className={`flex flex-col ${show ? 'opacity-1' : 'opacity-0'} gap-1 items-center justify-center`}>
           <div className="w-[1px] h-6 bg-black"></div>
           <button
-            className="hover:bg-red-100 bg-red-200  h-fit flex flex-col"
+            className="hover:bg-slate-300 text-black rounded-full border border-slate-600 bg-slate-100 h-fit flex flex-col"
             onClick={handleClick}
           >
-            <PlusIcon className="w-5 h-5" />
+            <PlusIcon className="w-5 h-5 text-black" />
           </button>
         </div>
       ) : 

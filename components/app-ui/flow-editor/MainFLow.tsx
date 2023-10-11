@@ -14,8 +14,12 @@ import ReactFlow, {
   Background,
   BackgroundVariant,
   Controls,
+  Edge,
   Panel,
   addEdge,
+  getConnectedEdges,
+  getIncomers,
+  getOutgoers,
   useEdgesState,
   useNodesState,
   useReactFlow
@@ -32,6 +36,7 @@ const g = new Dagre.graphlib.Graph().setDefaultEdgeLabel(() => ({}));
 
 const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
   g.setGraph({ rankdir: options.direction });
+  
 
   edges.forEach((edge) => g.setEdge(edge.source, edge.target));
   nodes.forEach((node) => g.setNode(node.id, node));
@@ -47,6 +52,8 @@ const getLayoutedElements = (nodes: any[], edges: any[], options: any) => {
     edges,
   };
 };
+
+ 
 
 const initialNodes: any[] = [
 
@@ -81,6 +88,28 @@ const MainFLow = () => {
     event.preventDefault();
     event.dataTransfer.dropEffect = "move";
   }, []);
+
+  const onNodesDelete = useCallback(
+    (deleted:  any) => {
+      setEdges(
+        deleted.reduce((acc: any, node: any ) => {
+          const incomers = getIncomers(node, nodes, edges);
+          const outgoers = getOutgoers(node, nodes, edges);
+          const connectedEdges = getConnectedEdges([node], edges);
+  
+          const remainingEdges = acc.filter((edge:Edge) => !connectedEdges.includes(edge));
+  
+          const createdEdges = incomers.flatMap(({ id: source }) =>
+            outgoers.map(({ id: target }) => ({ id: `${source}->${target}`, source, target }))
+          );
+  
+          return [...remainingEdges, ...createdEdges];
+        }, edges)
+      );
+    },
+    [nodes, edges]
+  );
+  
 
   const onDrop = useCallback(
     (event: any) => {
@@ -159,6 +188,7 @@ const MainFLow = () => {
           edges={edges}
           onNodesChange={onNodesChange}
           onEdgesChange={onEdgesChange}
+          onNodesDelete={onNodesDelete}
           onConnect={onConnect}
           onInit={setReactFlowInstance}
           onDrop={onDrop}
