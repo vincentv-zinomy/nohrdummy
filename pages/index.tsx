@@ -7,6 +7,7 @@ import Solution from '@/components/landing-page/Home/Solution'
 import PricingSection from '@/components/landing-page/Home/PricingSection'
 import { useRouter } from 'next/router' 
 import LandingPageLayout from '@/components/Layout/LandingPageLayout'
+import CustomTextSelectInput from '@/components/app-ui/flow-editor/CustomNodes/SubFlow/components/CustomTextSelectInput'
 
 declare global {
   interface Window {
@@ -27,6 +28,7 @@ export default function Home() {
 
       <LandingPageLayout>
         <main className="relative  ">
+         
           <Hero />
           <ProblemStatement />
           <IntrodSection />

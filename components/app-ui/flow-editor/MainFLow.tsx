@@ -130,7 +130,7 @@ const MainFLow = () => {
           y: event.clientY - reactFlowBounds.top,
         });
 
-        console.log(type, 'type')
+        // console.log(type, 'type')
 
         if(type==='subNode'){
           
@@ -152,16 +152,39 @@ const MainFLow = () => {
         // console.log(type);
         // console.log(nodes);
 
-        if (type !== 'usecase') {
+        // if (type !== 'usecase') {
+        //   setEdges((eds) => eds.concat({
+        //     id: `${uuidv4()}-edge__`,
+        //     source: `use_case_0`,
+        //     target: newNode.id,
+        //     targetHandle: 'a',
+        //     sourceHandle: 'use_case_main_pointer'
+
+        //   }));
+        // }
+
+        console.log()
+
+        if (['agents','conversation_agent','payment_agent'].includes(type)){
+          
           setEdges((eds) => eds.concat({
             id: `${uuidv4()}-edge__`,
             source: `use_case_0`,
             target: newNode.id,
+            sourceHandle: 'usecase-agent',
             targetHandle: 'a',
-            sourceHandle: 'use_case_main_pointer'
-
+          }));
+        }else if (type === 'crm_node'){
+          // console.log(type, 'type')
+          setEdges((eds) => eds.concat({
+            id: `${uuidv4()}-edge__`,
+            source: `use_case_0`,
+            target: newNode.id,
+            sourceHandle: 'usecase-store',
+            targetHandle: 'a',
           }));
         }
+
       }
     },
     [reactFlowInstance]

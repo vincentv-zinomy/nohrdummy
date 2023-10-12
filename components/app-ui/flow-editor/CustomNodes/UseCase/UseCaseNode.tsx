@@ -1,6 +1,8 @@
 import {
   AdjustmentsHorizontalIcon,
+  ArrowUpIcon,
   ChatBubbleLeftIcon,
+  ChevronUpIcon,
   EnvelopeIcon,
   PhoneIcon,
   PlusCircleIcon,
@@ -100,7 +102,7 @@ const channels: any = {
 export default function UseCaseNode(props: any) {
   const [openEditModal, setOpenEditModal] = useState(false);
   const [commChannel, setCommChannel] = useState(communicationchannel);
-  const [openQualificationCheck, setOpenQualificationCheck] = useState(false)
+  const [openQualRequirements, setOpenQualRequirements] = useState(true)
 
   // console.log(commChannel, "commchannel");
   const { setNodes, getNodes, addNodes, addEdges, deleteElements, getNode, getEdges, setEdges, getEdge } = useReactFlow();
@@ -234,13 +236,40 @@ export default function UseCaseNode(props: any) {
         <div className="p-5 text-sm text-slate-400">Create Use Case</div>
 
         <div className="space-y-1 pb-6 relative">
-          <TextInputComp
+          
+          <div className=" bg-slate-50 py-2 px-6 flex items-center gap-2 relative">
+              <Handle
+                type="source"
+                position={Position.Right}
+                className="w-2.5 h-2.5  absolute -right-[10px] border-2 bg-white border-red-500"
+                id="usecase-agent"
+                style={handleStyle}
+              />
+              <p>
+                Agent <span className="text-red-500 ">*</span>
+              </p>
+            </div>
+
+          
+
+            <div className=" bg-slate-50 py-2 px-6 flex items-center gap-2 relative">
+              <Handle
+                type="source"
+                position={Position.Right}
+                className="w-2.5 h-2.5  absolute -right-[10px] border-2 bg-white border-red-500"
+                id="usecase-store"
+                style={handleStyle}
+              />
+              <p>
+                Data Store <span className="text-red-500 ">*</span>
+              </p>
+            </div>
+            <TextInputComp
             name={"name"}
             value={nodeData.name}
             label={"Use Case Name"}
             handleChange={handleChange}
           />
-
           {/* <CustomSelelct
             state={nodeData}
             setState={setNodeData}
@@ -259,48 +288,44 @@ export default function UseCaseNode(props: any) {
               },
             ]}
           /> */}
-          {
-            openQualificationCheck ?
-              <div className="relative h-fit">
-                <button className="absolute top-2 right-2 z-10 cursor-pointer bg-slate-400 " onClick={() => setOpenQualificationCheck(!openQualificationCheck)}><XMarkIcon className="w-6 h-6 text-black " /></button>
+          <div className="  my-1">
+            <div className="px-6   font-semibold py-2 bg-slate-100 flex items-center justify-between" onClick={()=>setOpenQualRequirements(!openQualRequirements)}>
+              <span>Qualifications/Messages</span> 
+              <button className="p-1 shrink-0  ">
+                 <ChevronUpIcon className={`text-slate-900 w-5 h-5 stroke-2 shrink-0 ${!openQualRequirements && 'rotate-180'}`}/> 
+              </button>
+            </div>
+            {openQualRequirements &&
+              <div className="space-y-1">
+
+                  <TextAreaInputComp
+                    label="Qualification Requirement Check"
+                    value={nodeData.qualification_requirement_check}
+                    handleChange={handleChange}
+                    name={"qualification_requirement_check"}
+                  />
+                <TextAreaInputComp
+                  label="Default Followup Message"
+                  value={nodeData.default_followup_message}
+                  handleChange={handleChange}
+                  name={"default_followup_message"}
+                />
+                <TextAreaInputComp
+                  label="Default Not Interested Message"
+                  value={nodeData.default_not_interested_message}
+                  handleChange={handleChange}
+                  name={"default_not_interested_message"}
+                />
 
                 <TextAreaInputComp
-                  label="Qualification Requirement Check"
-                  value={nodeData.qualification_requirement_check}
+                  label="Default Not Qualified Message"
+                  value={nodeData.default_not_qualified_message}
                   handleChange={handleChange}
-                  name={"qualification_requirement_check"}
+                  name={"default_not_qualified_message"}
                 />
               </div>
-              :
-              <>
-                <div className="bg-slate-50 py-2 px-6 gap-2 relative flex items-center justify-between">
-                  <p>
-                    Qualification Requirement Check
-                  </p>
-                  <button className="hover:bg-slate-100 p-1 bg-white rounded" onClick={() => setOpenQualificationCheck(!openQualificationCheck)}><PlusIcon className="w-6 h-6" /></button>
-                </div>
-              </>
-
-          }
-          <TextAreaInputComp
-            label="Default Followup Message"
-            value={nodeData.default_followup_message}
-            handleChange={handleChange}
-            name={"default_followup_message"}
-          />
-          <TextAreaInputComp
-            label="Default Not Interested Message"
-            value={nodeData.default_not_interested_message}
-            handleChange={handleChange}
-            name={"default_not_interested_message"}
-          />
-
-          <TextAreaInputComp
-            label="Default Not Qualified Message"
-            value={nodeData.default_not_qualified_message}
-            handleChange={handleChange}
-            name={"default_not_qualified_message"}
-          />
+            }
+          </div>
 
           <div className=" bg-slate-50 py-2  gap-2 relative">
             <label

@@ -41,7 +41,6 @@ body {
 }
 
 .customscroll::-webkit-scrollbar-thumb {
-  
   background-color: darkgray;
   border-radius: 4px;
 }

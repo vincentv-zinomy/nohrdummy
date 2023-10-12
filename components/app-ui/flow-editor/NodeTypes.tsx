@@ -24,9 +24,15 @@ export const defineNodesTypes = {
   conversation_agent: ConversatoinAgentNode,
   payment_agent: PaymentAgentNode,
   commChannelNode: CommChannelNode,
-  crm_node: CRMNode,
-  customNode: TestNode,
 
+  // Data Store
+  crm_node: CRMNode,
+
+  // Subflow
+  customNode: TestNode,
+  childNode: ChildNode,
+
+  // Communication Channel
   whatappCommNode: WhatappCommNode,
   emailCommNode: EmailCommNode,
   voiceCommNode: VoiceCommNode,
@@ -34,7 +40,7 @@ export const defineNodesTypes = {
   facebookCommNode: FacebookCommNode,
   instagramCommNode: InstagramCommNode,
 
-  childNode: ChildNode
+   
 }
 
 export const navigation = [

@@ -69,7 +69,7 @@ const people = [
  
 
 export default function AppSelect() {
-  const [selected, setSelected] = useState(people[3])
+  const [selected, setSelected] = useState(people[0])
 
   return (
     <div className='bg-slate-50 py-2 px-6 flex flex-col    relative'>

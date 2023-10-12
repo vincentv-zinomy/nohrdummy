@@ -16,6 +16,8 @@ import CustomSelelct from "../CustomSelelct";
 import AppSelect from "./SubFlow/components/AppSelect";
 import TextInputComp from "../InputComponents/TextInputComp";
 import NumberInputComp from "../InputComponents/NumberInputCompt";
+import CustomMultiSelect from "../InputComponents/CustomMultiSelect";
+import CustomTextSelectInput from "./SubFlow/components/CustomTextSelectInput";
 
  
   const inputs = [
@@ -83,7 +85,6 @@ const ChildNode = (props: NodeProps) => {
     number:""|| props.data.values?.number
   });
 
-  console.log(nodeData.function, 'function')
   const deleteNodes = (id: string) => {
     const childNodes = getNodes().filter((x) => x.data.parentNode === id);
     if (childNodes.length > 0) {
@@ -113,7 +114,6 @@ const ChildNode = (props: NodeProps) => {
     const parent_id = getNode(props.id)?.parentNode;
     const id = uuidv4() 
     const level = props.data.level + 1
-    console.log(level, 'level')
 
     if (getNode(props.id)) {
       const node: any = getNode(props.id);
@@ -208,7 +208,7 @@ const ChildNode = (props: NodeProps) => {
             ]}
           />
           <AppSelect/>
-          
+          <CustomTextSelectInput/>
         
           <CustomSelelct
             state={nodeData}
@@ -246,9 +246,18 @@ const ChildNode = (props: NodeProps) => {
                         handleChange={handleChange}
                       />
                       }
-                       {input.type === "number" && (
+                       {input.input_type === "NUMBER_INPUT" && (
                             <NumberInputComp
                               label={input.label}
+                              name={'number'}
+                              handleChange={handleChange}
+                              value={nodeData.number}
+                            />
+                          )}
+                       {input.input_type === "MULTI_SELECT_DROPDOWN" && (
+                            <CustomMultiSelect
+                              label={input.label}
+                              lists={input.choices}
                               name={'number'}
                               handleChange={handleChange}
                               value={nodeData.number}
