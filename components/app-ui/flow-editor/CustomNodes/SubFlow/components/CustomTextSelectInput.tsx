@@ -17,7 +17,7 @@ import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
 import { classNames } from '@/lib/common'
 import { v4 as uuidv4 } from 'uuid'
-import { XMarkIcon } from '@heroicons/react/24/outline'
+import { MagnifyingGlassIcon, XMarkIcon } from '@heroicons/react/24/outline'
 
 const people = [
   { id: 1, name: 'Leslie Alexander' },
@@ -94,7 +94,8 @@ export default function CustomTextSelectInput() {
                     <>
                         {x.type === 'input' &&
                             <input 
-                                className='text-base p-0 border-none outline-none'
+
+  className='text-base p-0  border-none outline-black outline-solid noborderinput'
                             key={x.id} 
                             type='text' 
                             value={x.value} onChange={(e)=>setQueue((prev)=>prev.map((y)=>{
@@ -133,12 +134,13 @@ export default function CustomTextSelectInput() {
                     open 
                     && 
                     <div className="absolute z-10 mt-1 h-fit w-full overflow-auto rounded-md bg-white p-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm">
-                        <div className='w-full rounded-md   bg-white py-2 px-2  sm:text-sm'>
+                        <div className='w-full rounded-md  relative bg-white py-2 px-2  sm:text-sm'>
                             <input 
                                 type="text" 
-                                className="w-full rounded-md border border-gray-300 bg-white py-2 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm"
+                                className="w-full rounded-md border border-gray-300 bg-white py-2 px-2 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm pr-7  "
                                 onChange={(event) => setQuery(event.target.value)}
                             />
+                            <MagnifyingGlassIcon className='w-4 h-4 absolute inset-y-0 my-auto right-4 text-gray-300' />
                         </div>
                         {filteredPeople.map((person) => (
                         <div
