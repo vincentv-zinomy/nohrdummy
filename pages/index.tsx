@@ -25,10 +25,8 @@ export default function Home() {
   const router = useRouter();
   return (
     <> 
-
       <LandingPageLayout>
         <main className="relative  ">
-         
           <Hero />
           <ProblemStatement />
           <IntrodSection />
@@ -38,7 +36,6 @@ export default function Home() {
           <PricingSection />
         </main> 
       </LandingPageLayout>
-      {/* <ChatBot/> */}
     </>
   );
 }

@@ -12,7 +12,7 @@
   }
   ```
 */
-import { useState } from 'react'
+import { MouseEvent, useEffect, useRef, useState } from 'react'
 import { CheckIcon, ChevronUpDownIcon } from '@heroicons/react/20/solid'
 import { Combobox } from '@headlessui/react'
 import { classNames } from '@/lib/common'
@@ -33,12 +33,30 @@ export default function CustomTextSelectInput() {
 
   const [queue, setQueue] = useState<any[]>([{id:1, type:'input', value:''}])
   const [open, setOpen] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const handleClickOutside = (event: any) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('click', handleClickOutside);
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   const handleClick = (person:any) => {
-    console.log(person, 'person')
-    if(queue[queue.length - 1].value.trim === ''){
+    // console.log(person, 'person')
+    // console.log(queue[queue.length - 1].value)
+
+    if(queue[queue.length - 1].value.trim() === ''){
         const remque = queue.slice(0, -1)
-        setQueue([...remque,{id:uuidv4(),type:'option',value:person.name},
+        setQueue([
+          ...remque,
+          {id:uuidv4(),type:'option',value:person.name},
+          {id:uuidv4(),type:'input',value:''}
          ])     
     }else{
 
@@ -67,8 +85,8 @@ export default function CustomTextSelectInput() {
 
     <div  >
       <p className="block  text-black">Assigned to</p>
-      <div className="relative mt-1" onClick={()=>setOpen(true)}>
-        <div className='w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm'>
+      <div className="relative mt-1" ref={containerRef}>
+        <div className='w-full rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:text-sm' onClick={()=>setOpen(true)}>
 
             {
                 queue.map((x)=>{
@@ -109,7 +127,7 @@ export default function CustomTextSelectInput() {
         </div>
         
 
-        {filteredPeople.length > 0 && (
+        { (
             <>
                 {
                     open 
