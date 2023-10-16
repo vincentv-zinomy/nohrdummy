@@ -16,6 +16,7 @@ export default function ButtonEdge({
   targetY,
   sourcePosition,
   targetPosition,
+  source,
   style = {border:'1px solid red',background:'red'},
   markerEnd,
 }: EdgeProps) {
@@ -28,8 +29,12 @@ export default function ButtonEdge({
     targetPosition,
   });
 
+  console.log(source, 'source')
+
   const [isSplitButtonVisible, setIsSplitButtonVisible] = useState<boolean>(false);
   const {getEdges, getEdge, getNodes, getNode, addEdges, addNodes, setNodes} = useReactFlow()
+
+  
 
   const handleClick = useCallback( (evt:MouseEvent, id:string) => {
     const {source, target}:Edge | any = getEdge(id)
@@ -60,7 +65,6 @@ export default function ButtonEdge({
               // deletable:false
             }
       )
-
       addNodes(
           {
             id:newId,
@@ -73,7 +77,7 @@ export default function ButtonEdge({
             position: { x: xPos   , y: yPos     },
             parentNode: parentNode.id ,
             extent: 'parent',
-            type:'childNode',
+            type:getNode(source)?.type,
             draggable:true,
             zIndex:2000
           }

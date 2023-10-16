@@ -5,9 +5,10 @@ import ToogleSwitch from "./ToogleSwitch";
 type Props = {
   open: boolean;
   setOpen: (value: boolean) => void;
+  inputs:any[]
 };
 
-export default function EditModal({ open, setOpen }: Props) {
+export default function EditModal({ open, setOpen, inputs }: Props) {
   return (
     <Transition.Root show={open} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={setOpen}>
@@ -123,6 +124,38 @@ export default function EditModal({ open, setOpen }: Props) {
                                         </div>
                                       </td>
                                     </tr>
+                                    {
+                                      inputs && 
+                                      inputs.map((input)=>{
+                                        return(
+                                          <tr className="border-b transition-colors hover: /50 data-[state=selected]:  h-fit">
+                                          <td className="align-middle  truncate p-0 text-center text-sm text-foreground sm:px-3">
+                                            {input.label}
+                                          </td>
+                                          <td className="align-middle  w-[300px] p-1 text-center text-xs text-foreground">
+                                            <div className="mx-auto">
+                                              <div className="mt-1">
+                                                
+                                                <input        
+                                                  type="text" 
+                                                  className="block  w-full px-2 py-0.5 text-sm   rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                                                  defaultValue={input.value}
+                                                />
+                                              </div>
+                                            </div>
+                                          </td>
+                                          <td className="align-middle p-0 text-right">
+                                            <div className="items-center text-center">
+                                              <div className="">
+                                                <ToogleSwitch/>
+                                              </div>
+                                            </div>
+                                          </td>
+                                        </tr>
+                                        )
+                                      })
+                                      
+                                    }
                                   </tbody>
                                 </table>
                               </div>

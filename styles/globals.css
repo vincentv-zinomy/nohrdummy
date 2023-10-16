@@ -57,6 +57,7 @@ body {
 .customscroll1::-webkit-scrollbar {
   width: 8px; /* Adjust the width as needed */
 }
+ 
 
 .customscroll1::-webkit-scrollbar-thumb {
   

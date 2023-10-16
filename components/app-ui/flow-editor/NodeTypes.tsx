@@ -15,6 +15,8 @@ import FacebookCommNode from "./CustomNodes/CommunicationChannel/FacebookCommNod
 import InstagramCommNode from "./CustomNodes/CommunicationChannel/InstagramCommNode";
 import TestNode from "./CustomNodes/TestNode";
 import ChildNode from "./CustomNodes/ChildNode";
+import ConversationAgentNode from "./CustomNodes/SubFlow/nodes/ConversationAgentNode";
+import ChildCSNode from "./CustomNodes/SubFlow/nodes/ChildCSNode";
 
 export const handleStyle = { width: '10px', height: '10px', border: '1px solid red', background: 'white' }
 
@@ -31,6 +33,8 @@ export const defineNodesTypes = {
   // Subflow
   customNode: TestNode,
   childNode: ChildNode,
+  converstionAgent:ConversationAgentNode,
+  childCSNode:ChildCSNode,
 
   // Communication Channel
   whatappCommNode: WhatappCommNode,
@@ -39,6 +43,8 @@ export const defineNodesTypes = {
   smsCommNode: SMSCommNode,
   facebookCommNode: FacebookCommNode,
   instagramCommNode: InstagramCommNode,
+
+
 
    
 }
@@ -114,7 +120,7 @@ export const navigation = [
       },
       {
         id: 9,
-        name: "customNode",
+        name: "converstionAgent",
         label: "Follow Up Agent",
       },
     ],

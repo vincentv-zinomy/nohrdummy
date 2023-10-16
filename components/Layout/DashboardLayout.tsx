@@ -19,7 +19,8 @@ import {
   FolderOpenIcon,
   InformationCircleIcon,
   RocketLaunchIcon,
-  BoltIcon
+  BoltIcon,
+  ChevronDoubleLeftIcon,
 } from "@heroicons/react/24/outline";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Link from "next/link";
@@ -32,14 +33,11 @@ import Unauthorized from "./Unauthorized";
 import { useToast } from "../hooks/useToast";
 import axiosAPIWithAuth from "@/lib/axiosAPIWithAuth";
 
-
 const userNavigation = [
   // { name: "Your Profile", href: "/app/profile" },
   { name: "Settings", href: "/app/setting" },
   { name: "Sign out", href: "/app/signout" },
 ];
-
-
 
 function DashboardLayout({
   children, // will be a page or nested layout
@@ -52,14 +50,18 @@ function DashboardLayout({
   const toast = useToast();
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [isAddingNewOrg, setIsAddingNewOrg] = useState(false);
+  const [sidebarWide, setSideBarWide] = useState(true)
 
   // Define the allowed routes for each role
   const rolesRoutesAndNavigation = {
     [RoleTypes.ADMIN]: {
       routes: ["/app", "/app/*"],
       navigation: [
-
-        { name: "Flow Editor", href: "/app/org-agent/flow-editor", icon: BoltIcon },
+        {
+          name: "Flow Editor",
+          href: "/app/org-agent/flow-editor",
+          icon: BoltIcon,
+        },
         { name: "Agents", href: "/app/org-agent", icon: FolderIcon },
         { name: "Projects", href: "/app/org-project", icon: FolderIcon },
         { name: "Team Members", href: "/app/team", icon: UsersIcon },
@@ -96,19 +98,28 @@ function DashboardLayout({
           href: "/app/setting/integrations",
           icon: LinkIcon,
         },
-      ]
+      ],
     },
     [RoleTypes.TEAM_MEMBER]: {
-      routes: ["/app", "/app/dashboard", "/app/inbox",
-        "/app/signout", "/app/org-project", "/app/contacts/*",
+      routes: [
+        "/app",
+        "/app/dashboard",
+        "/app/inbox",
+        "/app/signout",
+        "/app/org-project",
+        "/app/contacts/*",
         "/app/contacts",
-        "/app/setting/general-settings", "/app/setting/integrations",
-        "/app/org-agent/*"
+        "/app/setting/general-settings",
+        "/app/setting/integrations",
+        "/app/org-agent/*",
       ],
       navigation: [
-
-        { name: "Flow Editor", href: "/app/org-agent/flow-editor", icon: BoltIcon },
-        { name: "Projects", href: "/app/org-project", icon: FolderIcon, },
+        {
+          name: "Flow Editor",
+          href: "/app/org-agent/flow-editor",
+          icon: BoltIcon,
+        },
+        { name: "Projects", href: "/app/org-project", icon: FolderIcon },
         {
           name: "Inbox",
           href: "/app/inbox",
@@ -125,23 +136,23 @@ function DashboardLayout({
           href: "/app/setting/integrations",
           icon: LinkIcon,
         },
-      ]
+      ],
     },
-  }
+  };
 
   const changeCurrentOrg = async (orgId: string) => {
     await handleOrgChange(orgId);
-  }
+  };
   const handleNewOrg = async () => {
     setIsAddingNewOrg(true);
     try {
-      const createNewOrgRes = await axiosAPIWithAuth.post("/organizations/create-new");
+      const createNewOrgRes = await axiosAPIWithAuth.post(
+        "/organizations/create-new"
+      );
       const newOrgId = createNewOrgRes.data;
       await handleOrgChange(newOrgId);
       toast.addToast("success", "New organization created successfully");
-
-    }
-    catch (err: any) {
+    } catch (err: any) {
       console.log(err);
       let errorMsg = "Something went wrong while starting conversation";
 
@@ -151,11 +162,9 @@ function DashboardLayout({
       }
 
       toast.addToast("error", errorMsg);
-
-
     }
     setIsAddingNewOrg(false);
-  }
+  };
   const userHasAccessToRoute = (userRoles: RoleTypes[], pathname: string) => {
     return userRoles.some((role) => {
       const allowedRoutes = rolesRoutesAndNavigation[role].routes;
@@ -176,13 +185,18 @@ function DashboardLayout({
           window.$crisp.push(["config", "position:reverse", [true]]);
       }
     }
-  }, [authState])
-
+  }, [authState]);
 
   useEffect(() => {
-    if (authState.user && authState.current_org && pathname.startsWith("/app")) {
-      if (!authState.current_org.waitlist_approved && !pathname.startsWith("/app/waitlist")) {
-
+    if (
+      authState.user &&
+      authState.current_org &&
+      pathname.startsWith("/app")
+    ) {
+      if (
+        !authState.current_org.waitlist_approved &&
+        !pathname.startsWith("/app/waitlist")
+      ) {
         router.push(`/app/waitlist`);
       }
     }
@@ -197,7 +211,12 @@ function DashboardLayout({
   } else if (!authState.isAuthenticated && pathname.startsWith("/app")) {
     router.push("/signin");
     return <div>Redirecting...</div>;
-  } else if (authState.isAuthenticated && authState.user && authState.current_org && pathname.startsWith("/app")) {
+  } else if (
+    authState.isAuthenticated &&
+    authState.user &&
+    authState.current_org &&
+    pathname.startsWith("/app")
+  ) {
     const userRoles = authState.current_org.roles;
     const hasAccess = userHasAccessToRoute(userRoles, pathname);
 
@@ -213,21 +232,20 @@ function DashboardLayout({
       return <Unauthorized />;
     }
 
-
     return (
       <div>
         <Script id="fb-pixel-scrips-id">
           {`
               !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '609725497530389');
-    fbq('track', 'PageView');
+                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                n.queue=[];t=b.createElement(e);t.async=!0;
+                t.src=v;s=b.getElementsByTagName(e)[0];
+                s.parentNode.insertBefore(t,s)}(window, document,'script',
+                'https://connect.facebook.net/en_US/fbevents.js');
+                fbq('init', '609725497530389');
+                fbq('track', 'PageView');
               `}
         </Script>
         <Script
@@ -287,7 +305,7 @@ function DashboardLayout({
                 <div className="flex-shrink-0 flex items-center px-4">
                   <img
                     className="h-24 w-auto"
-                    src="/Zigment_logo.svg"
+                    src="/Zigment_logo.png"
                     alt="zigment_logo"
                   />
                 </div>
@@ -313,7 +331,7 @@ function DashboardLayout({
                           )}
                           aria-hidden="true"
                         />
-                        {item.name}
+                        {sidebarWide && item.name}
                       </Link>
                     ))}
                   </nav>
@@ -325,20 +343,29 @@ function DashboardLayout({
             </div>
           </Dialog>
         </Transition.Root>
-
+        
         {/* Static sidebar for desktop */}
-        <div className="hidden md:flex md:w-64 md:flex-col md:fixed md:inset-y-0">
+        <div className={`hidden bg-red-100 md:flex w-fit md:flex-col md:fixed md:inset-y-0`}>
           {/* Sidebar component, swap this element with another sidebar if you like */}
-          <div className="flex flex-col flex-grow border-r border-gray-200 pt-5 bg-white overflow-y-auto customscroll1">
-            <div className="flex items-center flex-shrink-0 px-4">
-              <img
-                className="h-24 w-auto"
-                src="/Zigment_logo.svg"
-                alt="zigment_logo"
-              />
+       
+          <div className="flex flex-col relative flex-grow border-r border-gray-200   bg-white  noscroll overflow-y-auto  ">
+            <div className={`    w-full h-[64px]  flex justify-center bg-white     items-center flex-shrink-0   `}>
+              {sidebarWide ? 
+                <img
+                  className="  w-[164px] my-2   object-cover"
+                  src="/Zigment_logo.png"
+                  alt="zigment_logo"
+                />
+                :
+                <img
+                  className="w-[40px] my-2 "
+                  src="/zigment.svg"
+                  alt="zigment_logo"
+                />
+              }
             </div>
-            <div className="mt-5 flex-grow flex flex-col">
-              <nav className="flex-1 px-2 pb-4 space-y-1">
+            <div className={` mt-[10px] ${sidebarOpen ? 'w-full' : 'w-fit'} h-full    flex flex-col `}>
+              <nav className="flex-1 px-2 pb-4 space-y-1 ">
                 {navigation.map((item) => (
                   <Link
                     key={`${item.name}-main-nav-items-sub-menu`}
@@ -347,7 +374,7 @@ function DashboardLayout({
                       pathname === item.href
                         ? "bg-gray-100 text-gray-900"
                         : "text-gray-600 hover:bg-gray-50 hover:text-gray-900",
-                      "cursor-pointer group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+                      "cursor-pointer group flex items-center gap-2 px-2 py-2 text-sm font-medium rounded-md"
                     )}
                   >
                     <item.icon
@@ -355,18 +382,18 @@ function DashboardLayout({
                         pathname === item.href
                           ? "text-gray-500"
                           : "text-gray-400 group-hover:text-gray-500",
-                        "mr-3 flex-shrink-0 h-6 w-6"
+                        "  flex-shrink-0 h-6 w-6"
                       )}
                       aria-hidden="true"
                     />
-                    {item.name}
+                    {sidebarWide && item.name}
                   </Link>
                 ))}
               </nav>
             </div>
           </div>
         </div>
-        <div className="md:pl-64 flex flex-col flex-1">
+        <div className={`${sidebarWide ? 'pl-[213px]': 'pl-[57px]' }  flex flex-col flex-1`}>
           <div className="sticky top-0 z-10 flex-shrink-0 flex h-16 bg-white shadow">
             <button
               type="button"
@@ -377,7 +404,10 @@ function DashboardLayout({
               <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             </button>
             <div className="flex-1 px-4 flex justify-between">
-              <div className="flex-1 flex">
+              <div className="flex-1 flex relative">
+              <button className="inline-block border absolute z-[2000] top-4 -left-[30px] bg-white p-1 rounded-md cursor-pointer" onClick={()=>setSideBarWide(!sidebarWide)}>
+                <ChevronDoubleLeftIcon className="w-4 h-4"/>
+              </button>
                 <form className="w-full flex md:ml-0" action="#" method="GET">
                   <label htmlFor="search-field" className="sr-only">
                     Search
@@ -400,20 +430,16 @@ function DashboardLayout({
                 </form>
               </div>
               <div className="ml-4 flex items-center md:ml-6">
-
-                {
-                  isAddingNewOrg && (
-                    <Spinner color="text-indigo-500" />
-                  )
-                }
+                {isAddingNewOrg && <Spinner color="text-indigo-500" />}
                 <Menu as="div" className="relative inline-block text-left">
                   <div>
-
                     <Menu.Button className="inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:ring-offset-gray-100">
                       {authState.current_org.org_name}
-                      <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
+                      <ChevronDownIcon
+                        className="-mr-1 ml-2 h-5 w-5"
+                        aria-hidden="true"
+                      />
                     </Menu.Button>
-
                   </div>
 
                   <Transition
@@ -427,49 +453,55 @@ function DashboardLayout({
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                       <div className="py-1">
-                        {
-                          authState.all_orgs.map((org) => (
-                            <Menu.Item key={`menu_item_${org.org_id}`}>
-                              {({ active }) => (
+                        {authState.all_orgs.map((org) => (
+                          <Menu.Item key={`menu_item_${org.org_id}`}>
+                            {({ active }) => (
+                              <span
+                                className={classNames(
+                                  active
+                                    ? "bg-gray-100 text-gray-900"
+                                    : "text-gray-700",
+                                  "group flex items-center px-4 py-2 text-sm cursor-pointer"
+                                )}
+                                onClick={() => {
+                                  if (
+                                    org.org_id !== authState.current_org?.org_id
+                                  ) {
+                                    changeCurrentOrg(org.org_id);
+                                  }
+                                }}
+                              >
+                                {org.org_name}
                                 <span
                                   className={classNames(
-                                    active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                    'group flex items-center px-4 py-2 text-sm cursor-pointer'
+                                    "text-xs",
+                                    org.org_id === authState.current_org?.org_id
+                                      ? "text-rose-500"
+                                      : "text-gray-400"
                                   )}
-                                  onClick={() => {
-                                    if (org.org_id !== authState.current_org?.org_id) {
-                                      changeCurrentOrg(org.org_id)
-                                    }
-                                  }}
                                 >
-                                  {org.org_name}
-                                  <span className={
-                                    classNames("text-xs",
-                                      org.org_id === authState.current_org?.org_id ? "text-rose-500" : "text-gray-400")
-                                  }>
-                                    {org.org_id === authState.current_org?.org_id && `(Current)`}
-                                  </span>
-
+                                  {org.org_id ===
+                                    authState.current_org?.org_id &&
+                                    `(Current)`}
                                 </span>
-                              )}
-                            </Menu.Item>
-                          ))
-                        }
-
+                              </span>
+                            )}
+                          </Menu.Item>
+                        ))}
                       </div>
                       <div className="py-1">
                         <Menu.Item>
                           {({ active }) => (
                             <span
-
                               className={classNames(
-                                active ? 'bg-gray-100 text-gray-900' : 'text-gray-700',
-                                'group flex items-center px-4 py-2 text-sm cursor-pointer'
+                                active
+                                  ? "bg-gray-100 text-gray-900"
+                                  : "text-gray-700",
+                                "group flex items-center px-4 py-2 text-sm cursor-pointer"
                               )}
                               onClick={(e) => {
                                 if (!isAddingNewOrg) {
-
-                                  handleNewOrg()
+                                  handleNewOrg();
                                 }
                               }}
                             >
@@ -478,11 +510,9 @@ function DashboardLayout({
                                 aria-hidden="true"
                               />
                               Add Organization
-
                             </span>
                           )}
                         </Menu.Item>
-
                       </div>
                     </Menu.Items>
                   </Transition>

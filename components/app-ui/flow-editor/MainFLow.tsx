@@ -130,7 +130,7 @@ const MainFLow = () => {
           y: event.clientY - reactFlowBounds.top,
         });
 
-        // console.log(type, 'type')
+        console.log(type, 'type')
 
         if(type==='subNode'){
           
@@ -144,13 +144,10 @@ const MainFLow = () => {
           data: { label: `${type} node` },
         };
 
-        // console.log("node added")
-        // console.log(newNode)
+      
 
         setNodes((nds) => nds.concat(newNode));
-        // console.log(edges)
-        // console.log(type);
-        // console.log(nodes);
+ 
 
         // if (type !== 'usecase') {
         //   setEdges((eds) => eds.concat({
@@ -163,7 +160,6 @@ const MainFLow = () => {
         //   }));
         // }
 
-        console.log()
 
         if (['agents','conversation_agent','payment_agent'].includes(type)){
           
@@ -175,7 +171,6 @@ const MainFLow = () => {
             targetHandle: 'a',
           }));
         }else if (type === 'crm_node'){
-          // console.log(type, 'type')
           setEdges((eds) => eds.concat({
             id: `${uuidv4()}-edge__`,
             source: `use_case_0`,
@@ -183,6 +178,18 @@ const MainFLow = () => {
             sourceHandle: 'usecase-store',
             targetHandle: 'a',
           }));
+        }else if(type=== 'converstionAgent'){
+          const child_node = {
+            id: `dndNode_${Math.floor(Math.random() * 10 ** 10)}`,
+            type: 'childCSNode', 
+            position: { x:  10 , y: 100 },
+            data: { label: "Parent Node", level: 1, column: 1 },
+            parentNode: newNode.id,
+            extent: "parent",
+            draggable: true,
+            zIndex: 2000,
+          }
+          setNodes((nds:any) => nds.concat(child_node))
         }
 
       }

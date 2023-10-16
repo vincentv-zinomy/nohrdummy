@@ -1,13 +1,35 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
 type Props = {
   handleChange:(e:any)=>void,
   value:string | number,
   label:string,
-  name:string
+  name:string,
+  initialValue?:string
 }
 
-const TextInputComp = ({handleChange, value, label, name}: Props) => {
+const TextInputComp = ({
+  handleChange, 
+  value, 
+  label, 
+  name,
+  initialValue
+
+}: Props) => {
+
+  useEffect(()=>{
+      if(initialValue){
+        const e = {
+          target:{
+            value:initialValue,
+            name:label
+          }
+        }
+  
+        handleChange(e)
+      }
+  },[])
+
   return (
     <div className=" bg-slate-50 py-2 px-6 gap-2 relative">
             <label htmlFor="name" className="block    text-black text-left">
