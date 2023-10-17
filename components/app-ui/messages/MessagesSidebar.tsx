@@ -1,4 +1,4 @@
-import React, { UIEvent, memo, useContext, useRef, useState } from "react";
+import React, { UIEvent, memo, useContext, useEffect, useRef, useState } from "react";
 import DirectMessages from "./DirectMessages";
 import ProjectsLists from "./ProjectsLists";
 import Spinner from "@/components/common/Spinner";
@@ -17,6 +17,22 @@ function MessagesSidebar({
 }) {
 
   const { contacts, setContacts, currentProject, openFilter, setOpenFilter } = useContext(ContactContext); 
+  const filterRef = useRef<any>()
+
+  useEffect(()=>{
+    const handleClickOutside = (e:any) => {
+      if(filterRef.current && !filterRef.current.contains(e.target)){
+        setOpenFilter(false)
+      }
+    }
+
+    document.addEventListener('click',handleClickOutside)
+
+    return ( )=>{
+      document.removeEventListener('click',handleClickOutside)
+    }
+
+  },[])
 
   return (
     <div
@@ -63,9 +79,20 @@ function MessagesSidebar({
                     </svg>
                   </button>
                 </form>
-                <button className="" onClick={()=>setOpenFilter(true)}>
-                  <AdjustmentsHorizontalIcon  className="w-6 h-6 "/> 
-                </button>
+                <div className="relative"  ref={filterRef} >
+                  <button onClick={()=>setOpenFilter(!openFilter)}>
+                   <AdjustmentsHorizontalIcon  className="w-6 h-6 "/> 
+                  </button>
+                  {
+                    openFilter && 
+                    <div className="w-44 h-fit space-y-1 absolute drop-shadow-md rounded-md top-10 border bg-white right-1 px-3 py-3">
+                        <div className="flex text-sm items-center gap-2 ">
+                          <input type="checkbox" id="checkbox_id" className=" active:ring-1 rounded-sm active:ring-slate-200"  />
+                          <label htmlFor="checkbox_id">filter</label>
+                        </div>
+                    </div>
+                  }
+                </div>
               </div>
               {/* Direct messages */}
               
