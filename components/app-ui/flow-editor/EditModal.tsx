@@ -5,7 +5,7 @@ import ToogleSwitch from "./ToogleSwitch";
 type Props = {
   open: boolean;
   setOpen: (value: boolean) => void;
-  inputs:any[]
+  inputs?: any[]
 };
 
 export default function EditModal({ open, setOpen, inputs }: Props) {
@@ -119,42 +119,42 @@ export default function EditModal({ open, setOpen, inputs }: Props) {
                                       <td className="align-middle p-0 text-right">
                                         <div className="items-center text-center">
                                           <div className="">
-                                            <ToogleSwitch/>
+                                            <ToogleSwitch />
                                           </div>
                                         </div>
                                       </td>
                                     </tr>
                                     {
-                                      inputs && 
-                                      inputs.map((input)=>{
-                                        return(
+                                      inputs &&
+                                      inputs.map((input) => {
+                                        return (
                                           <tr className="border-b transition-colors hover: /50 data-[state=selected]:  h-fit">
-                                          <td className="align-middle  truncate p-0 text-center text-sm text-foreground sm:px-3">
-                                            {input.label}
-                                          </td>
-                                          <td className="align-middle  w-[300px] p-1 text-center text-xs text-foreground">
-                                            <div className="mx-auto">
-                                              <div className="mt-1">
-                                                
-                                                <input        
-                                                  type="text" 
-                                                  className="block  w-full px-2 py-0.5 text-sm   rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
-                                                  defaultValue={input.value}
-                                                />
+                                            <td className="align-middle  truncate p-0 text-center text-sm text-foreground sm:px-3">
+                                              {input.label}
+                                            </td>
+                                            <td className="align-middle  w-[300px] p-1 text-center text-xs text-foreground">
+                                              <div className="mx-auto">
+                                                <div className="mt-1">
+
+                                                  <input
+                                                    type="text"
+                                                    className="block  w-full px-2 py-0.5 text-sm   rounded-md border border-grey-300 shadow-sm focus:border-gray-500 focus:ring-gray-500 sm:text-sm"
+                                                    defaultValue={input.value}
+                                                  />
+                                                </div>
                                               </div>
-                                            </div>
-                                          </td>
-                                          <td className="align-middle p-0 text-right">
-                                            <div className="items-center text-center">
-                                              <div className="">
-                                                <ToogleSwitch/>
+                                            </td>
+                                            <td className="align-middle p-0 text-right">
+                                              <div className="items-center text-center">
+                                                <div className="">
+                                                  <ToogleSwitch />
+                                                </div>
                                               </div>
-                                            </div>
-                                          </td>
-                                        </tr>
+                                            </td>
+                                          </tr>
                                         )
                                       })
-                                      
+
                                     }
                                   </tbody>
                                 </table>
@@ -175,7 +175,7 @@ export default function EditModal({ open, setOpen, inputs }: Props) {
                     <button
                       type="button"
                       className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none  "
-                      onClick={()=>setOpen(false)}
+                      onClick={() => setOpen(false)}
                     >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"

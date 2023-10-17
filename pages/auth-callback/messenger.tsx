@@ -2,35 +2,36 @@ import axiosAPIWithAuth from '@/lib/axiosAPIWithAuth';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-function AuthCallbackForInstagram() {
+function AuthCallbackForFBMessenger() {
     const router = useRouter();
 
-    async function handleInstagramAuth() {
+    async function handleFBMessengerAuth() {
         // Capture the access_token from the URL fragment
         const fragment = window.location.hash.substring(1);
         const params = new URLSearchParams(fragment);
         const accessToken = params.get("access_token");
 
         if (!accessToken) {
-            console.error("Access token was not returned by Instagram.");
+            console.error("Access token was not returned by FB Messenger.");
+            window.close(); // Close the popup if no access token is found
             return;
         }
 
         // Send access_token to your backend to validate, save, and/or act upon it
         try {
-            const response = await axiosAPIWithAuth.post('/communication-channels/setup-instagram', { access_token: accessToken });
+            const response = await axiosAPIWithAuth.post('/communication-channels/setup-fb-messenger', { access_token: accessToken });
             if (response.data) {
                 // Handle success logic, e.g. redirect to another page
                 // router.push('/dashboard');
                 window.close(); // Close the popup when finished
             } else {
                 // Handle error logic
-                console.error("Error validating the Instagram token on the backend.");
-                alert("Something went wrong...");
+                console.error("Error validating the FB Messenger token on the backend.");
+                // alert("Something went wrong...");
                 window.close(); // Close the popup when finished
             }
         } catch (error) {
-            console.error("Error occurred while validating the Instagram token:", error);
+            console.error("Error occurred while validating the FB Messenger token:", error);
             alert("Something went wrong...");
             window.close(); // Close the popup when finished
         }
@@ -38,14 +39,14 @@ function AuthCallbackForInstagram() {
     useEffect(() => {
 
 
-        handleInstagramAuth();
+        handleFBMessengerAuth();
     }, []);
 
     return (
         <div>
-            Authenticating with Instagram...
+            Authenticating with FB Messenger...
         </div>
     );
 }
 
-export default AuthCallbackForInstagram;
+export default AuthCallbackForFBMessenger;

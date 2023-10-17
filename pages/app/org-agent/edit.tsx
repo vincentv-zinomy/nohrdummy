@@ -30,6 +30,8 @@ function EditAgent() {
     _id: "",
     org_project_id: "",
     assigned_website_chat_widget_id: "",
+    is_fb_messenger_enabled: false,
+    assigned_fb_messenger_id: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -63,6 +65,8 @@ function EditAgent() {
         custom_values: agents_data.custom_values,
         org_project_id: agents_data.org_project_id,
         assigned_website_chat_widget_id: agents_data.assigned_website_chat_widget_id,
+        is_fb_messenger_enabled: agents_data.is_fb_messenger_enabled,
+        assigned_fb_messenger_id: agents_data.assigned_fb_messenger_id,
       });
     } catch (err) {
       console.log(err);

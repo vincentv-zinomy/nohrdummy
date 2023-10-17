@@ -45,6 +45,7 @@ export enum ChatChannelType {
   INSTAGRAM = 'INSTAGRAM',
   VOICE = 'VOICE',
   WEBCHAT = 'WEBCHAT',
+  FB_MESSENGER = 'FB_MESSENGER',
 }
 export interface MessageTemplateResponseType {
   org_id?: string;
@@ -85,15 +86,23 @@ export interface CommunicationChannelTypes {
   connection_type: ChatChannelType;
   email_metadata: EmailMetadata;
   instagram_id: string;
+  fb_messenger_id: string;
   voice_id: string;
   WHATSAPP_METADATA?: WhatsAppMetadata;
   WEB_CHAT_METADATA?: WebChatMetadata;
   IG_PAGE_METADATA?: IGPageMetadata;
+  FB_MESSENGER_METADATA?: FBPageMessengerMetadata;
   updated_at_timestamp: number;
 
   created_at_timestamp: number;
 
   is_deleted: boolean;
+}
+export interface FBPageMessengerMetadata {
+  page_id: string;
+  page_name: string;
+  page_access_token: string;
+  messenger_id: string;
 }
 export interface IGPageMetadata {
   page_id: string;
@@ -151,7 +160,9 @@ export interface OrgAgentDataTypes {
   is_sms_enabled: boolean;
   is_whatsapp_enabled: boolean;
   is_instagram_enabled: boolean;
+  is_fb_messenger_enabled: boolean;
   is_email_enabled: boolean;
+  assigned_fb_messenger_id: string;
   is_voice_enabled: boolean;
   is_website_chat_enabled: boolean;
   assigned_sms_number: string;

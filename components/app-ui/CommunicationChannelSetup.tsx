@@ -195,6 +195,8 @@ function CommunicationChannelSetup() {
           <option value={ChatChannelType.SMS}>SMS</option>
           <option value={ChatChannelType.WHATSAPP}>WhatsApp</option>
           <option value={ChatChannelType.INSTAGRAM}>Instagram</option>
+
+          <option value={ChatChannelType.FB_MESSENGER}>FB Messenger</option>
           <option value={ChatChannelType.EMAIL}>Email</option>
           <option value={ChatChannelType.WEBCHAT}>Web Chat</option>
         </select>
@@ -259,7 +261,7 @@ function CommunicationChannelSetup() {
               const top = window.innerHeight / 2 - height / 2;
 
               const scopes = ['instagram_basic', 'instagram_content_publish', 'instagram_manage_comments', 'instagram_manage_insights', 'pages_show_list', 'pages_read_engagement', 'pages_messaging', 'pages_manage_metadata'];
-              window.open(`https://www.facebook.com/v18.0/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/auth-callback/instagram&response_type=token&scope=${scopes.join(",")}`,
+              window.open(`https://www.facebook.com/${process.env.NEXT_PUBLIC_META_API_VERSION}/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&extras={"setup":{"channel":"IG_API_ONBOARDING"}}&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/auth-callback/instagram&response_type=token&scope=${scopes.join(",")}`,
                 "integrationAuthPopupForIG",
                 `width=${width},height=${height},left=${left},top=${top}`);
             }}
@@ -268,6 +270,34 @@ function CommunicationChannelSetup() {
             Connect Instagram
           </button>
         }
+        {
+          selectedChannelToAdd === ChatChannelType.FB_MESSENGER &&
+          <button
+            className="mt-2 inline-flex justify-center 
+      py-2 px-4 border border-transparent 
+      shadow-sm text-sm font-medium 
+      rounded-md text-white 
+      bg-indigo-600 hover:bg-indigo-700 
+      focus:outline-none focus:ring-2 
+      focus:ring-offset-2 focus:ring-indigo-500
+      disabled:opacity-50 disabled:cursor-not-allowed"
+            onClick={() => {
+              const width = 600;
+              const height = 700;
+              const left = window.innerWidth / 2 - width / 2;
+              const top = window.innerHeight / 2 - height / 2;
+
+              const scopes = ['pages_show_list', 'pages_read_engagement', 'pages_messaging', 'pages_manage_metadata'];
+              window.open(`https://www.facebook.com/${process.env.NEXT_PUBLIC_META_API_VERSION}/dialog/oauth?client_id=${process.env.NEXT_PUBLIC_META_APP_ID}&display=page&redirect_uri=${process.env.NEXT_PUBLIC_APP_URL}/auth-callback/messenger&response_type=token&scope=${scopes.join(",")}`,
+                "integrationAuthPopupForFB",
+                `width=${width},height=${height},left=${left},top=${top}`);
+            }}
+            disabled={isSubmitting}
+          >
+            Connect FB Messenger
+          </button>
+        }
+
         {
           selectedChannelToAdd === ChatChannelType.EMAIL &&
           <>

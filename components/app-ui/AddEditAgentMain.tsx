@@ -39,31 +39,7 @@ function AddEditAgentMain({
       console.log(err);
     }
   };
-  const getAllAgentUseCases = async () => {
-    try {
-      const getData = await axiosAPIWithAuth.get("/agents/all-use-cases");
-      const resData = await getData.data;
-      setAgentUseCases(resData);
 
-
-
-    }
-    catch (err: any) {
-      console.log(err);
-      let errorMsg = "Something went wrong...";
-
-      // Check if err object has response data and it has a message property
-      if (err.response && err.response.data && err.response.data.message) {
-        errorMsg = err.response.data.message;
-      }
-
-      toast.addToast("error", errorMsg);
-
-
-    }
-
-
-  }
   const getAllMyNumbers = async () => {
     setIsCommunicationChannelsLoading(true);
     try {
@@ -95,7 +71,6 @@ function AddEditAgentMain({
   useEffect(() => {
     if (authState.isAuthenticated) {
       getAllMyNumbers()
-      getAllAgentUseCases()
       getAllOrgProjects()
     }
   }, [authState]);
@@ -137,28 +112,7 @@ function AddEditAgentMain({
         <div>
           <div>
             <div className="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-6">
-              <div className="sm:col-span-6 sm:w-full md:w-1/2">
-                <label className="block text-sm font-medium text-gray-700">
-                  Agent Use Case
-                </label>
-                <select
-                  className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
-                  value={formData.agent_use_case_id}
-                  onChange={(e) => {
-                    setFormDataMain({
-                      ...formData,
-                      agent_use_case_id: e.target.value
-                    })
-                  }}
-                >
-                  <option value={""}>Select Agent</option>
-                  {
-                    agentUseCases.map((use_case) => {
-                      return <option value={use_case.id}>{use_case.name}</option>
-                    })
-                  }
-                </select>
-              </div>
+
               <div className="sm:col-span-6 sm:w-full md:w-1/2">
                 <label className="block text-sm font-medium text-gray-700">
                   Org Project
@@ -581,6 +535,55 @@ function AddEditAgentMain({
                               {
                                 myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.INSTAGRAM).map((comm_channel: CommunicationChannelTypes) => {
                                   return <option value={comm_channel.instagram_id}>{comm_channel.IG_PAGE_METADATA?.instagram_account_name ?? "No account name..."}</option>
+                                })
+                              }
+                            </select>
+                          }
+                        </div>
+                        {/* FB Messenger Channel */}
+                        <div className="flex items-center">
+                          <input
+
+                            name={`Enable Instagram`}
+                            type="checkbox"
+                            className="h-4 w-4 
+                            rounded border-gray-300 text-indigo-600 focus:ring-indigo-500
+                            disabled:bg-gray-200 disabled:cursor-not-allowed
+                            "
+                            onChange={(e) => {
+                              setFormDataMain({
+                                ...formData,
+                                is_fb_messenger_enabled: e.target.checked
+                              })
+                            }}
+                            checked={formData.is_fb_messenger_enabled}
+                            disabled={myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.FB_MESSENGER) ? false : true}
+                          />
+                          <label
+                            className="ml-3 whitespace-nowrap pr-6 text-sm font-medium text-gray-900"
+                          >
+                            Enable FB Messenger
+
+                          </label>
+                          <span className="text-sm text-gray-600">{
+                            myCommunicationChannels.find((comm_channel: CommunicationChannelTypes) => comm_channel.connection_type === ChatChannelType.FB_MESSENGER) ? `` : `No FB messenger Account Found`
+                          }</span>
+                          {
+                            formData.is_fb_messenger_enabled &&
+                            <select
+                              className="block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm rounded-md"
+                              value={formData.assigned_fb_messenger_id}
+                              onChange={(e) => {
+                                setFormDataMain({
+                                  ...formData,
+                                  assigned_fb_messenger_id: e.target.value
+                                })
+                              }}
+                            >
+                              <option value={""}>Select FB Messenger Account</option>
+                              {
+                                myCommunicationChannels.filter(elem => elem.connection_type === ChatChannelType.FB_MESSENGER).map((comm_channel: CommunicationChannelTypes) => {
+                                  return <option value={comm_channel.fb_messenger_id}>{comm_channel.FB_MESSENGER_METADATA?.page_name ?? "No account name..."}</option>
                                 })
                               }
                             </select>

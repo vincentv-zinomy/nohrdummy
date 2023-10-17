@@ -29,6 +29,8 @@ function CreateAgent() {
     _id: "",
     org_project_id: "",
     assigned_website_chat_widget_id: "",
+    assigned_fb_messenger_id: "",
+    is_fb_messenger_enabled: false,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
 
