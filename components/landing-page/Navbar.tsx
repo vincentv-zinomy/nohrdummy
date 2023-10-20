@@ -8,6 +8,8 @@ import Sidebar from './Navbar/Sidebar';
 import Link from 'next/link';
 import { PencilSquareIcon, CloudIcon, ShoppingBagIcon, UserGroupIcon, ChartBarIcon, SquaresPlusIcon } from '@heroicons/react/24/solid';
 import Logo from './Navbar/Logo';
+import {FcAssistant} from 'react-icons/fc'
+import { MdAutoGraph, MdOutlineSportsBasketball } from 'react-icons/md';
 
  
 
@@ -22,17 +24,27 @@ const menuItems = [
         icon: UserGroupIcon
       },
       {
-        name: 'For Sales',
-        description: 'Built for buisness to scale their sales',
-        href: '/solutions/leadfix',
-        icon: ChartBarIcon
+        name: 'Lead Automation',
+        description: 'Automate Leads, Maximize Conversions',
+        href: '/solutions/zigment',
+        icon: MdAutoGraph
+      } 
+      ,
+      {
+        name: 'Sales Assistant',
+        description: 'Never Miss a Conversation Again',
+        href: '/solutions/salesassistant',
+        icon: FcAssistant
+      } 
+      ,
+      {
+        name: 'For Coaches ',
+        description: 'Engage More, Stress Less',
+        href: '/solutions/coaches',
+        icon: MdOutlineSportsBasketball
       } 
 
     ]
-  },
-  {
-    name: 'Pricing',
-    href: '/#pricing'
   },
   {
     name: 'Products',
@@ -51,6 +63,10 @@ const menuItems = [
       } 
 
     ]
+  },
+  {
+    name: 'Pricing',
+    href: '/#pricing'
   },
   {
     name: 'Resources',
