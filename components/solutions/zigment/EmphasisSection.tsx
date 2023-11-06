@@ -12,29 +12,38 @@
   }
   ```
 */
-export default function Example() {
+
+import line from '@/assets/images/solutions/hero/line-shape-1.svg'
+import Image from 'next/image';
+
+export default function EmphasisSection() {
   return (
     <div className="bg-white">
-      <div className="mx-auto max-w-7xl py-10 px-4 sm:px-6 lg:px-8 w-full">
-        <div className="overflow-hidden rounded-lg bg-indigo-700 shadow-xl flex pr-10 w-full items-center justify-between">
-          <div className="px-12 py-10 flex items-center justify-between w-full">
+      <div className="mx-auto max-w-7xl py-10 px-4 sm:px-6 lg:px-12 w-full">
+        <div className="overflow-hidden  rounded-lg  flex   w-full items-center justify-center">
+          <div className=" py-10 flex items-center justify-center w-full">
             <div className="lg:self-center">
-              <h2 className="text-2xl font-bold tracking-tight text-white ">
-                <span className="block">Each moment a lead waits, its value depreciates. Don't let your leads go cold, heat them up instantly with Zigment.
-</span>
-                 
-              </h2>
-            
-              
+              <div className="text-4xl font-bold tracking-tight mx-auto  ">
+                <span className="block text-center">
+                  Each moment a lead waits, its value depreciates. 
+                </span>
+                <div className="relative text-center">
+                  Don't let your leads go cold, heat them up 
+                </div>
+                <div className="relative text-center ">
+                  <div>
+                    instantly with Zigment.
+                  </div>
+                  <div className="absolute top-8  inset-x-0 mx-auto">
+                    <Image src={line} alt='' className='w-[400px]  mx-auto'/>
+                  </div>
+                </div>
+              </div>
             </div>
-
-            
           </div>
-          <button className="bg-white  h-fit font-bold  p-2 rounded-md w-36 text-indigo-600">
-              Book A Demo
-            </button>
+           
         </div>
       </div>
     </div>
-  )
+  );
 }

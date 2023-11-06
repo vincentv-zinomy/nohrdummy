@@ -1,108 +1,108 @@
-import Image from "next/image";
-import React from "react";
-import blueTitle from "@/assets/Home/IntroSection/icon-green-title.d661a043.svg";
-import imgHello from "@/assets/Home/IntroSection/img-hello.3c9879c2.svg";
-import iconline from '@/assets/Home/IntroSection/icon-line.f1dda700.svg'
+ 
 
-const worksteps = [
-    {
-        name:'Click and Go',
-        description:"Sign up, log in, you're almost there."
-    },
-    {
-        name:'Click to Integrate, That’s It',
-        description:"Zigment easily plugs into your existing CRM, be it Salesforce, Hubspot, or any other."
-    },
-    {
-        name:'Set It and Forget It',
-        description:"Now go back to doing what you love. We got this."
-    },
-]
 
-const HowWorksSections = () => {
+
+import {
+  BoltIcon,
+  ChatBubbleBottomCenterTextIcon,
+  EnvelopeIcon,
+  GlobeAltIcon,
+  ScaleIcon,
+} from '@heroicons/react/24/outline'
+
+import img1 from '@/assets/images/solutions/howworks/ils_10.svg'
+import img2 from '@/assets/images/solutions/howworks/ils_11.svg'
+import img3 from '@/assets/images/solutions/howworks/ils_12.svg'
+import Image from 'next/image'
+import line from '@/assets/images/solutions/hero/line-shape-1.svg'
+
+ 
+
+export default function HowWorksSections() {
   return (
-    <section className="bg-gray-50">
-      <div className="max-w-5xl mx-auto px-5  py-20 lg:py-24">
-        <div className="max-w-3xl mx-auto text-center font-outfit">
-          <h2 className="font-bold text-4xl md:text-40">
-          Your Easy-Peasy Setup Guide{" "}
-            {/* <span className="relative inline-flex justify-center items-center">
-              {" "}
-              
-            </span> */}
-          </h2>
-          {/* <p className="md:text-lg text-brand-gray-300 mt-3">
-            {" "}
-            Let Zigment.ai coordinate with your shortlisted prospects to fix up
-            sales calls. Just enter your product or service description and feed
-            the leads data. No human intervention needed!
-          </p> */}
-        </div>
-        <div className="flex flex-col items-center mt-6">
-          {/* <h4 className="text-2xl font-semibold text-center">See how you can do this in the demo video</h4> */}
-          {/* <div className="bg-[#F4F4EB] w-9/12 h-96 mt-8">
+    <div className="overflow-hidden   py-16  ">
+      <div className="relative mx-auto max-w-xl px-6 lg:max-w-7xl lg:px-8">
+        
+        <div className="relative">
+          <h2 className="text-center text-3xl font-bold leading-8 tracking-tight text-gray-900 sm:text-4xl">
+          Your Easy-Peasy Setup Guide
 
-          </div> */}
+            <Image src={line} alt='' className='w-[250px] absolute mx-auto inset-x-0 -bottom-4'/>
+          </h2>
+          
         </div>
-        <div className="grid lg:grid-cols-2 gap-y-10 mt-14 md:mt-20">
-          <div>
-            <Image src={imgHello} alt="img-hello" />
+
+        <div className="relative mt-12   lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
+          <div className="relative">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Click and Go</h3>
+            <p className="mt-3 text-lg text-gray-500">
+            Sign up, log in, you're almost there.
+
+            </p>
+
+            
           </div>
-          <div className="font-outfit">
-            <h3 className="text-xl text-brand-dark md:text-xl font-bold">
-              Get started in just 3 steps
-            </h3>
-            <div className="relative space-y-5 sm:space-y-7 md:space-y-10 md:text-lg mt-5 md:mt-7">
-                {worksteps.map((x,i)=>{
-                    return (
-                        <div className="flex items-start space-x-4">
-                <div className="relative   z-30 w-12 h-12 shrink-0 grid place-content-center">
-                  <div className="w-[2.125rem] h-[2.125rem] grid place-content-center rounded-full bg-brand-blue-100 text-white">
-                    {i + 1}
-                  </div>
-                </div>
-                <div>
-                    <p className="font-semibold">{x.name}
-</p>
-                    <p>{x.description}</p>
-                </div>
-              </div>
-                    )
-                })}
-              
-           
+
+          <div className="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true">
+             
+            <Image
+              className="relative mx-auto"
+              width={490}
+              src={img1}
+              alt=""
+            />
+          </div>
+        </div>
+
+         
+
+        <div className="relative mt-12 sm:mt-16 lg:mt-24">
+          <div className="lg:grid lg:grid-flow-row-dense lg:grid-cols-2 lg:items-center lg:gap-8">
+            <div className="lg:col-start-2">
+              <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Customize to Your Style</h3>
+              <p className="mt-3 text-lg text-gray-500">
+              Make Zigment sound like you, not a robot.
+
+              </p>
+
+               
+            </div>
+
+            <div className="relative -mx-4 mt-10 lg:col-start-1 lg:mt-0">
+               
               <Image
-                alt="Line"
-                loading="lazy"
-                width="2"
-                height="202"
-                decoding="async"
-                data-nimg="1"
-                className="absolute h-40 sm:h-44 md:h-auto left-6 top-3"
-                src={iconline}
+                className="relative mx-auto"
+                width={490}
+                src={img2}
+                alt=""
               />
             </div>
-            <button className="group mx-auto lg:mx-0 flex items-center space-x-2.5 bg-brand-blue-100 font-semibold text-white rounded-full hover:bg-white hover:text-brand-blue-100 border border-brand-blue-100 transition duration-200 px-4 py-2.5 md:py-3.5 md:px-7 mt-9">
-              <span>Get Started</span>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                className="w-5 h-5 lg:w-6 lg:h-6 group-hover:fill-brand-blue-100 group-hover:translate-x-2 transition duration-200"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M4.5 12h15m0 0l-6.75-6.75M19.5 12l-6.75 6.75"
-                ></path>
-              </svg>
-            </button>
+          </div>
+        </div>
+        <div className="relative mt-12   lg:grid lg:grid-cols-2 lg:items-center lg:gap-8">
+          <div className="relative">
+            <h3 className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Set It and Forget It
+</h3>
+            <p className="mt-3 text-lg text-gray-500">
+            Now go back to doing what you love. We got this.
+
+
+            </p>
+
+            
+          </div>
+
+          <div className="relative -mx-4 mt-10 lg:mt-0" aria-hidden="true">
+             
+            <Image
+              className="relative mx-auto"
+              width={490}
+              src={img3}
+              alt=""
+            />
           </div>
         </div>
       </div>
-    </section>
-  );
-};
-
-export default HowWorksSections;
+    </div>
+  )
+}

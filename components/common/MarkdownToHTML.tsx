@@ -1,22 +1,23 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import ReactMarkdown from 'react-markdown';
+import React from 'react'
+import ReactMarkdown from 'react-markdown'
 
 type Props = {
-  content: any
+    content:any
 }
 
-const MarkdownToHTML = ({ content }: Props) => {
+const MarkdownToHTML = ({content}: Props) => {
 
-  const renderers = {
-    a: ({ node, children, href, ...props }: any) => {
-      return <Link href={href}> {children} </Link>
-
-    },
-    image: ({ src, alt }: any) => (
-      <Image src={src} alt={alt} className="w-full h-full" />
-    ),
-  };
+    const renderers = {
+        a: ({ node, children, href, ...props }: any) => { 
+          return <Link href={href}> {children} </Link>
+      
+        },
+        image: ({ src, alt }:any) => (
+          <Image src={src} alt={alt} className="w-full h-full" />
+        ),
+      };
 
   return (
     <div className='max-w-5xl mx-auto   items-center py-10  
@@ -54,12 +55,12 @@ const MarkdownToHTML = ({ content }: Props) => {
           [&_th]:p-2
           font-mont 
         '>
-
-      <ReactMarkdown
-        children={content}
-        components={renderers}
-      />
-    </div>
+        
+        <ReactMarkdown 
+          children={content} 
+          components={renderers}   
+        />
+      </div>
   )
 }
 

@@ -1,38 +1,27 @@
-import React, { ReactNode, useEffect } from 'react'
-import Navbar from '@/components/landing-page/Navbar'
-import Footer from '@/components/landing-page/Footer'
-import Head from 'next/head'
+import Head from "next/head";
+import AppNav from "../Navbar/AppNav";
+import AppFooter from "../Footer/AppFooter";
 import NextProgress from 'nextjs-progressbar'
-import { usePathname } from 'next/navigation'
 
 
-type Props = {
-  children: ReactNode
-}
-
-function LandingPageLayout({ children }: Props) {
-  const pathname = usePathname();
-  useEffect(() => {
-    if (window && window.$crisp && window.$crisp.push) {
-      window.$crisp.push(["config", "position:reverse", [false]]);
-    }
-
-  }, [])
+const AppLayout = ({ children }: any) => {
   return (
     <>
-      <>
-        <Head>
-          <title>Zigment.ai</title>
-        </Head>
-        <Navbar />
-        <NextProgress />
-        <main className="pt-[80px]">
-          {children}
-        </main>
-        <Footer />
-      </>
-    </>
-  )
-}
+      <Head>
+        <title>NoHR.ai</title>
 
-export default LandingPageLayout
+        <meta
+          name="description"
+          content="Schedule Interviews without spending hours  | NoHR.ai"
+        />
+
+      </Head>
+      <AppNav />
+      <NextProgress />
+      <main>{children}</main>
+      <AppFooter />
+    </>
+  );
+};
+
+export default AppLayout;

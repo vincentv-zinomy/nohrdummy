@@ -147,18 +147,7 @@ const MainFLow = () => {
       
 
         setNodes((nds) => nds.concat(newNode));
- 
-
-        // if (type !== 'usecase') {
-        //   setEdges((eds) => eds.concat({
-        //     id: `${uuidv4()}-edge__`,
-        //     source: `use_case_0`,
-        //     target: newNode.id,
-        //     targetHandle: 'a',
-        //     sourceHandle: 'use_case_main_pointer'
-
-        //   }));
-        // }
+  
 
 
         if (['agents','conversation_agent','payment_agent'].includes(type)){

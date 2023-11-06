@@ -9,6 +9,7 @@ import Cookies from "js-cookie";
 export enum RoleTypes {
   ADMIN = "ADMIN",
   TEAM_MEMBER = "TEAM_MEMBER",
+  INTERVIEWER = "INTERVIEWER"
 }
 export const rolePriority = [
   RoleTypes.ADMIN,
