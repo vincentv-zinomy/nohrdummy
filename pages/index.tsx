@@ -26,7 +26,7 @@ export default function Home() {
   return (
     <> 
 
-      <LandingPageLayout>
+      {/* <LandingPageLayout> */}
         <main className="relative  ">
           
           <Hero />
@@ -37,7 +37,7 @@ export default function Home() {
           <Solution />
           <PricingSection />
         </main> 
-      </LandingPageLayout>
+      {/* </LandingPageLayout> */}
       {/* <ChatBot/> */}
     </>
   );

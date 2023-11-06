@@ -16,10 +16,10 @@ const AppLayout = ({ children }: any) => {
         />
 
       </Head>
-      <AppNav />
+      {/* <AppNav /> */}
       <NextProgress />
       <main>{children}</main>
-      <AppFooter />
+      {/* <AppFooter /> */}
     </>
   );
 };

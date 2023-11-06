@@ -18,6 +18,7 @@ export default function index() {
   const [open, setOpen] = useState(false)
 
   return (
+    <>
     <DashboardLayout>
       <div className="w-full pb-10">
 
@@ -155,5 +156,6 @@ export default function index() {
       <AddCandidateModal open={open} setOpen={setOpen} />
 
     </DashboardLayout>
+    </>
   );
 }

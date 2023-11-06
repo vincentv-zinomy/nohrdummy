@@ -55,10 +55,10 @@ export default function App({ Component, pageProps }: AppProps) {
         <AllScripts />
       }
       <ToastProvider>
-        <DashboardLayout>
+        {/* <DashboardLayout> */}
           <Component {...pageProps} />
           <ToastContainer />
-        </DashboardLayout>
+        {/* </DashboardLayout> */}
       </ToastProvider>
     </AuthProvider>
   );
